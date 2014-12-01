@@ -107,3 +107,7 @@ sympy-plots-for-*.tex/
 
 # xindy
 *.xdy
+
+# etc
+*.ptc
+main.pdf
