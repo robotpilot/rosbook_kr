@@ -1,5 +1,5 @@
 %-------------------------------------------------------------------------------
-\chapterimage{chapter_head_2.pdf} % Chapter heading image
+\chapterimage{chapter_head_2.pdf} 
 
 %-------------------------------------------------------------------------------
 \chapter{로봇 운영 체제}
@@ -83,7 +83,7 @@
 
 ROS is an open-source, meta-operating system for your robot.
 It provides the services you would expect from an operating system, including hardware abstraction, low-level device control, implementation of commonly-used functionality, message-passing between processes, and package management.
-It also provides tools and libraries for obtaining, building, writing, and running code across multiple computers.
+It also provides tools and libraries for obtaining, building, writing, and running code across multiple computers\footnote{http://wiki.ros.org/ROS/Introduction}.
 
 ROS 위키에는 위와 같은 정의를 내리고 있다. ROS는 로봇 응용프로그램을 개발할때 필요한 하드웨어 추상화, 하위 디바이스 제어, 일반적으로 사용되는 기능의 구현, 프로세스간의 메시지 패싱, 패키지 관리, 개발환경에 필요한 라이브러리와 다양한 개발 및 디버깅 도구를 제공한다는 것이다. 
 
@@ -132,9 +132,125 @@ ROS는 Robot Operating System 이라고 하여 OS 임을 나태내고 있다.
 아직, 그 여파력은 미미하지만 점점 늘고 있고 있는 유저들과 회사들 그리고 급격히 늘고 있는 관련 툴 및 라이브러리를 볼 때 멀지 않아 생태계가 완만히 돌아갈 것이라고 기대해본다.
 그리고, 로봇회사 및 센서회사와 같은 로봇 관련 하드웨어 분야의 개발자, ROS 개발 운용 팀, 응용 소프트웨어 개발자, 유저 모두가 웃을 수 있는 생태계가 되길 바란다.
  
-아래는 2013년 9월 기점으로 필자가 조사해본 ROS 실태이다.
+아래는 2013년 9월 기점으로 필자가 조사해본 ROS 실태이다\footnote{http://www.ros.org/browse/list.php}\footnote{http://www.ros.org/news/2012/12/ros-five-years.html}.
 아직, 미미한 수준이라고 생각하는 사람들도 있지만, 로봇 분야에서 이만큼 세력을 키운 로봇 소프트웨어 플랫폼은 없다고 생각한다.
 앞으로 어떻게 변할지 점점 기대가 된다!
+
+%-------------------------------------------------------------------------------
+\section{ROS 역사}\index{ROS 역사}
+
+%-------------------------------------------------------------------------------
+\subsection{ROS 역사}\index{ROS 역사}
+
+ROS를 본격적으로 공부하기 전에 ROS에 대해서 좀 더 알아보도록 하자. 
+
+ROS는 2007년 미국의 스탠포드 대학 인공지능 연구소(AI LAB)\footnote{스탠포드대학 인공지능 연구실(AI LAB), http://ai.stanford.edu/}가 진행하던 STAIR(STanford AI Robot) 프로젝트\footnote{스탠포드대학 STAIR(STanford AI Robot) 프로젝트, http://stair.stanford.edu/}\footnote{http://stair.stanford.edu/}를 위해 Morgan Quigley \footnote{http://www.osrfoundation.org/morgan-quigley.html}이 개발한 "Switchyard" 이라는 시스템에서 시작하였다. Morgan Quigley 은 현재 ROS의 개발 및 관리를 맡고 있는 OSRF(Open Source Robotics Foundation)의 재단 설립자이며, 소프트웨어 개발 책임자이다. "Switchyard"는 그 당시 AI 연구실의 프로젝트에 사용된 인공지능 로봇의 개발을 위해 만든 프로그램이다. 
+
+그 이외에도 2000년도 부터 개발되어, ROS 의 네트워크 프로그램에 큰 영향을 끼친 Player/Stage 프로젝트 (Player 네트워크 서버 및 2D Stage 시뮬레이터, 추후에 ROS의 3D 시뮬레이터인 Gazebo의 개발까지 영향을 미친다)\footnote{Player/Stage/Gazebo Project, http://playerstage.sourceforge.net/}의 개발자 Brian Gerkey\footnote{http://www.osrfoundation.org/brian-gerkey.html}는 OSRF의 CEO이자 재단 설립자이다. 이렇게 ROS는 2008년 윌로우게러지(Willow Garage) 회사에 의해 ROS라는 이름이 붙기전에 2000년의 "Player/Stage", 2007년의 "Switchyard" 등의 영향을 받았다.
+
+2008년 미국의 로봇 전문 기업  윌로우게러지라는 회사가 이어받아 ROS라는 이름으로 개발하기 시작하였다. 윌로우게러지에대해 생소한 사람들도 있을지도 모르겠지만, 개인로봇(personal robotics) 및 서비스 로봇분야에서는 매우 유명하다. 그리고 우리가 알고 있는 영상처리 오픈소스인 OpenCV\footnote{OpenCV, http://opencv.org/}, 키넥트(Kinect)와 같은 3차원 디바이스에 많이 사용되고 있는 PCL(Point Cloud Library)\footnote{PCL, http://pointclouds.org/}을 개발 및 공식 지원하는 등으로도 유명하다. 
+
+이러한 윌로우게러지는 2008년 ROS라는 이름으로 개발에 착수하였고, 2010년 1월 22일날 ROS 1.0 이라는 세상에 나왔다. 공식적으로 우리에게 알려진 버전은 ROS Box Turtle 이라는 이름으로 2010년 3월 2일 첫 릴리즈되었다. 그 뒤에도 C Turtle, Diamondback 등 버전은 우분투 및 안드로이드와 비슷하게 A B C 순으로 작명하고 있다. 최근(2014년7월)에는 ROS의 9번째 버전 ROS Indigo Igloo가 오랜 베타과정을 거치고 공개되었다. 
+
+ROS는 BSD 라이센스를 기반으로 하고 있기에 그 누구던지 수정 편집, 재사용, 재배포가 가능하게 되었고 로봇 관련 학회를 통해 우선적으로 알려지기 시작하였다. 특히, ROSDay 및 ROSCon 이라는 이름으로 개발자 및 사용자를 대상으로 컨퍼런스 형식으로 매년 행사를 진행하고 있다. 뿐만아니라, ROS를 적용가능한 로봇 개발도 발빠르게 이루어지고 있다. 그예로 Personal Robot이라는 뜻의 PR2 footnote{PR2, http://www.willowgarage.com/pages/pr2/overview}및 터틀봇(turtlebot)\footnote{Turtlebot Official website, http://turtlebot.com/}이라는 로봇이 있으며, 이를 이용하여 많은 어플리케이션을 선보이면서 로봇 소프트웨어 플랫폼으로서 자리매김하게 되었다. 
+
+2007년 스탠포드 대학 인공지능 연구소에서 시작된 이 움직임은 2008년 Willow Garage \footnote{Willow Garage, http://www.willowgarage.com/}가 이어받아 그 틀을 완성하였고, 보급에 힘써왔다. 그 뒤 2013년 Willow Garage가 상업 서비스 로봇 시장으로 진입하면서 그 바톤은 오픈 소스 로봇공학 재단인 OSRF(Open Source Robotics Foundation)\footnote{OSRF, http://osrfoundation.org/}으로 이어지고 있으며, 연구소, 회사, 재단에 그치지 않고 일반 유저들도 자발적으로 ROS 개발에 참혀하고 있다. ROS 개발은 로봇공학자들의 따뜻한 관심을 받으며 앞으로도 지속될 것으로 보인다.
+
+%-------------------------------------------------------------------------------
+\subsection{ROS 의 주요 포인트}\index{ROS 의 주요 포인트}
+
+ROS 의 릴리즈\footnote{ROS Distributions, http://wiki.ros.org/Distributions} 및 컨퍼런스
+
+\begin{itemize}
+\item 2014.09.12 ~ 13 - ROSCon2014 컨퍼런스 개최\footnote{ROSCON, http://roscon.ros.org/}
+\item 2014.07.22 - Indigo Igloo 릴리즈
+\item 2014.06.06 - ROS Kong 2014 개최
+\item 2013.09.04 - Hydro Medusa 릴리즈
+\item 2013.05.11 ~ 12 - ROSCon2013 컨퍼런스 개최
+\item 2013.02 - Open Source Robotics Foundation 가 개발, 관리를 맡음
+\item 2012.12.31 - Groovy Galapagos 릴리즈
+\item 2012.05.19 ~ 20 - ROSCon2012 컨퍼런스 개최
+\item 2012.04.23 - Fuerte Turtle 릴리즈
+\item 2011.08.30 - Electric Emys 릴리즈
+\item 2011.03.02 - Diamondback 릴리즈
+\item 2010.08.02 - C Turtle 릴리즈
+\item 2010.03.02 - Box Turtle 릴리즈
+\item 2010.01.22 - ROS 1.0 개발
+\item 2008 - Willow Garage 가 “ROS”라는 이름으로 개발 시작
+\item 2007 - “Switchyard”, Morgan Quigley, Stanford AI LAB, 스탠포드 대학
+\item 2000 - "Player/Stage Project", Brian Gerkey, Richard Vaughan, Andrew Howard, 남캘리포니아 대학
+\end{itemize}
+
+
+%-------------------------------------------------------------------------------
+\section{ROS 버전}\index{ROS 버전}
+
+%-------------------------------------------------------------------------------
+\subsection{ROS 버전}\index{ROS 버전}
+
+2007년 스탠포드대학 인공지능 연구소에서 "Switchyard"라는 이름으로 시작된 로봇 소프트웨어 프레임워크는 연구는, 2008년 윌로우게이지(Willow Garage)가 이어받아 "ROS(Robot Operating System)" 라는 이름으로 개발을 이어갔다. 그 뒤로 ROS 1.0을 포함하여, 7번의 버전 업데이트를 거쳐 2012.12월 ROS Groovy Galapagos 버전까지 내놓았다. 2013년에는 ROS개발이 OSRF(Open Source Robotics Foundation)으로 이양되어 현재 2014년 7월에 ROS의 9번째 버전업인 ROS Indigo Igloo 버전이 릴리즈되었다. 
+
+%-------------------------------------------------------------------------------
+\subsection{ROS 버전 규칙}\index{ROS 버전 규칙}
+
+ROS는 2014년 8월 현재까지 ROS 1.0, Box Turtle, C Turtle, Diamondback, Electric Emys, Fuerte Turtle, Groovy Galapagos, Hydro Medusa, Indigo Igloo 의 버전을 내놓았다. 차기 버전은 Jade Turtle 로 2015년 5월에 릴리즈될 예정이다. ROS는 1.0 버전을 제외하고는 우분투와 안드로이드처럼 버전명을 A, B, C 의 알파벳 순으로 짓고 있다. 즉, 이번에 릴리즈된 Indigo Igloo 버전은 알파벳 I 버전이라는 것을 말하는 것으로 9번째 버전이다.
+
+그 이외에도 한 가지 규칙이 더있다. 바로 각 버전마다 포스터 형식의 일러스트를 내놓으며, 거북이 아이콘을 만들어 오고 있다. 이 거북이 아이콘은 turtlesim\footnote{ROS Turtlesim, http://wiki.ros.org/turtlesim}이라는 ROS 공식 튜토리얼용 시뮬레이션에도 사용된다. ROS의 상징으로 거북이를 사용한 이유에 대해서는 특별한 설명은 없다.
+
+%-------------------------------------------------------------------------------
+\subsection{ROS 버전 주기}\index{ROS 버전 주기}
+
+지금까지 ROS는 아래와 같이 버전 업데이트\footnote{ROS 릴리즈 주기, http://wiki.ros.org/Distributions/Timeline}가 되고 있다. 초기에는 우분투의 새로운 버전의 릴리즈 주기와 동일하게 1년에 2번의 업데이트가 이루어졌다. 그러나, 2013년 빈번한 업데이트로 인하여 새로운 버전 주기를 제안하는 유저들이 생겨났다. 이에 ROS 개발 및 관리를 맡은 OSRF는 유저들의 의견을 수렴하여 2013년 Hydro Medusa 버전 부터는 1년에 1번 정식 버전을 릴리즈하며 그 시기는 우분투의 새로운 버전 출시인 4월에 하기로 결정이 내려졌다. 올해는 새로운 버전 주기를 새로 세우면서 버전 주기가 불안정했지만 내년 2014년 부터는 매년 4월에 새로운 버전의 정식 릴리즈가 이루어질 예정이다.
+
+또한, ROS는 공식 지원 운영체제로 우분투(Ubuntu) LTS를 지원한다. 지원하는 우분투 버전은 2년에 한 번씩 릴리즈 되는 우분투 LTS(Long Term Support, 5년간 지원하는 버전) 주기 에 맞추기로 하였다. 즉, 2014년의 우분투 14.04 LTS 를 지원하는 ROS 버전은 2014년의 ROS I 와 2015년의 J 버전 이렇게 두 개의 버전이 지원될 예정이다.
+
+\begin{itemize}
+\item 2015.05.01 - Jade Turtle (예정)
+\item 2014.07.22 - Indigo Igloo\footnote{ROS Hydro Medusa, http://wiki.ros.org/indigo} (현재)
+\item 2013.09.04 - Hydro Medusa\footnote{ROS Hydro Medusa, http://wiki.ros.org/hydro}
+\item 2012.12.31 - Groovy Galapagos\footnote{ROS Groovy Galapagos, http://wiki.ros.org/groovy}
+\item 2012.04.23 - Fuerte Turtle\footnote{ROS Fuerte Turtle, http://wiki.ros.org/fuerte}
+\item 2011.08.30 - Electric Emys\footnote{ROS Electric Emys, http://wiki.ros.org/electric}
+\item 2011.03.02 - Diamondback\footnote{ROS Diamondback, http://wiki.ros.org/diamondback}
+\item 2010.08.02 - C Turtle\footnote{ROS C Turtle, http://wiki.ros.org/cturtle}
+\item 2010.03.02 - Box Turtle\footnote{ROS Box Turtle, http://wiki.ros.org/boxturtle}
+\item 2010.01.22 - ROS 1.0
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+\subsection{ROS 최신 버전}\index{ROS 최신 버전}
+
+2014년 07월 22일, 정식 릴리즈된 ROS Indigo Igloo\footnote{ROS Indigo Igloo, http://wiki.ros.org/indigo/}가 현재 ROS의 최신 버전이다. 포스터는 거북이가 이글루(Igloo)을 등에 엎고 있는 모습이고, 아이콘에는 스키는 타는 재미난 모습을 담고 있다.
+
+이번 버전은 무엇보다 더욱 catkin 빌드 시스템에 중점을 두어 모든 패키지가 catkin화 되었다는 점이다. 그 이외에는 이번 버전 부터는 Python3.3 을 사용하였다는 점, 내부적으로는 아직 Python2가 주이기는 하지만 Python3도 사용 가능하는 것을 의미한다. 그리고, OpenCV를 우분투 표준의 것을 이용한다는 점, cmake modules 라는 패키지가 있는데 이는 공식 서포트하지 않는 패키지들을 모아 두었다는 점, boost의 signal함수의 사용을 모두 signal2로 변경하여 최신의 버전을 유지하였다는 점으로 전체적으로 마이너 업그레이드와 유지보수으 성격이 강하다.
+
+ROS Indigo Igloo에 대한 더 자세한 정보는 아래의 링크를 참조하기 바란다.
+
+%-------------------------------------------------------------------------------
+\subsection{ROS 버전 선택}\index{ROS 버전 선택}
+
+ROS는 메타운영체제이기때문에 기본적으로 사용하는 OS를 선택해야한다. ROS는 Ubuntu, OS X, Fedora, Gentoo, OpenSUSE, Debian, Arch Linux, Windows 등을 지원하고 있지만, ROS 유저들이 제일 많이 사용하고 있는 OS는 우분투라고 할 수 있다. 개발팀에서도 우분투 LTS 버전\footnote{우분투 릴리즈 주기, https://wiki.ubuntu.com/Releases}에 맞추어 테스트를 진행하고 릴리즈하고 있다. 이러한 이유로 필자는 ROS LTS 버전에 맞는 ROS 버전을 선택하라고 말하고 싶다. 
+
+각각의 ROS 버전에 대한 우부투 포팅에 대한 정보는 http://www.ros.org/debbuild/ 에 접속하여 사용하고자하는 ROS 버전의 이름의 html 을 보도록 하자. 이 파일에는 현재 선택한 ROS 버전이 1행의 우분투 버전별로 기존 패키지(소스)가 이전작업이 완료되었는지 진행중인지 볼 수 있다. 여기서 우분투 버전이 생소한데, 아래의 우분투 버전을 보면 11.04가 N으로 표기되어 있으며, 그 뒤로 O, P, Q, R, S 로 진행되고 있다. 이를 비교하여 안정화된 버전을 찾아야한다. ROS의 최신 버전의 경우에는 많은 패키지가 작업중으로 뜨는데 중요한 패키지가 아니고서는 문제 없으니 바로 최신 버전을 사용해도 좋고, 자신이 사용하던 패키지가 새로운 ROS 버전에 적용이 안되었다면 좀 더 기다릴 필요가 있다고 할 수 있다. 
+
+\begin{itemize}
+\item Ubuntu 14.04 Trusty Tahr (LTS)
+\item Ubuntu 13.10 Saucy Salamander
+\item Ubuntu 13.04 Raring Ringtail 
+\item Ubuntu 12.10 Quantal Quetzal 
+\item Ubuntu 12.04 Precise Pangolin (LTS)
+\item Ubuntu 11.10 Oneiric Ocelot
+\item Ubuntu 11.04 Natty Narwhal
+\item Ubuntu 10.10 Maverick Meerkat
+\item Ubuntu 10.04 Lucid Lynx (LTS)
+\end{itemize}
+
+2014년 8월 11일 현재, 필자는 아래와 같은 조합을 추천하고자 한다.
+
+\begin{itemize}
+\item Ubuntu 14.04 Trusty Tahr (LTS)
+\item ROS Indigo Igloo
+\end{itemize}
 
 % \begin{enumerate}
 % \item The first item
