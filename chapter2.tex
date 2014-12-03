@@ -1,5 +1,5 @@
 %-------------------------------------------------------------------------------
-\chapterimage{chapter_head_1.pdf} 
+\chapterimage{chapter_head_2.pdf} 
 
 %-------------------------------------------------------------------------------
 \chapter{ROS 설치}
@@ -19,7 +19,12 @@
 \end{itemize}
 
 %-------------------------------------------------------------------------------
-\subsection{설치 방법}\index{설치 방법}
+\subsection{ROS Indigo 설치 방법}\index{ROS Indigo 설치 방법}
+\label{sec:ROSInstallation}
+
+\begin{exercise}[간단 설치]
+아래의 강좌보다 간단히 설치 할 수 있는 스크립트를 이용한 설치 방법은 \ref{sec:SimpleInstallation}[ROS Indigo 간단 설치]을 참조하기 바란다.
+\end{exercise}
 
 %-------------------------------------------------------------------------------
 \subsubsection{NTP (Network Time Protocol) 설정}
@@ -224,8 +229,243 @@ process[rosout-1]: started with pid [10041]
 started core service [/rosout]
 \end{lstlisting}
 
-%\section{ROS 간단 설치}
-% \label{sec:Related}
-% \ref{sec:Robot}
+%-------------------------------------------------------------------------------
+\section{ROS Indigo 간단 설치}\index{ROS Indigo 간단 설치}
+\label{sec:SimpleInstallation}
+
+우분투 13.04, 14.04 버전이라면 어디에서나 간단히 설치하는 스크립트를 이용하면 손쉽게 설치 할 수 있다. ※ xxx.xxx.xxx.xxx 와 자신의 IP 주소를 입력하면 된다.
+
+\begin{lstlisting}[language=bash]
+wget https://raw.githubusercontent.com/oroca/oroca-ros-pkg/master/ros_indigo_install.sh
+sh ros_indigo_install.sh
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\section{ROS Indigo 설치 (간략버전)}\index{ROS Indigo 설치 (간략버전)}
+
+본 강좌는 \ref{sec:ROSInstallation} ROS 의 Indigo 버전 설치의 요약판이다. 긴 설명 없이 바로 설치하실 분들에게 도움이 될 것이다.
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install chrony
+sudo ntpdate ntp.ubuntu.com
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
+wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install ros-indigo-desktop-full
+sudo apt-get install ros-indigo-rqt-*
+sudo rosdep init
+rosdep update
+echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+sudo apt-get install python-rosinstall
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
+cd ~/catkin_ws/
+catkin_make
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+echo "export ROS_MASTER_URI=http://xxx.xxx.xxx.xxx:11311" >> ~/.bashrc
+echo "export ROS_IP=xxx.xxx.xxx.xxx" >> ~/.bashrc
+source ~/.bashrc
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\section{ROS 개발 환경 구축 (환경설정)}\index{ROS 개발 환경 구축 (환경설정)}
+
+%-------------------------------------------------------------------------------
+\subsection{환경 설정 파일}
+
+이전 "로봇 운영체제 강좌 : ROS Indigo 설치" 강좌에서 다루었던 환경 설정 파일을 불러오는 것은 새로운 터미널 창을 열때마다 매번 실행해줘야 한다. 이러한 번거로운 작업을 없애기 위하여 새로운 터미널 창을 열때마다 정해진 환경 설정 파일을 읽어오도록 설정해주도록 하자. 또한, ROS 네트워크 설정 및 자주 사용하는 명령어를 단축 명령어로 설정하는 방법에 대해서 알아보도록 하자.
+
+우선, gedit 프로그램과 같은 문서편집 프로그램을 사용하여 bashrc 파일을 수정하도록 하자. 아래의 명령어로 bashrc 파일을 불러오자.
+
+\begin{lstlisting}[language=bash]
+gedit ~/.bashrc
+\end{lstlisting}
+
+\noindent
+bashrc 파일을 불러오면 이미 매우 많은 설정들이 있을 것이다. 이전 설정들은 건들지 말고, bashrc 파일의 제일 하단으로 내려가서 아래의 내용을 추가해주도록 하자. (xxx.xxx.xxx.xxx 는 자신의 IP이다.)
+
+\begin{lstlisting}[language=bash]
+# set ROS Indigo
+source /opt/ros/indigo/setup.bash
+source ~/catkin_ws/devel/setup.bash
+# set ROS Network
+export ROS_MASTER_URI=http://xxx.xxx.xxx.xxx:11311
+export ROS_HOSTNAME=xxx.xxx.xxx.xxx
+# set ROS alias command
+alias cw='cd ~/catkin_ws'
+alias cs='cd ~/catkin_ws/src'
+alias cm='cd ~/catkin_ws && catkin_make'
+\end{lstlisting}
+
+위에서 설정한 내용들에 대하여 좀 더 자세히 설명하도록 하겠다.
+
+%-------------------------------------------------------------------------------
+\subsubsection{ROS 환경 설정 불러오기}
+"\#" 은 주석문이여서 그 뒤의 내용은 설명문이다. 그리고,  2번째 줄의 "source /opt/ros/indigo/setup.bash" 및 3번째 줄의 "source ~/catkin\_ws/devel/setup.bash" 은 필수로 설정해줘야 하는 ROS 환경 설정 파일이다. "로봇 운영체제 강좌 : ROS Indigo 설치" 를 참고하기 바란다.
+
+\begin{lstlisting}[language=bash]
+# set ROS Indigo
+source /opt/ros/indigo/setup.bash
+source ~/catkin_ws/devel/setup.bash
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsubsection{ROS 네트워크 설정}
+ROS\_MASTER\_URI 와 ROS\_HOSTNAME 의 설정이다. ROS는 네트워크를 이용하여 노드간에 메시지 통신을하기 때문에 이 설정이 중요하다. 우선은 둘다 자신의 네트워크 IP를 입력해주면 된다. 차후에 마스터 PC가 따로 있고, 로봇은 호스트 PC를 사용하는 경우, 이를 구분하여 입력하면 서로 다른 컴퓨터간의 통신이 가능하게 된다. 지금은 둘다 모두 자신의 네트워크 IP를 입력해주자. 아래의 내용은 필자의 IP가 192.168.4.185의 경우에 설정한 예제이다. (ROS 네트워크에 대한 자세한 내용은 "ROS 강좌 : 08. ROS 컨셉" 에서 자세히 설명할 예정이다.)
+
+\begin{lstlisting}[language=bash]
+# set ROS Network
+export ROS_MASTER_URI=http://192.168.4.185:11311
+export ROS_HOSTNAME=192.168.4.185
+\end{lstlisting}
+
+\begin{exercise}[ifconfig]
+리눅스에서 자신의 IP를 알아보는 방법으로는 "ifconfig" 명령어를 이용하는 방법이 제일 간단하다. 아래의 예제처럼 터미널창에서 ifconfig를 실행해보자. 유선이라면 eth, 무선이라면 wlan 의 항목의 inet addr 부분의 IP가 자신의 IP이다. 필자의 경우, 유선랜을 이용하지만 일부로 무선랜도 켜보았다. 아래의 예제에서 필자의 IP는 192.168.4.185 이다.
+\begin{lstlisting}[language=bash, backgroundcolor=\color{ocre!10}, numbers=none]
+rt@rt:~$ ifconfig
+eth0   Link encap:Ethernet  HWaddr xx:xx:xx:xx:xx:xx  
+          inet addr:192.168.4.185  Bcast:192.168.4.255  Mask:255.255.255.0
+          inet6 addr: fe81::d64d:7ef1:f197:cb2/64 Scope:Link
+
+lo       Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+
+wlan1 Link encap:Ethernet  HWaddr xx:xx:xx:xx:xx:xx
+          inet addr:192.168.4.107  Bcast:192.168.4.255  Mask:255.255.255.0
+          inet6 addr: fe81::232:dfff:feff:5e33/64 Scope:Link
+\end{lstlisting}
+\end{exercise}
+
+%-------------------------------------------------------------------------------
+\subsubsection{단축 명령어}
+ROS 개발 작업에서 자주 사용하는 명령어를 단축 명령어로 설정하는 방법에 대해서 알아보도록 하자. 아래의 "cw", "cs", "cm"은 필자가 만들어둔 단축 명령어이다. 이 단축 명령어는 리눅스에서 사용하는 alias 라는 단축 명령어를 이용하여 작성하였다. 
+
+\begin{itemize}
+\item "cw"는 미리 설정해둔 catkin 작업폴더인 "~/catkin\_ws" 로 이동한다. 
+\item "cs"는 catkin 작업폴더 중 소스파일이 담겨있는 "~/catkin\_ws/src" 로 이동한다. 
+\item "cm"는 catkin 작업폴더인 "~/catkin\_ws" 로 이동한 후, catkin\_make 명령어로 ROS 패키지를 빌드하게 된다.
+\end{itemize}
+
+\begin{lstlisting}[language=bash]
+# set ROS alias command
+alias cw='cd ~/catkin_ws'
+alias cs='cd ~/catkin_ws/src'
+alias cm='cd ~/catkin_ws && catkin_make'
+\end{lstlisting}
+
+\begin{exercise}[ROS 환경 설정 확인 방법]
+아래처럼 "export \textbar grep ROS" 명령어를 이용하여 자신이 현재 설정한 ROS 환경 설정들을 확인할 수 있다.
+
+\begin{lstlisting}[language=bash, backgroundcolor=\color{ocre!10}, numbers=none]
+$ export | grep ROS
+declare -x ROSLISP_PACKAGE_DIRECTORIES="/home/rt/catkin_ws/devel/share/common-lisp"
+declare -x ROS_DISTRO="indigo"
+declare -x ROS_ETC_DIR="/opt/ros/indigo/etc/ros"
+declare -x ROS_HOSTNAME="192.168.4.185"
+declare -x ROS_MASTER_URI="http://192.168.4.185:11311"
+declare -x ROS_PACKAGE_PATH="/home/rt/catkin_ws/src:/opt/ros/indigo/share:/opt/ros/indigo/stacks"
+declare -x ROS_ROOT="/opt/ros/indigo/share/ros"
+declare -x ROS_TEST_RESULTS_DIR="/home/rt/catkin_ws/build/test_results"
+\end{lstlisting}
+\end{exercise}
+
+%-------------------------------------------------------------------------------
+\section{ROS 개발 환경 구축 (IDE)}\index{ROS 개발 환경 구축 (IDE)}
+
+%-------------------------------------------------------------------------------
+\subsection{통합 개발 환경 (Integrated Development Environment, IDE)}
+
+IDE는 코딩, 디버그, 컴파일, 배포 등 프로그램 개발에 관련된 모든 작업을 하나의 프로그램 안에서 처리하는 환경을 제공하는 소프트웨어를 말한다. 아마 많은 개발자들이 자신만이 즐겨쓰는 IDE는 한 두개쯤 있을 것이라고 생각한다. 
+
+ROS 또한 여러 IDE\footnote{ROS 위키, "IDE", http://wiki.ros.org/IDEs}를 사용할 수 있는데, 많이 사용되는 IDE로는 Eclipse, CodeBlocks, Emacs, Vim, NetBeans, QtCreator 등이 있다. 필자의 경우, 처음에는 Eclipse 를 사용하였으나 Eclipse가 최근 버전에 와서는 매우 무겁게 느껴졌으며, ROS의 catkin 빌드 시스템 사용에 있어서 많은 불편을 느꼈다. 그래서, 다른 IDE 를 구축하고자 여러 IDE 를 검토해 봐다. 그 중 가장 적합한 툴로는 QtCreator\footnote{Qt Project, http://qt-project.org/}\footnote{Qt Download page, http://qt-project.org/downloads}가 아닐까 싶다. ROS 의 개발/디버깅 툴인 rqt 같은 경우나, RViz 같은 경우에도 QT로 만들어져 있고, 사용자는 QT 플러그인으로 기존 툴과 플러그인을 개발도 가능하다는 점에서 QT의 편집기인 QtCreator 는 매우 유용하다고 볼 수 있다. 또한 QT 를 이용하지 않더라도 범용적인 에디터로써의 기능도 충분히 갖추고 있을뿐 아니라, 프로젝트를 CMakeLists.txt 를 통하여 바로 열수가 있어서 catkin\_make 에도 매우 편리하다.
+
+아래의 내용은 QtCreator 로 ROS 개발 환경을 꾸미는 내용을 담고 있다. 반드시 QtCreator 를 이용하여 개발할 필요는 없으므로 QtCreator 를 IDE로 사용하지 않더라도 본 강좌 이외의 후속 강좌들을 사용하는데에는 아무런 문제가 없음을 미리 밝혀둔다.
+
+%-------------------------------------------------------------------------------
+\subsubsection{QtCreator 설치}
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install qtcreator
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsubsection{QtCreator 구동}
+QtCreator를 아이콘으로 실행시켜도 구동에는 문제 없으나 우리가 ~/.bashrc 에 기술해둔 ROS 경로 등의 설정을 QtCreator 에도 적용하기 위해서는 새로운 터미널 창을 열어, 아래와 같이 실행해줘야 한다.
+
+\begin{lstlisting}[language=bash]
+qtcreator
+\end{lstlisting}
+
+\noindent
+위의 명령어로 아래와 같이 QtCreator 가 실행됨을 확인 할 수 있다.
+
+%-------------------------------------------------------------------------------
+\subsubsection{ROS 패키지를 프로젝트로 불러오기}
+앞서 말한바와 같이 QtCreator는 CMakeLists.txt 를 사용한다. 그렇기에 ROS 패키지는 단순히 아래와 화면의 OpenProject 버튼을 클릭하여 해당 ROS 패키지의 CMakeLists.txt 를 선택하면 손쉽게 프로젝트로 불러올 수 있다.
+
+%-------------------------------------------------------------------------------
+\subsubsection{ROS 패키지를 프로젝트로 불러오기}
+컴파일의 경우에는 단순히 Ctrl + B 로 컴파일 하면 catkin\_make 가 실행된다. 단, 빌드 관련은 해당 패키지와 같은 위치의 폴더에 새로운 폴더로 생성된다. 예를 들어 tms\_rp\_action 이라는 패키지를 컴파일하면 "build-tms\_rp\_action-Desktop-Default" 이라는 폴더에 빌드 관련이 모두 놓이게 된다. 즉,  원래는 ~/catkin\_ws/build 와 ~/catkin\_ws/devel 에 보관되어야 할 파일들이 따로 컴파일 되어 새로운 장소에 놓이게 되므로 실행을 위해서는 나중에 다시 한번 catkin\_make 를 해줘야 한다. 이는 매번 해줄 필요는 없고 개발도중에는 QtCreator 에서 개발, 디버깅을 한 후에 완료되어 실행할때만 따로 catkin\_make 를 해준다고 보면된다. 
+
+%-------------------------------------------------------------------------------
+\section{ROS 동작 테스트}\index{ROS 동작 테스트}
+
+%-------------------------------------------------------------------------------
+\subsection{turtlesim 패키지}
+일단, ROS를 설치하긴 했는데, 제대로 작동되는지 궁금하신분들을 위해 ROS에서 제공하는 간단한 예제 노드를 실행하는 방법에 대해 설명한다. 예제는 turtlesim 이라는 패캐지(노드의 묶음)로 ROS의 심볼인 거북이 모양을 한 로봇이 화면에 나타나고 키보드로 로봇의 이동을 간단히 조종해 보는 노드(프로그램)이다.
+
+이번 강좌부터는 "노드", "패키지", "코어" 등 ROS 의 고유의 용어들이 많이 등장하는데 이번 강좌에서는 단순히 이런게 있구나 알아두기 바라며, 자세한 설명은 "ROS 강좌 : 08. ROS 컨셉", "ROS 강좌 : 09. ROS 용어" 등에서 설명하도록 하겠다. 이번 강좌는 ROS 가 문제없이 설치됨을 확인하는가 동시에, 본격적인 ROS 강좌가 들어가기 전에 몸풀기 운동 정도로 생각하자.
+
+%-------------------------------------------------------------------------------
+\subsection{roscore 실행}
+새로운 터미널을 열어 다음과 같은 명렁어를 실행한다. 그러면, 모든 ROS 시스템을 관할하는 로스코어(roscore)가 실행되게 된다.
+
+\begin{lstlisting}[language=bash]
+roscore
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsection{turtlesim 패키지의 turtlesim\_node 실행}
+새로운 터미널을 열어 다음과 같은 명렁어를 실행한다. 그러면 다음와 같은 메시지를 보게 되며, turtlesim 패키지의 turtlesim\_node 를 실행하게 된다. 별도의 창에 파란색 바탕의 화면에 거북이 한 마리가 보일 것이다. (거북이 모양은 실행에 따라 랜덤으로 바뀌기 때문에 필자의 모양과는 다를 수 있다.)
+
+\begin{lstlisting}[language=bash]
+rosrun turtlesim turtlesim_node
+[ INFO] [1378628396.169086362]: Starting turtlesim with node name /turtlesim
+[ INFO] [1378628396.178989006]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsection{turtlesim 패키지의 turtle\_teleop\_key 실행}
+새로운 터미널을 열어 다음과 같은 명렁어를 실행한다. 그러면 다음과 같은 메시지를 보게 되며, turtlesim 패키지의 turtle\_teleop\_key를 실행하게 된다. 이 터미널 창 위에서 키보드의 화살표(← → ↑ ↓)를 이용하여 거북이를 제어하게 된다. 간단하므로 직접 해보길 바란다. 제어하게 되면 화면 속의 거북이가 움직이게 되는데, 이는 간단히 시뮬레이션이지만 실제 로봇도 이와 같은 방법으로 원격조정이 가능하게 된다.
+
+\begin{lstlisting}[language=bash]
+rosrun turtlesim turtle_teleop_key
+Reading from keyboard
+---------------------------
+Use arrow keys to move the turtle.
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsection{rqt\_graph 패키지의 rqt\_graph 실행}
+새로운 터미널을 열어 다음와 같은 명렁어를 실행한다. 그러면 rqt\_graph 패키지의 rqt\_graph를 실행하게 된다. 그 결과 다음과 같은 그래프를 볼 수 있을 것이다. 이는 현재 실행중인 노드(프로그램)들의 정보를 그래프로 볼 수 있는 노드이다.
+
+\begin{lstlisting}[language=bash]
+rosrun rqt_graph rqt_graph
+\end{lstlisting}
+
+아래의 rqt\_graph 노드는 현재 실행 중인 노드들의 정보를 볼 수 있는 GUI 형태의 노드이다. 동그라미는 노드를 의미하고, 네모는 토픽을 의미한다. 다음의 그림을 자세히 보자. /teleop\_turtle 노드로부터 화살표가 그어져 /turtlesim 으로 이어져 있다. 이는 두 노드가 실행 중 이고, 이 두 노드 간에는 메시지 통신이 이루어 지고 있다는 설명이다. 
+
+그리고 화살표 사이의 네모박스 turtle1 토픽의 하위 토픽인 /turtle1/cmd\_vel 는 두 노드간의 토픽의 이름으로, teleop\_turtle 노드에서 키보드로 입력한 속도 명령이 turtlesim 으로 토픽을 통해 메세지(msg 데이타)가 송수되고 있다는 내용이다. 
+
+즉, 위에서 실행한 두 노드를 이용하여 키보드 명령을 로봇 시뮬레이션에게 전달해 줬다는 내용이다. 자세한 내용은 추후에 ROS 강좌 에서 하도록 하고, 여기까지 진행이 원만히 되었다면, ROS 구동 테스트는 끝나게 된다.
+
+%-------------------------------------------------------------------------------
+\subsection{노드의 종료}
+
+각각 실행된 roscore 및 노드는 터미널 창에서 Ctrl + c 를 눌러 종료한다.
 
 %-------------------------------------------------------------------------------
