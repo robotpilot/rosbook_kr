@@ -24,10 +24,6 @@
 % Bibliography
 \usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 
-% LaTeX/Source Code Listings
-\usepackage{listings}
-
-
 \addbibresource{bibliography.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
 
@@ -39,6 +35,7 @@
 %-------------------------------------------------------------------------------
 
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+\input{code} % parameters to insert source code
 
 \begin{document}
 
@@ -92,7 +89,7 @@ Introduction to ROS\par % Book title
 %-------------------------------------------------------------------------------
 % CHAPTER  LIST
 %-------------------------------------------------------------------------------
-
+\setlength\parindent{1em}
 \input{chapter1}
 \input{chapter2}
 \input{chapter3}

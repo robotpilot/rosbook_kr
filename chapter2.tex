@@ -5,20 +5,227 @@
 \chapter{ROS 설치}
 
 %-------------------------------------------------------------------------------
-\section{ROS 간단 설치}
-
-
-
-\lstset{language=C++}          % Set your language (you can change the language for each code-block optionally)
-
-\begin{lstlisting}[frame=single]  % Start your code-block
-void main(void)
-{
-  int test;
-}
-\end{lstlisting}
-
-\end{document}
+\section{ROS Indigo 설치}\index{ROS Indigo 설치}
 
 %-------------------------------------------------------------------------------
-\subsection{플랫폼이 가져온 변화}\index{플랫폼이 가져온 변화}
+\subsection{개발 환경}\index{개발 환경}
+
+본 강좌는 아래와 같은 개발 환경에서 ROS 설치를 설명한 글이다. ROS는 Ubuntu, OS X, Windows, Fedora, Gentoo, OpenSUSE, Debian, Arch Linux 등을 지원하고 있지만 Ubuntu 를 제외하고는 공식적으로 지원하는 것이 아닌 설치 방법만 언급하고 있다. 하지만, 우분투이외의 주요 운영체제인 OS X, Windows 는 유저들이 많은 편이라 어느정도 만족스럽게 쓸 수 있을 것이다. 우분투 버전이 다른 경우에는 공식 페이지\footnote{http://wiki.ros.org/indigo/Installation/Ubuntu}를 보기를 권하며, OS X\footnote{http://wiki.ros.org/indigo/Installation/OSX/Homebrew/Source}, Windows\footnote{http://wiki.ros.org/hydro/Installation/Windows}의 경우에는 각각의 설치 방법을 관련 위키\footnote{ROS 위키, "환경설정", http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment}\footnote{ROS 위키, "catkin 빌드 시스템", http://wiki.ros.org/catkin}에서 확인하기 바란다. 여기서는 우분투에 대해서만 언급하겠다.
+
+\begin{itemize}
+\item 하드웨어: INTEL 및 AMD 칩을 사용하는 데스크톱 및 노트북 
+\item 운영체제: Ubuntu 14.04 LTS (Trusty Tahr)
+\item ROS: Indigo Igloo
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+\subsection{설치 방법}\index{설치 방법}
+
+%-------------------------------------------------------------------------------
+\subsubsection{NTP (Network Time Protocol) 설정}
+ROS 공식 설치항목에는 포함되어 있지는 않지만 NTP 설정을 해주므로써 서로 다른 PC간의 통신에서 ROS Time 의 오차를 줄이기 위하여 NTP 설정을 해주도록 하자. 설정법은 매우 간단한데, 아래의 명령어처럼 우선 chrony 를 설치한 후, ntpdate 라는 명렁어로 ntp 서버를 지정하면 된다. 결과, 서버측과의 현재 컴퓨터 시간 오차를 표시해주며, 서버 시간에 맞추게 될것이다. 이는 서로 다른 PC 간에 같은 NTP 서버를 지정함으로써 시간오차를 최소한으로 줄이는 방법이라 할 수 있다.
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install chrony
+sudo ntpdate ntp.ubuntu.com
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsubsection{소스 리스트 추가}
+"sources.list"에 ROS 저장소 주소를 추가하자. 새로운 커맨드 창을 열고 아래와 같이 입력한다. 
+
+\begin{lstlisting}[language=bash]
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsubsection{키 설정}
+ROS 저장소로부터 패키지를 다운로드 받기위해 공개키를 추가하자. 아래와 같이 입력한다.
+
+\begin{lstlisting}[language=bash]
+wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsubsection{패키지 인덱스 업데이트}
+소스 리스트에 ROS 저장소 주소를 넣었으니 패키지 리스트를 다시 재인덱싱을 하고, 설치상에 필수 사항은 아니지만 ROS설치전에 현재 설치된 우분투 관련 모든 패키지를 판올림 하기를 추천한다.
+
+\begin{lstlisting}[language=bash]
+sudo apt-get update && sudo apt-get upgrade
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsubsection{ROS Indigo Igloo 설치}
+이 명령어로 데스크톱용 기본적인 ROS 패키지들을 설치하게 된다. 여기에는 ROS, rqt, rviz, 로봇 관련 라이브러리, 시뮬레이션, 네이게이션 등이 포함되어 있다.
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install ros-indigo-desktop-full
+\end{lstlisting}
+
+필자의 경우에는 추가로 rqt 관련 패키지를 설치하고 있다. 위의 설치만으로도 기본적인 rqt는 포함되지만 아래의 설치로 rqt관련 모든 패키지를 설치하는것이 여러모로 편하고, 다양한 rqt 플러그인을 사용가능해진다.
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install ros-indigo-rqt-*
+\end{lstlisting}
+
+만약, 그 이외에 패키지를 설치하고 싶은 경우에는 아래와 같이  "apt-cache" 의 명령어를 이용하여 "ros-indigo" 로 시작되는 패키지들을 검색할 수 있다. 현재 아래의 명령어를 실행해보면 대략 800여개의 패키지를 확인할 수 있다. 패키지 개별 설치를 원하는 경우에는 "sudo apt-get install ros-indigo-[패키지이름]" 과 같은 명령어로 개별 패키지를 설치 가능하다. 그 이외에 GUI 툴인 sysnaptic package manager 를 이용해도 된다.
+
+\begin{exercise}[APT (Advanced Packaging Tool)]
+apt-get, apt-key, apt-cache 등의 나오는 apt는 Advanced Packaging Tool 이라고 하여서 우분투(Ubuntu)를 포함안 데비안(Debian)계열의 리눅스에서 사용하는 패키지 관리 명령어이다\footnote{http://en.wikipedia.org/wiki/Advanced\_Packaging\_Tool}.
+\end{exercise}
+
+\begin{exercise}[패키지 검색 방법]
+apt-cache search ros-indigo
+\end{exercise}
+
+\begin{exercise}[패키지 개별 설치 방법]
+sudo apt-get install ros-indigo-패키지이름
+\end{exercise}
+
+\begin{exercise}[이전 버전의 ROS 삭제 및 번갈아 가며 사용하기]
+아래의 명령어로 설정과 파일을 같이 삭제 가능하다. 만약, 기존 버전과 함께 사용하고자하는 경우에는 설정파일을 불러오는 명령어중 source /opt/ros/indigo/setup.bash 의 부분을 indigo 또는 hydro 로 바꾸면 된다. sudo apt-get purge ros-hydro-*
+\end{exercise}
+
+%-------------------------------------------------------------------------------
+\subsubsection{rosdep 초기화}
+ros를 사용하기전에 rosdep 를 초기화 해주어야만 한다. rosdep 는 ros의 핵심 컴포넌트 들을 사용하거나 컴파일 할때 의존성 패키지를 쉽게 설치하여 사용자 편의성을 높인 기능이다.
+
+\begin{lstlisting}[language=bash]
+sudo rosdep init
+rosdep update
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsubsection{rosinstall 설치}
+ros의 다양한 패키지를 인스톨하는 프로그램이다. 빈번하게 사용할 정도로 유용한 툴인만큼 꼭 설치하도록 하자. 
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install python-rosinstall
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsubsection{환경설정 파일 불러오기}
+환경설정이 설정되어 있는 파일을 불러온다. ROS\_ROOT, ROS\_PACKAGE\_PATH 등의 환경 변수들이 정의되어 있다.
+
+\begin{lstlisting}[language=bash]
+source /opt/ros/indigo/setup.bash
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsubsection{작업폴더 생성 및 초기화}
+ROS에서는 catkin 이라는 ROS 전용 빌드 시스템을 사용하고 있다. 이를 사용하기위해서는 아래와 같이 catkin 작업 폴더 및 작업 폴더 초기화 설정을 해주어야 한다. (아래의 설정은 ROS를 사용함에 있어서 한 번만 해주면 된다.)
+
+\begin{lstlisting}[language=bash]
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
+\end{lstlisting}
+
+catkin 작업 폴더를 생성하였으면 컴파일을 하자. 현재의 catkin 작업 폴더에는 src폴더 및 그 안의 CMakeLists.txt 이외에 아무런 파일이 없지만 테스트삼아 아래와 같이 "catking\_make"명령어를 이용하여 빌드하여 보자. 
+
+\begin{lstlisting}[language=bash]
+cd ~/catkin_ws/
+catkin_make
+\end{lstlisting}
+
+문제없이 빌드를 마치게 되면 아래와 같이 "ls" 명령어를 실행해보자. 유저가 직접 생성하였던 "src" 폴더 이외의 없었던 "build" 및 "devel"폴더가 새로 생성되었다. catkin 빌드 시스템의 빌드 관련 파일은 "build" 폴더에, 빌드 후 실행관련 파일은 "devel" 에 저장되게 된다.
+
+\begin{lstlisting}[language=bash]
+ls
+build  devel  src
+\end{lstlisting}
+
+마지막으로, catkin 빌드 시스템과 관련된 환경 파일을 불러오자. 
+
+\begin{lstlisting}[language=bash]
+source ~/catkin_ws/devel/setup.bash
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsection{환경 설정}\index{환경 설정}
+
+위 설치과정에서 사용된 아래 명렁어처럼 환경 설정 파일을 불러오는 것은 새로운 터미널 창을 열때마다 매번 실행해줘야 한다. 이러한 번거로운 작업을 없애기 위하여 새로운 터미널 창을 열때마다 정해진 환경 설정 파일을 읽어오도록 설정해주도록 하자. 또한, ROS 네트워크 설정 및 자주 사용하는 명령어를 단축 명령어로 설정하도록 하자.
+
+\begin{lstlisting}[language=bash]
+source /opt/ros/indigo/setup.bash
+source ~/catkin_ws/devel/setup.bash
+\end{lstlisting}
+
+우선, gedit 프로그램과 같은 문서편집 프로그램을 사용하여 bashrc 파일을 수정하도록 하자. 아래의 명령어로 bashrc 파일을 불러오자.
+
+\begin{lstlisting}[language=bash]
+gedit ~/.bashrc
+\end{lstlisting}
+
+bashrc 파일을 불러오면 이미 매우 많은 설정들이 있을 것이다. 이전 설정들은 건들지 말고, bashrc 파일의 제일 하단으로 내려가서 아래의 내용을 추가해주도록 하자. (xxx.xxx.xxx.xxx 는 자신의 IP이다.) 각 항목의 상세 설명에 대해서는 이전 강좌를 참고하도록 하자.
+
+\begin{lstlisting}[language=bash]
+# Set ROS Indigo
+source /opt/ros/indigo/setup.bash
+source ~/catkin_ws/devel/setup.bash
+# Set ROS Network
+export ROS_MASTER_URI=http://xxx.xxx.xxx.xxx:11311
+export ROS_IP=xxx.xxx.xxx.xxx
+# set ROS alias command
+alias cw='cd ~/catkin_ws'
+alias cs='cd ~/catkin_ws/src'
+alias cm='cd ~/catkin_ws && catkin_make'
+\end{lstlisting}
+
+위 설정 이외에 필자는 아래와 같은 추가 설정을 하기도 한다. 아래의 내용은 어디까지나 참고 사항이니 설정하지 않아도 된다.
+
+\begin{lstlisting}[language=bash]
+# Set User Alias
+alias rm='rm -rf' 
+alias eb='gedit ~/.bashrc' 
+alias sb='source ~/.bashrc'
+alias agi='sudo apt-get install'  
+alias m='make -j4 -l4'  
+alias gs='git status'  
+alias gp='git pull'
+alias catkin_eclipse='catkin_make --force-cmake -G"Eclipse CDT4 - Unix Makefiles"'
+\end{lstlisting}
+
+%-------------------------------------------------------------------------------
+\subsection{테스트}\index{테스트}
+
+모든 설치가 완료되었다. 마지막으로, 제대로 설치가 되었는지 테스트하기 위하여 지금의 모든 터미널창을 닫고, 새 터미널 창을 실행하자. 그 다음 아래의 명령어를 입력하여 roscore 를 실행해보자.
+
+\begin{lstlisting}[language=bash]
+roscore
+\end{lstlisting}
+
+\noindent
+아래와 같이 에러가 없이 실행되었다면 설치가 완료된 것이다. 종료는 "Ctrl-C" 이다.
+
+\begin{lstlisting}[language=bash]
+... logging to /home/rt/.ros/log/21d50290-1842-11e3-9f14-d43d7e970cb0/roslaunch-rt-5461.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+
+started roslaunch server http://xxx:xxxxx/
+ros_comm version 1.11.3
+
+SUMMARY
+========
+
+PARAMETERS
+ * /rosdistro: <...>
+ * /rosversion: <...>
+
+NODES
+auto-starting new master
+process[master]: started with pid [10028]
+ROS_MASTER_URI=http://xxx.xxx.xxx.xxx:11311/
+
+setting /run_id to 92356a28-fc05-11e3-a59d-648099507444
+process[rosout-1]: started with pid [10041]
+started core service [/rosout]
+\end{lstlisting}
+
+%\section{ROS 간단 설치}
+% \label{sec:Related}
+% \ref{sec:Robot}
+
+%-------------------------------------------------------------------------------
