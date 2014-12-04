@@ -16,7 +16,7 @@
 # *.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
-*.bbl
+# *.bbl
 *.bcf
 *.blg
 *-blx.aux
@@ -73,10 +73,10 @@
 *.lol
 
 # makeidx
-*.idx
+# *.idx
 *.ilg
-*.ind
-*.ist
+# *.ind
+# *.ist
 
 # minitoc
 *.maf
@@ -110,4 +110,5 @@ sympy-plots-for-*.tex/
 
 # etc
 *.ptc
-Introduction_to_ROS.pdf
+main.pdf
+Output/
