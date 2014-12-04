@@ -1,0 +1,146 @@
+% -*- root: Introduction_to_ROS.tex -*-
+
+%-------------------------------------------------------------------------------
+\chapterimage{chapter_head_2.pdf} 
+
+%-------------------------------------------------------------------------------
+\chapter{ROS 명령어}
+
+%-------------------------------------------------------------------------------
+\section{ROS 명령어 정리}\index{ROS 명령어 정리}
+
+ROS는 쉘(shell)환경에서 명령어로 파일 시스템 이용, 소스코드 편집, 빌드, 디버깅, 패키지 관리 등을 처리할 수 있다. 로스를 제대로 사용하기 위해서는 기본적인 리눅스 명령어 이외에도 로스만의 고유한 명령어들을 익힐 필요가 있다. 로스 명령어로는 다음과 같이 다양하게 존재한다. 
+
+처음부터 모든 명령어를 숙련하게 사용할 수 없겠지만, 다음의 내용을 보고 필요할 때마다 이용하면 되겠다. 처음에는 익숙하지 않아서 불편하게 느껴질 수 있겠지만, 사용하면 사용할 수록 매우 빠르고 편하게 각종 기능을 명령어로 처리하는 자신의 모습을 보게 될 것이다.
+
+로스의 다양한 명령어를 숙달하기 위하여 본 강좌에서는 우선 각 명령어의 기능을 간단히 설명하고, 하나 하나 예제를 들어가며 소개하도록 하겠다. 그리고 각 명령어의 사용 빈도 및 중요도를 고려하여 필자가 별표로 점수를 매겨두었다. 별표가 많은 명령어의 경우, 사용 빈도수가 높고 중요한 명령어이니 꼭 익혀두기로 하자.
+
+\vspace{\baselineskip}
+\noindent
+\textbf{[ROS 쉘 명령어]}
+\begin{description}
+\item[roscd] (★★★) ros+cd(changes directory) : ROS 패키지 또는 스택의 디렉토리 변경 명령어
+\item[rospd] (☆☆☆) ros+pushd : ROS 디렉토리 인덱스에 디렉토리 추가
+\item[rosd] (☆☆☆) ros+directory : ROS 디렉토리 인덱스 확인 명령어
+\item[rosls] (★☆☆) ros+ls(lists files) : ROS 패키지의 파일 리스트를 확인하는 명령어
+\item[rosed] (★☆☆) ros+ed(editor) : ROS 패키지의 파일을 편집하는 명령어
+\item[roscp] (☆☆☆) ros+cp(copies files) : ROS 패키지의 파일 복사하는 명령어
+\end{description}
+
+\vspace{\baselineskip}
+\noindent
+\textbf{[ROS 실행 명령어]}
+\begin{description}
+\item[roscore] (★★★) ros+core : master (ROS 네임 서비스) + rosout (stdout/stderr) + parameter server (매개변수관리)
+\item[rosrun] (★★★) ros+run : 패키지의 노드를 실행하는 명령어
+\item[roslaunch] (★★★) ros+launch : 패키지의 노드를 복수개 실행하는 명령어
+\item[rosclean] (★☆☆) ros+clean : ros 로그 파일을 체크하거나 삭제하는 명령어
+\end{description}
+
+\vspace{\baselineskip}
+\noindent
+\textbf{[ROS 정보 명령어]}
+\begin{description}
+\item[rostopic] (★★★) ros+topic : ROS 토픽 정보를 확인하는 명령어
+\item[rosservice] (★★★) ros+service : ROS 서비스 정보를 확인하는 명령어
+\item[rosnode] (★★★) ros+node : ROS의 노드 정보를 얻는 명령어
+\item[rosparam] (★★★) ros+param(parameter) : ROS 파라미터 정보를 확인, 수정 가능한 명령어
+\item[rosmsg] (★★☆) ros+msg : ROS 메세지 선언 정보를 확인하는 명령어
+\item[rossrv] (★★☆) ros+srv : ROS 서비스 선언 정보를 확인하는 명령어
+\item[roswtf] (☆☆☆) ros+wtf : ROS 시스템을 검사하는 명령어
+\item[rosversion] (★☆☆) ros+version : ros 패키및 배포 릴리즈 버전의 정보를 확인하는 명령어
+\item[rosbag] (★★★) ros+bag : ROS 메세지를 기록, 재생하는 명령어
+\end{description}
+
+\vspace{\baselineskip}
+\noindent
+\textbf{[ROS 캐킨 명령어]}
+\begin{description}
+\item[catkin\_create\_pkg] (★★★) 캐킨 빌드 시스템에 의한 패키지 자동 생성
+\item[catkin\_eclipse] (★★☆) 캐킨 빌드 시스템에 의해 생성된 패키지를 이클립스에서 사용할 수 있도록 변경하는 명령어
+\item[catkin\_find] (☆☆☆) 캐킨 검색
+\item[catkin\_generate\_changelog] (☆☆☆) 캐킨 변경로그 생성
+\item[catkin\_init\_workspace] (★☆☆) 캐킨 빌드 시스템의 작업폴더 초기화
+\item[catkin\_make] (★★★) 캐킨 빌드 시스템을 기반으로한 빌드 명령어
+\end{description}
+
+\vspace{\baselineskip}
+\noindent
+\textbf{[ROS 패키지 명령어]}
+\begin{description}
+\item[rosmake] (☆☆☆) ros+make : ROS package 를 빌드한다. (구 ROS 빌드 시스템에서 사용됨)
+\item[rosinstall] (★☆☆) ros+install : ROS 추가 패키지 설치 명령어
+\item[roslocate] (☆☆☆) ros+locate : ROS 패키지 정보 관련 명령어 
+\item[roscreate-pkg] (☆☆☆) ros+create-pkg : ROS 패키지를 자동 생성하는 명령어 (구 ROS 빌드 시스템에서 사용됨)
+\item[rosdep] (★☆☆) ros+dep(endencies) : 해당 패키지의 의존성 파일들을 설치하는 명령어
+\item[rospack] (★★☆) ros+pack(age) : ROS 패키지와 관련된 정보를 알아보는 명령어
+\end{description}
+
+%-------------------------------------------------------------------------------
+\section{ROS 명령어 정리}\index{ROS 명령어 정리}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%-------------------------------------------------------------------------------
