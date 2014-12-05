@@ -13,6 +13,10 @@
 
 \newcommand*{\Comment}[1]{\hfill\makebox[3.0cm][l]{#1}}
 
+\lstdefinelanguage{bash}{
+  keywords={cd,sudo,apt-get,install,mkdir,rm,gedit,nano},
+  literate={\$}{{\textcolor{red}\$}}1   
+}
 \lstdefinelanguage{ROS}{
   keywords={roscd,rospd,rosd,rosls,rosed,roscp,roscore,rosrun,roslaunch,rosclean,rostopic,rosservice,rosnode,rosparam,rosmsg,rossrv,roswtf,rosversion,rosbag,catkin_create_pkg,catkin_eclipse,catkin_find,catkin_generate_changelog,catkin_init_workspace,catkin_make,rqt,rqt_plot,rqt_graph,rqt_bag},
   comment=[l]{//},
