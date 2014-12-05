@@ -32,6 +32,12 @@
 \usepackage{makeidx} % Required to make an index
 \makeindex % Tells LaTeX to create the files required for indexing
 
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+\newcounter{num}
+% \newcounter{num}\setcounter{num}{0}
+% \stepcounter{num}\circled{\thenum}
 %-------------------------------------------------------------------------------
 
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
@@ -47,11 +53,13 @@
 \thispagestyle{empty}
 \AddToShipoutPicture*{\put(6,5){\includegraphics[scale=1]{background}}} % Image background
 \centering
-\vspace*{9cm}
-\par\normalfont\fontsize{35}{35}\sffamily\selectfont
-Introduction to ROS\par % Book title
-\vspace*{1cm}
-{\Huge Yoonseok Pyo}\par % Author name
+\vspace*{7cm}
+\par\normalfont\fontsize{50}{50}\sffamily\selectfont
+로봇 프로그래밍\\ROS로 시작하자!\par % Book title
+{\Huge -로봇 운영 체제-}\\ % Sub book title
+{\Huge (Robot Operating System)}\par
+\vspace*{7cm}
+{\Huge 표윤석}\par % Author name
 \endgroup
 
 %-------------------------------------------------------------------------------
@@ -89,12 +97,14 @@ Introduction to ROS\par % Book title
 %-------------------------------------------------------------------------------
 % CHAPTER  LIST
 %-------------------------------------------------------------------------------
+
 \setlength\parindent{1em}
 \input{chapter1}
 \input{chapter2}
 \input{chapter3}
 \input{chapter4}
 \input{chapter5}
+\input{chapter6}
 
 %----------------------------------------------------------------------------------------
 % BIBLIOGRAPHY
