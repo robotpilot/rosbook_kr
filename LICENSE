@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Content author:
 % Yoonseok Pyo (passionvirus@gmail.com, robotpilot.net, oroca.org)
@@ -12,9 +12,14 @@
 % 2) What does the CC Attribution-NC-SA license mean for this template?
 % http://www.latextemplates.com/forums#/discussion/25/what-does-the-cc-attribution-nc-sa-license-mean-for-this-template
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Cover image
+% Free Turtle Pattern By freecooldesign (www.freecooldesign.com)
+% License: Creative Commons Attribution-Share Alike 3.0 Unported License. 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 % The Legrand Orange Book
 % LaTeX Template
 % Version 1.4 (12/4/14)
@@ -51,4 +56,4 @@
 % Chapter heading images should have a 2:1 width:height ratio,
 % e.g. 920px width and 460px height.
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
