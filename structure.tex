@@ -1,29 +1,22 @@
 % -*- root: main.tex -*-
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	VARIOUS REQUIRED PACKAGES
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \usepackage{titlesec} % Allows customization of titles
-
 \usepackage{graphicx} % Required for including pictures
 \graphicspath{{pictures/}} % Specifies the directory where pictures are stored
-
 \usepackage{lipsum} % Inserts dummy text
-
 \usepackage{tikz} % Required for drawing custom shapes
-
 \usepackage[english]{babel} % English language/hyphenation
-
 \usepackage{enumitem} % Customize lists
 \setlist{nolistsep} % Reduce spacing between bullet points and numbered lists
-
 \usepackage{booktabs} % Required for nicer horizontal rules in tables
-
 \usepackage{eso-pic} % Required for specifying an image background in the title page
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	MAIN TABLE OF CONTENTS
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \usepackage{titletoc} % Required for manipulating the table of contents
 
@@ -49,9 +42,9 @@
 {\sffamily\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
 [] 
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	MINI TABLE OF CONTENTS IN CHAPTER HEADS
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 % Section text styling
 \titlecontents{lsection}[0em] % Indendating
@@ -67,9 +60,9 @@
 {}
 {}
  
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	PAGE HEADERS
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \usepackage{fancyhdr} % Required for header and footer configuration
 
@@ -94,9 +87,9 @@
 \newpage
 \fi}
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	THEOREM STYLES
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \usepackage{amsmath,amsfonts,amssymb,amsthm} % For math equations, theorems, symbols, etc
 
@@ -174,13 +167,14 @@
 \newtheorem{vocabulary}{ROS용어}
 \newtheorem{definitionT}{ROS용어}
 \newtheorem*{definitionT*}{ROS용어}
-\newtheorem{corollaryT}[dummy]{Corollary}
+% \newtheorem{corollaryT}[dummy]{Corollary}
+\newtheorem{corollaryT}{Tip!}
 \theoremstyle{ocrenum}
 \newtheorem{proposition}[dummy]{Proposition}
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	DEFINITION OF COLORED BOXES
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
 
@@ -254,9 +248,9 @@ innerbottommargin=5pt]{cBox}
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}		
 \newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}	
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	REMARK ENVIRONMENT
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \newenvironment{remark}{\par\vspace{10pt}\small % Vertical white space above the remark and smaller font size
 \begin{list}{}{
@@ -266,9 +260,9 @@ innerbottommargin=5pt]{cBox}
 \node[draw=ocre!60,line width=1pt,circle,fill=ocre!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{R}};\end{tikzpicture}} % Orange R in a circle
 \advance\baselineskip -1pt}{\end{list}\vskip5pt} % Tighter line spacing and white space after remark
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	SECTION NUMBERING IN THE MARGIN
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \makeatletter
 \renewcommand{\@seccntformat}[1]{\llap{\textcolor{ocre}{\csname the#1\endcsname}\hspace{1em}}}                    
@@ -289,17 +283,17 @@ innerbottommargin=5pt]{cBox}
 {.1ex}
 {\normalfont\small\sffamily\bfseries}}
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	HYPERLINKS IN THE DOCUMENTS
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 % For an unclear reason, the package should be loaded now and not later
 \usepackage{hyperref}
 \hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	CHAPTER HEADINGS
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 % The set-up below should be (sadly) manually adapted to the overall margin page septup controlled by the geometry package loaded in the main.tex document. It is possible to implement below the dimensions used in the goemetry package (top,bottom,left,right)... TO BE DONE
 
