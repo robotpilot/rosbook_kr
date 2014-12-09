@@ -130,6 +130,11 @@ rosrun image_view image_view image:=/image_raw
 \noindent
 \stepcounter{num}\thenum) 아래의 그림과 같이 카메라의 이미지가 작은 윈도우창에 표시된다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter9/imageview.png}
+\caption{image\_view 노드를 이용한 이미지 보기}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsubsection{RViz 로 확인하기}
 
@@ -158,9 +163,19 @@ rosrun rviz rviz
 \noindent
 (Add → by display → rviz → Image)
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter9/add_display_of_rviz.png}
+\caption{RViz에 이미지 디스플레이 추가}
+\end{figure}
+
 \vspace{\baselineskip}
 \noindent
 \thenum-3) Image → Image Topic 의 값을 "/image\_raw" 로 변경한다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter9/rqt_image_full.png}
+\caption{rqt를 이용한 이미지 확인}
+\end{figure}
 
 \vspace{\baselineskip}
 \noindent
@@ -214,16 +229,30 @@ rosrun image_view image_view image:=/image_raw
 
 이러한, 센서들의 가장 큰 문제점은 가격이다. 기본적인 가격은 제품마다 다르겠지만 수 백만원대이고, Velodyne의 HDL시리즈의 경우에는 수 천만을 호가하는 제품들이다. 이러한 단점을 커버하기 위한 중국 제품 (RPLIDAR\footnote{http://www.robopeak.com/} 등) 등이 40만원 안밖으로 저가로 나오기 시작하였으니 앞으로 더 기대해 볼 만 하다고 볼 수 있다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter9/sickhokuyovelodyne.png}
+\caption{왼쪽: SICK LMS 210, 가운데 Hokuyo UTM-30LX, 오른쪽: Velodyne HDL-64e}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{LRF 측정 원리}\index{LRF 측정 원리}
 
-각 식에서 사용된 정의는 이와 같다. c 광원의 속도 / t 반사되어 돌아온 시간 / φ 위상 딜레이 / ω 광파의 각주파수 / λ 파장 / N 파장 반주기. 여기서 사용자는 레이저가 돌아온 시간을 반으로 나누어 거리를 계산한다고 보면 된다.
+\begin{equation}
+  D = \frac{1}{2}ct = \frac{1}{2}\frac{c\varphi}{\omega} = \frac{c}{4\pi f}(N\pi +  \Delta\varphi) = \frac{\lambda}{4}(N +  \Delta N)
+\end{equation}
+
+위 식\footnote{\url{http://en.wikipedia.org/wiki/Laser_rangefinder}}에서 사용된 정의는 이와 같다. $c$ 광원의 속도, $t$ 반사되어 돌아온 시간, $\varphi$ 위상 딜레이, $\omega$ 광파의 각주파수, $\lambda$ 파장, $N$ 파장 반주기. 여기서 사용자는 레이저가 돌아온 시간을 반으로 나누어 거리를 계산한다고 보면 된다.
 
 문제는, 여기서 사용되는 레이저는 제어 및 가격의 문제로 적게 쓸수록 이득이기에 제조 회사들은 레이저 광원을 하나만 사용하게 된다. 참고로 수 천만원 이상의 Velodyne의 HDL시리즈는 적게는 32개, 많게는 64개의 레이저를 사용하고 있다. 그 이외에는 대부분 하나의 레이저를 사용한다고 보면 된다. 
 
 이런 문제를 극복하기 위하여, LRF 는 하나의 레이저와 하나의 반사거울과 모터로 구성되어 있다. LRF 를 구동하면 모터 소리가 들리는데 이는 내부의 거울을 회전시켜서 레이저를 수평면으로 주사하기 때문이다. 제품마다 다르겠지만 일반적으로 180도~360도 까지 측정 가능하다. 
 
 밑에 그림에서 (a)는 LRF 의 모습으로 내부에 레이저가 하나 있고, 이를 거울(회색부분)을 회전시켜가며 레이저의 반사되어 온 시간을 측정하게 된다 (엄밀히 말하면 파장계산이지만...). 이렇게 하여 그림 (b)와 같이 LRF 를 중심으로 수평면의 물체들을 스캔 가능하다. 다만, 단점으로는 거리가 멀어짐으로써 정확도가 떨어짐을 알 수 있다. (그림 (c))
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter9/mechanism_lrf.png}
+\caption{LRF 측정 원리}
+\end{figure}
 
 사용자 입장에서 LRF 의 동작 원리는 굳이 알 필요는 없다. 여기서 이 내용을 포함한 이유는, 이 원리로 인하여 측정할때 주의할 점이 있다는 점이다. 
 
@@ -326,6 +355,11 @@ rviz 좌측 하단의 Add 클릭한 후, Axes 선택하여 추가한다.
 rviz 좌측 하단의 Add 클릭한 후, LaserScan 선택하여 추가한다.
 아래 그림과 같이 세부 설정을 바꿔준다. (Topic 및 Color Transformer, Color)
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter9/rviz_laser_scan.png}
+\caption{RViz에 LaserScan 디스플레이}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsubsection{데이터 확인}
 
@@ -338,7 +372,17 @@ LRF 활용은 무궁무진 할테지만 대표적인 예는 SLAM (Simultaneous l
 
 LRF 의 또다른 예로는 아래의 동영상과 같이 환경에 있는 다양한 물체인식과 사람의 발 혹은 몸체를 측정하여 위치를 추척하고 주변의 상황과 매치하여 현재 행동을 추리하는 것도 가능하다. 필자의 석사 연구 테마였는데 올해 가을경에 관련 소스를 오픈할 준비를 하고 있다. 그 때에 관련 응용 강좌를 준비하도록 하겠다.
 
-그 이외에도 아래의 동영상처럼 2D의 LRF 센서 몸체 자체를 회전시켜 3차원 정보를 생성, 3D 환경 지도를 작성할 수 도 있다. 필자의 연구실에서는 이러한 부분도 다루고 있으니 이 부분에 대해서도 다루고 싶다.
+그 이외에도 아래의 동영상처럼 2D의 LRF 센서 몸체 자체를 회전시켜 3차원 정보를 생성, 3D 환경 지도를 작성할 수 도 있다. 필자의 연구\cite{pyo2014floor}에서는 이러한 부분도 다루고 있으니 이 부분에 대해서도 다루고 싶다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter9/lrfandrobot.png}
+\caption{LRF 활용1: 모바일 로봇의 장애물 검출}
+\end{figure}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter9/fss.png}
+\caption{LRF 활용2: 인물 및 이동 물체 검출}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \section{Depth Camera}\index{Depth Camera}
@@ -352,26 +396,57 @@ Depth camera 에는 그 취득 방법에 따라 매우 다양한 종류로 나�
 
 ToF 방식은 적외선을 방사하여 돌아온 거리로 거리를 측정하는 방식으로 일반적으로는 IR 송신부와 수신부가 쌍으로 존재하여(적외선 카메라를 사용하는 제품등, 제품에 따라 다른 경우도 있음) 각 픽셀에서 측정한 거리를 읽어내는 방식이다. ToF 방식이 다음에 설명할 일관적 방사 패턴 방식보다 비싼 이유는 이러한 구조적인 면에서 하드웨어가 가격이 올라가기 때문이다 (최근에는 위상차를 이용한 거리계산등 다양한 방법이 소개되어 가격이 낮아지고 있는 추세이다). ToF 방식\footnote{ToF Camera, http://en.wikipedia.org/wiki/Time-of-flight\_camera}의 센서로는 파나소닉의 D-IMager, MESA Imaging사의 SwissRanger, Fotonic 사의 FOTONIC-B70, pmdtechnologies 사의 CamCube와 CamBoard, SoftKinectic사의 DepthSense DS시리즈, MS사의 최근에 출시한 Kinect 2 등이 있다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter9/tof.png}
+\caption{왼쪽부터 D-IMager, SwissRanger, CamBoard, Kinect2}
+\end{figure}
+
 일관적 방사 패턴 방식(pattern of coherent radiation, US20100225746\footnote{http://www.google.com/patents/US20100225746} 특허 인용, 가간섭성 방사라고도 한다.)의 경우에는 많이 들어본 MS사의 Kinect\footnote{Kinect, http://en.wikipedia.org/wiki/Kinect}와 Asus 의 Xtion\footnote{http://www.asus.com/Multimedia/Xtion\_PRO\_LIVE/} 이 있다. 그 이외에도 PrimeSense사의 Carmine, Capri 등이 있고, 최근에는 occipital 사의 structure sensor\footnote{structure sensor, http://structure.io/}가 출시 되었다. 이들 센서들의 공통점은 PrimeSense 사의 PrimeSense System on a Chip (SoC) 을 사용하고 있다는 것이다. 
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter9/pattern.png}
+\caption{왼쪽부터 Kinect xbox, Xtion, Carmine}
+\end{figure}
 
 PrimeSense 사의 단 하나의 적외선 프로젝터와 단 하나의 적외선 카메라로 구성된 센서로, 기존 ToF 방식에서는 없었던 "일관적 방사 패턴"을 사용한다는 점이다. 이는 미국 특허 US20100225746 에 자세히 기재되어 있다. 또한, 이 기술을 집접시킨 PrimeSense System on a Chip (SoC) 도 개발되었다. 
 
-간단히 소개하자면, 밑의 그림중 26번에 해당되는 프로젝터가 랜덤하게 적에선 점들을 일정한 패턴에 의해 적외선 점들을 방사하게 된다. 방사된 적외선 점들은 31번과 같이 대상체에 투영되고, 이 점들을 적외선 카메라인 32번에 의해서 수집하게 되는 것이다. 여기서 31번의 무수한 일정 패턴의 적외선 점들은 평평한 대상체라면 패턴들이 방사된 시점에서 동일하겠지만 장애물이 놓여지게 되면 일그러지게 되고 변형된다. 이 변형을 적외선 프로젝터와 적외선 카메라의 거리를 가지고 수학적 계산으로 풀게되면 거리를 계산할 수 있게 된다.
+간단히 소개하자면, 밑의 그림중 26번에 해당되는 프로젝터가 랜덤하게 적에선 점들을 일정한 패턴에 의해 적외선 점들을 방사하게 된다. 방사된 적외선 점들은 31번과 같이 대상체에 투영되고, 이 점들을 적외선 카메라인 32번에 의해서 수집하게 되는 것이다. 여기서 31번의 무수한 일정 패턴의 적외선 점들은 평평한 대상체라면 패턴들이 방사된 시점에서 동일하겠지만 장애물이 놓여지게 되면 일그러지게 되고 변형된다. 그 예가 그림 \ref{fig:irpattern}\footnote{\url{https://www.youtube.com/watch?v=Tpa1JP1AtCo}}와 같다. 이 변형을 적외선 프로젝터와 적외선 카메라의 거리를 가지고 수학적 계산으로 풀게되면 거리를 계산할 수 있게 된다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter9/US20100225746A1_20100909_D00001.png}
+\caption{미국 특허출원번호 US20100225746 에 기재된 적외선 프로젝터}
+\end{figure}
+
+\begin{figure}[h]
+\label{fig:irpattern}
+\centering\includegraphics[width=0.4\columnwidth]{pictures/chapter9/irpattern.png}
+\caption{Kinect 의 IR 패턴을 찍은 사진}
+\end{figure}
 
 이 기술은 기존의 ToF 방식을 지원하는 하드웨어가 비싸다는 문제점과 외부 간섭등의 문제점을 해결하면서 관심을 받게 되었고, PrimeSense 사의 PrimeSense SoC 를 탑재한 자사의 Carmine, Capri 가 세상에 나왔다. 또한 같은 SoC칩을 탑재한 MS 사의 Kinect 의 경우에는 Xbox 의 컨트롤러로 대중화되면서 인기를 한 몸에 받을 수 있었다. 그 뒤로도 일반 PC에서의 사용을 염두해둔 Asus의 Xtion 등이 나올 수 있었다. 이는 모두,  PrimeSense SoC 를 탑재한 센서들이다. 단, 문제는 2013년 12월 PrimeSense 사가 Apple 사에 인수되면서 발생되었다. PrimeSense 사가 Apple 사에 인수된 이후, PrimeSense의 Carmine, Capri 제품을 구매할 수 없게된 것은 물론, MS사의 Kinect는 판매중지가 되었고, Asus의 Xtion 또한 재고품을 제외한 추후 생산을 중단하게 되었다. PrimeSense SoC 를 탑재한 마지막 제품인 Occipital 사의 Structure sensor 는 현재까지 제품을 판매하고 있지만, 추후 어떻게 될지는 당사도 모르는 분위기이다. 저렴한 가격으로 인기를 끌었던 한 제품이 역사속으로 숨어버리게 된 상황이다. 하지만, 앞으로 구글의 Tango 프로젝트 및 Apple사의 PrimeSense 사 인수후 나올 제품, ToF 계열의 Canesta 사를 인수한 MS사의 후속 제품인 Kinect 2 등이 기대되어지는 상황이다.
 
 %-------------------------------------------------------------------------------
 \subsection{OpenNI (Open Natural Interaction)}\index{OpenNI}
 
-OpenNI (Open Natural Interaction)\footnote{OpenNI, http://en.wikipedia.org/wiki/OpenNI}\footnote{} 란 PrimeSense 사를 중심으로 Willow Garage, ASUS와 함께 개발한 자사의 제품들을 사용하기 위해 개발한 드라이버와 다양한 응용 API의 집합의 라이브러리이다. 여기서 NI는 Natural Interaction의 약자로, 인간과 기계의 의사소통이라는 뜻으로 키보드 마우스 등이 아닌 인간의 감각을 기본으로한 상호작용이라는 의미에서 나왔다. PrimeSense SoC 를 탑재한 대부분의 센서는 이 드라이브를 사용하고 있다. 비슷한 형태의 MS사의 Kinect Windows SDK 및 한 때 MS사의 Kinect를 처음 해킹하여 프리로 내놓았던 것으로 유명한 libfreenect 등이 있다. OpenNI에는 Ponit Cluoud Data를 다루는 기본적인 드라이버 이외에 사람의 인체 골격을 다루는 NITE 등의 미들웨어도 포함되어 있다. OpenNI 는 PrimeSense 이 Apple 사로 인수된 후, 폐기의 위기에 놓였다가, 현재는 Occipital 사가 뒤를 이어 Github 저장소\footnote{https://github.com/occipital/openni2}에서 개발을 이어가고 있다.
+OpenNI (Open Natural Interaction)\footnote{OpenNI, http://en.wikipedia.org/wiki/OpenNI}란 PrimeSense 사를 중심으로 Willow Garage, ASUS와 함께 개발한 자사의 제품들을 사용하기 위해 개발한 드라이버와 다양한 응용 API의 집합의 라이브러리이다. 여기서 NI는 Natural Interaction의 약자로, 인간과 기계의 의사소통이라는 뜻으로 키보드 마우스 등이 아닌 인간의 감각을 기본으로한 상호작용이라는 의미에서 나왔다. PrimeSense SoC 를 탑재한 대부분의 센서는 이 드라이브를 사용하고 있다. 비슷한 형태의 MS사의 Kinect Windows SDK 및 한 때 MS사의 Kinect를 처음 해킹하여 프리로 내놓았던 것으로 유명한 libfreenect 등이 있다. OpenNI에는 Ponit Cluoud Data를 다루는 기본적인 드라이버 이외에 사람의 인체 골격을 다루는 NITE 등의 미들웨어도 포함되어 있다. OpenNI 는 PrimeSense 이 Apple 사로 인수된 후, 폐기의 위기에 놓였다가, 현재는 Occipital 사가 뒤를 이어 Github 저장소\footnote{\url{https://github.com/occipital/openni2}}에서 개발을 이어가고 있다.
 
 %-------------------------------------------------------------------------------
 \subsection{점 군 데이터 (Point Cloud Data) 와 Point Cloud Library}\index{PCL}
 
-방식의 차이에 따라 Depth Sensor 의 경우, LRF와 Depth Camera 로 나뉘기도 하는데, 이 범주의 모든 거리 센서등은 대상체와의 거리를 한 점으로 표시하고 이를 점들의 집합체인 Point Cloud 를 다룬다는 의미에서 동일하다. OpenNI 또한 Point Cloud 를 만들어 낸다. 이러한 Point Cloud 를 사용하기 위한 API 의 잡합체로 우리는 PCL (Point Cloud Library)\footnote{PCL, http://pointclouds.org/about/} 이라는 라이브러리를 사용한다. PCL 은 그 기능이 많아 다 설명하기 어렵지만 PCL 사이트에 대표적인 특징이 있는 사진이 있어서 첨부한다. 아래의 그림과 같이 PCL 에서는 점 군 데이터(PCD) 을 가지고 필터링, 분할, 표전 재구성, 모델로부터의 피팅 및 특징 추출 등을 행하는 라이브러리이다. 거의 모든 PCD 를 이용한 처리에 필요한 함수등을 가지고 있다. 우리는 나중에 이 PCL 을 이용하여 PCD 를 처리할 예정이다.
+방식의 차이에 따라 Depth Sensor 의 경우, LRF와 Depth Camera 로 나뉘기도 하는데, 이 범주의 모든 거리 센서등은 대상체와의 거리를 한 점으로 표시하고 이를 점들의 집합체인 Point Cloud 를 다룬다는 의미에서 동일하다. OpenNI 또한 Point Cloud 를 만들어 낸다. 이러한 Point Cloud 를 사용하기 위한 API 의 잡합체로 우리는 PCL (Point Cloud Library)\footnote{PCL, http://pointclouds.org/about/} 이라는 라이브러리를 사용한다. PCL 은 그 기능이 많아 다 설명하기 어렵지만 PCL 사이트에 대표적인 특징이 있는 사진이 있어서 첨부한다. 아래의 그림과 같이 PCL 에서는 점 군 데이터(PCD) 을 가지고 아래의 그림\footnote{\url{http://www.pointclouds.org/}}처럼 필터링, 분할, 표전 재구성, 모델로부터의 피팅 및 특징 추출 등을 행하는 라이브러리이다. 거의 모든 PCD 를 이용한 처리에 필요한 함수등을 가지고 있다. 우리는 나중에 이 PCL 을 이용하여 PCD 를 처리할 예정이다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter9/pcl_features.jpg}
+\caption{PCL 특징}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{Depth camera 의 드라이버 설치 및 구동}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter9/depth_camera.jpg}
+\caption{Depth cameras}
+\end{figure}
 
 그 방식이 다르던, PCD 데이터를 받는다는 점에서 LRF 를 포함한 Depth Sensor 계열을 동일하다. 우선, 이 강좌에서는 위 그림 오른쪽 맨위에 있는 Asus의 Xtion을 이용하기로 하겠다. 
 
@@ -433,6 +508,11 @@ Global Options → Fixed Frame 을 "camera\_depth\_frame" 로 변경한다.
 \noindent
 \thenum-2) PointCloud2 추가 및 설정
 rviz 좌측 하단의 Add 클릭한 후, PointCloud2를 선택하여 추가한다. 아래 그림과 같이 세부 설정을 바꿔준다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter9/rviz_pc2.png}
+\caption{RViz PointCloud2 디스플레이}
+\end{figure}
 
 \vspace{\baselineskip}
 \noindent

@@ -291,10 +291,15 @@ $ rosrun turtlesim turtlesim_node
 [INFO] [1383445615.686475328]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.6\columnwidth]{pictures/chapter5/term_rosrun.png}
+\caption{turtlesim\_node 노드를 실행한 모습}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{roslaunch : 로스 노드 복수 실행}\index{roslaunch : 로스 노드 복수 실행}
 
-roslaunch\footnote{http://wiki.ros.org/roslaunch} 지정한 패키지의 하나이상의 노드를 실행하는 명령어이다. 여기서는 간략히 설명하고 더 자세한 사용 방법은 "로봇 운영체제 강좌 : 18. 로스런치 사용법" 를 참고하길 바란다.
+roslaunch\footnote{http://wiki.ros.org/roslaunch} 지정한 패키지의 하나이상의 노드를 실행하는 명령어이다. 여기서는 간략히 설명하고 더 자세한 사용 방법은 "로봇 운영체제 강좌 : 18. 로스런치 사용법" 를 참고하길 바란다. 
 
 \setcounter{num}{0}
 
@@ -697,6 +702,12 @@ publishing and latching message for 3.0 seconds
 \item \textbf{-- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'} : x축 좌표로 초당 2.0 미터(m/s)의 속도 이동, z축 좌표로 초당 1.8 라디안 (radian/s) 회전을 하라는 값이다.
 \end{itemize}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter5/rostopic_pub.png}
+\caption{발행된 메시지가 반영된 모습}
+\end{figure}
+
+
 %-------------------------------------------------------------------------------
 \subsection{rosservice : 로스 서비스}\index{rosservice : 로스 서비스}
 
@@ -808,6 +819,11 @@ $ rosservice call /turtle1/set_pen 255 0 0 5 0
 \noindent
 "/turtle1/set\_pen" 서비스를 요청하는 명령어이다. 사용된 255 0 0 5 0 은 "/turtle1/set\_pen" 서비스에 사용되는 매개변수(r, g, b, width, off)에 해당되는 수치이다.  빨간색의 r의 최대치인 255으로 하고, g,b 는 모두 0 이므로 펜의 색깔을 빨간색으로 설정하라는 이야기이며, width는 5의 굵기로 설정, off는 0(false)이기에 선이 보이도록 하는것을 의미한다. 그 결과가 아래와 같다. 위 명령어로 서비스를 요청하여 TurtleSim에 사용되는 펜의 특성을 바꾸었고, turtle\_teleop\_key에서 명령을 내려 이동한 결과 아래와 같이 흰색이였던 펜 색이 빨간색으로 표시됨을 확인할 수 있다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter5/rosservice_call.png}
+\caption{rosservice call 예제}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{rosparam : 로스 매개변수}\index{rosparam : 로스 매개변수}
 
@@ -891,6 +907,12 @@ run_id: 93598b26-44f6-11e3-a077-d43d7e970cb0
 $ rosparam set background_b 0
 $ rosservice call clear
 \end{lstlisting}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.4\columnwidth]{pictures/chapter5/rosparam_set1.png}
+\centering\includegraphics[width=0.4\columnwidth]{pictures/chapter5/rosparam_set2.png}
+\caption{rosparam set 예제}
+\end{figure}
 
 \noindent
 매개변수 값을 설정하는 명령어이다. 위 예제에서 "turtlesim" 노드의 배경색관련 매개변수인 "background\_b" 를 "0"으로 설정하였다. 그러면 rgb 는 255, 86, 69 에서 0, 86, 69 으로 변경되기에 위 오른쪽 그림처럼 짙은 녹색이 된다.
@@ -1187,6 +1209,11 @@ $ rosbag record /turtle1/cmd_vel
 \noindent
 사용중인 토픽중에서 기록하고자 하는 토픽을 옵션으로 입력하여 bag기록을 시작한다. 기록을 시작한 후, "turtle\_teleop\_key" 노드에서 키보드로 명령을 내리면서 거북이를 이동시켜본다. 이때에 사용된 "/turtle1/cmd\_vel" 토픽이 기록되게 된다. 기록 종료는 Ctrl + C 으로 종료하면 된다. 위 정보처럼 "2013-11-04-15-29-16.bag" 와 같은 .bag 파일이 생성될 것이다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter5/rosbag_record.png}
+\caption{rosbag record 예제}
+\end{figure}
+
 \begin{lstlisting}[language=ROS]
 $ rosbag record -a
 [ INFO] [1383547478.578148917]: Recording to 2013-11-04-15-44-38.bag.
@@ -1239,6 +1266,12 @@ Done.
 
 \noindent
 기록해둔 "2013-11-04-15-29-16.bag" 를 재생하는 명령어이다. 아래의 그림처럼 원본과 재생시의 데이터가 같음을 확인할 수 있다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.4\columnwidth]{pictures/chapter5/rosbag_play1.png}
+\centering\includegraphics[width=0.4\columnwidth]{pictures/chapter5/rosbag_play2.png}
+\caption{rosbag play 예제}
+\end{figure}
 
 \vspace{\baselineskip}
 \noindent

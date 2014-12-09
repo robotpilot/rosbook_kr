@@ -33,6 +33,16 @@ RViz는 ROS의 3차원 시각화 툴이다. ROS 네트워크상의 데이터를 
 
 그 이외에 필자가 작성한 패키지중 RViz를 이용하여 표시가능한것을 아래에 링크하였다. 참고하길 바란다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter6/rviz_example1.png}
+\caption{RViz의 사용예1) 레고를 이용한 모바일 로봇과 초음파 센서를 이용하여 간단한 맵작성}
+\end{figure}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter6/rviz_example2.png}
+\caption{RViz의 사용예2) 키넥트로부터 사람의 골격을 취득하고 로봇을 제어하는 모습}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{RViz 설치 및 실행}\index{RViz 설치 및 실행}
 
@@ -51,6 +61,11 @@ rosrun rviz rviz
 
 %-------------------------------------------------------------------------------
 \subsection{RViz 화면 구성}\index{RViz 화면 구성}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter6/rviz.png}
+\caption{RViz 화면 구성}
+\end{figure}
 
 \begin{enumerate}[leftmargin=*, label=\arabic{*})]
 \item 3D 뷰 (3D view)
@@ -73,10 +88,25 @@ rosrun rviz rviz
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
-\subsection{사용 방법}\index{사용 방법}
+% \subsection{사용 방법}\index{사용 방법}
 
 %-------------------------------------------------------------------------------
 \subsection{데이터 표시의 예}\index{데이터 표시의 예}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter6/rviz_example3.png}
+\caption{RViz 사용예3) LRF를 이용한 거리측정}
+\end{figure}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter6/rviz_example4.png}
+\caption{RViz 사용예4) Xtion 센서로부터 취득한 3차원 거리 값}
+\end{figure}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter6/rviz_example5.png}
+\caption{RViz 사용예5) Xtion 센서에 장착된 카메라를 이용한 이미지 데이터 취득}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \section{ROS 도구 (rqt) }\index{ROS 도구 (rqt) }
@@ -105,6 +135,11 @@ http://www.pyqtgraph.org/downloads/python-pyqtgraph\_0.9.8-1\_all.deb 에서 deb
 rqt_graph
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter6/rqtplotoption.png}
+\caption{rqt\_graph의 설치 옵션}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{rqt 실행 및 각 메뉴 소개}\index{rqt 실행 및 각 메뉴 소개}
 
@@ -115,6 +150,11 @@ rqt
 \end{lstlisting}
 
 rqt 를 실행해주면 아래와 같이 rqt gui 화면이 나온다.처음 구동하였다면 아무런 표시가 없이 덩그러니 메뉴만 표시된다. 이는 rqt가 직접적으로 수행하는 프로그램인 플러그인이 지정되지 않았기 때문이다. 메뉴를 간단히 설명하자면, File의 경우, 단순히 rqt를 종료하는 서브메뉴만 있다. 플러그인(Plugins) 에는 27가지의 플러그인이 있다. 이를 선택하여 이용하게 된다. 동작(Running) 은 현재 동작중인 플러그인이 표시되어 필요치 않을시에 동작을 중단시킬 수 있는 메뉴이다. 끝으로 시각(Perspectives)은 현재 구동중인 플러그인을 셋트로 다음에도 같은 셋트를 이용하고 싶을때 저장하여 동일한 플러그인들을 실행할때 쓰는 메뉴이다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.6\columnwidth]{pictures/chapter6/rqt.png}
+\caption{rqt의 초기 화면}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{rqt 플러그인}\index{rqt 플러그인}
@@ -162,6 +202,11 @@ Pose View | 현재 tf의 위치 및 모델의 위치 표시 플러그인\\
 RViz | 3차원 시각화 툴인 RViz 플러그인\\
 TF Tree | tf 관계를 트리로 나타내는 그래프 뷰 형식의 플러그인\\
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter6/rqt_plugin.png}
+\caption{rqt 플러그인}
+\end{figure}
+
 \vspace{\baselineskip}
 \noindent
 이 들의 모든 플러그인을 설명하기 어렵고, 이번 강좌에서는 가장 빈번히 사용되는 rqt\_bag, rqt\_graph, rqt\_plot 등 에대해서 알아보도록 하겠다.
@@ -172,7 +217,7 @@ TF Tree | tf 관계를 트리로 나타내는 그래프 뷰 형식의 플러그�
 rqt\_plot 은 2차원 데이터 플롯 툴이다. 플롯이라하면 좌료를 그리다라는 의미이다. 즉, ROS 메시지를 받아서 이를 좌표에 뿌리게 되는 것을 의미한다. 예를들어 turtlesim 노드 pose 메시지의 x 좌표와  y좌표를 좌표에 표기해보도록 하자. 우선, turtlesim 패키지의 turtlesim\_node 을 구동하자.
 
 \begin{lstlisting}[language=ros]
-rosrun turtlesim turtlesim_node 
+$ rosrun turtlesim turtlesim_node 
 \end{lstlisting}
 
 다음으로, rqt\_plot 을 아래의 조건으로 구동하여 좌표를 작성한다. (원래는 rqt 를 구동후에 Plot 플러그인을 불러와서 GUI환경에서 토픽을 설정하면 되야하지만, 현재 버전에서는 이상하게 구동하지 않는다. 그러므로 아래의 명령어로 대채하여 설명한다.)
@@ -184,10 +229,16 @@ rqt_plot /turtle1/pose/
 다음으로, turtlesim 패키지의 turtle\_teleop\_key 을 구동하여, 화면속의 거북이를 이리저리 움직여보자.
 
 \begin{lstlisting}[language=ros]
-rosrun turtlesim turtle_teleop_key
+$ rosrun turtlesim turtle_teleop_key
 \end{lstlisting}
 
 그러면 빨간색 선이 거북이의 x위치가 x 좌표, 파란선이 거북이의 y위치가 y좌표에 표시됨을 확인할 수 있을 것이다. 이와 같이 2차원 데이터의 좌표 표시에 매우 유용한 툴로 지금은 turtlesim 을 이용하였지만, 사용자가 개발한 노드의 2차원 데이터 표시에 매우 유용할 것이다. 특히, 센서값 표시에 적합하다.
+
+\begin{figure}[h]
+\centering\includegraphics[height=50mm]{pictures/chapter6/turtlesim_rqt_plot1.png}
+\centering\includegraphics[height=50mm]{pictures/chapter6/turtlesim_rqt_plot2.png}
+\caption{rqt\_plot 예제}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{rqt\_bag}\index{rqt\_bag}
@@ -197,14 +248,19 @@ rosrun turtlesim turtle_teleop_key
 이를 테스트하기 위해서 위헤서 다룬 rqt\_graph 및 Image View 에서 다룬 turtlesim 및 uvc camera 관련의 노드들을 전부 실행해 주자. 그 뒤, 아래의 명령어로 카메라의 "/image\_raw" 와 터틀시뮬레이션의 "/turtle1/cmd\_vel" 값을 bag 파일로 생성하자.
 
 \begin{lstlisting}[language=ros]
-rosbag record /image_raw /turtle1/cmd_vel
+$ rosbag record /image_raw /turtle1/cmd_vel
 \end{lstlisting}
 
 그 후, 아래의 명령어로 rqt를 구동 후, 플러그인(Plugins) 메뉴에서 Bag를 선택한다. 그 뒤 왼쪽 상단의 폴더 모양(Load Bag)의 아이콘을 선택하여 방금전에 기록해둔 *.bag 파일을 불러오도록 하자. 그러면 아래의 화면처럼 영상 및 cmd\_vel 값을 확인할 수 있다. 또한, 이를 확대, 재생, 시간별 데이터 수 등을 확인할 수 있으며, 오른쪽 마우스를 누르면 Publish 라는 옵션이 있는데 이를 통해 메시지를 다시 발행할 수도 있다.
 
 \begin{lstlisting}[language=ros]
-rqt
+$ rqt
 \end{lstlisting}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter6/rqt_bag.png}
+\caption{rqtbag 예제}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{rqt\_graph}\index{rqt\_graph}
@@ -214,8 +270,13 @@ rqt
 사용방법은 매우 간단한다. 아래의 명령어로 rqt를 구동후, 플러그인(Plugins) 메뉴에서 ROS Graph를 선택하면 그것으로 끝이다. 현재, 카메라 및 터틀봇시뮬레이션을 구동하셨을때의 노드 및 메시지의 상황은 아래 그림처럼 나타난다.
 
 \begin{lstlisting}[language=ros]
-rqt
+$ rqt
 \end{lstlisting}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter6/rqt_graph.png}
+\caption{rqt\_graph 예제}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{Image View}\index{Image View}
@@ -224,20 +285,20 @@ rqt
 
 일반 USB CAM의 경우, UVC을 지원하기에 ROS의 "uvc\_camera"\footnote{ROS wiki, UVC Camera, http://wiki.ros.org/uvc\_camera} 패키지를 이용하면 된다. 우선, 아래의 명령어로 "uvc\_camera" 패키지를 설치하도록 하자.
 
-\begin{lstlisting}[language=ros]
-sudo apt-get install ros-indigo-uvc-camera 
+\begin{lstlisting}[language=ROS]
+$ sudo apt-get install ros-indigo-uvc-camera 
 \end{lstlisting}
 
 USB CAM을 컴퓨터의 USB에 연결하고, 아래의 명령어로 uvc\_camera 패키지의 uvc\_camera\_node 노드를 구동하자.
 
 \begin{lstlisting}[language=ros]
-rosrun uvc_camera uvc_camera_node
+$ rosrun uvc_camera uvc_camera_node
 \end{lstlisting}
 
 그 후, 아래의 명령어로 rqt를 구동후, 플러그인(Plugins) 메뉴에서 이미지 뷰(Image View)를 선택한다. 그 뒤 왼쪽 상단의 메시지 선택란을 "/image\_raw"를 선택하면 아래의 화면처럼 영상을 확인할 수 있다. 
 
 \begin{lstlisting}[language=ros]
-rqt
+$ rqt
 \end{lstlisting}
 
 이상으로 rqt 를 대략적인 개요, 설치, 사용 방법에 대해서 설명하였다. 이 강좌를 통해서 모든 플러그인의 설명을 하는 것을 불가능했지만 위에서 설명한 몇가지 예를 기반으로 직접 사용해보기를 추천한다. ROS 노드와 같은 직접적으로 로봇 및 센서 처리에 관련한 내용은 아니지만, 이와 같은 작업들을 수행하는데 있어서 데이터를 저장, 보존, 수정, 현황파악 등에 도움이 되는 보조툴로서 사용가능하다. 

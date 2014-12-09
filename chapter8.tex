@@ -19,9 +19,20 @@ ROS에서는 중요한 하드웨어로 로봇과 센서를 꼽고있다. 이들�
 
 그리고 또 다른 대표적인 로봇은 터틀봇이다. 터틀봇은 PR2가 범용적이고 성능면에서 뛰어나지만 가격면에서 ROS의 활성화를 이룰수 없다는 판단하에 ROS 의 활성화를 목적으로 한 개발용 모바일 로봇이다. 처음에는 iRobot 사의 청소로봇 룸바를 모바일 베이스로 채택했었고, 이어서 터틀봇2에서는 우리나라의 유진로봇사의 아이클레보를 개량한 거북이(KOBUKI) 를 모바일 베이스로 채택하여 지금까지 많이 사용되고 있다.
 
+\begin{figure}[h]
+\centering\includegraphics[height=55mm]{pictures/chapter8/PR2.png}
+\centering\includegraphics[height=55mm]{pictures/chapter8/turtlebot2.png}
+\caption{좌측:PR2(http://www.willowgarage.com]), 우측:Turtlebot2(http://turtlebot.com)}
+\end{figure}
+
 \vspace{\baselineskip}
 \noindent
 이 대표적인 두 가지의 로봇 이외에도 120여 종류의 로봇이 소스를 제공하고 있다.  이는 오픈소스로 ROS 패키지 소스가 공개된 로봇들의 숫자이고, 로봇 관련 회사, 연구소, 대학, 개인 들이 사용하고 있는 로봇들의 수까지 합친다면 더 많을 것이라고 생각된다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=\columnwidth]{pictures/chapter8/robots.png}
+\caption{ROS가 도입한 로봇들 (http://wiki.ros.org/Robots)}
+\end{figure}
 
 로봇의 종류로는 아래와 같이 거의 모든 종류의 로봇 분류에서 사용되는 로봇들이 등록되어 있다.
 
@@ -93,12 +104,21 @@ $ hg clone http://code.google.com/p/amor-ros-pkg/ %*(위키에 적혀져 있는 
 
 이러한 환경 정보를 취득하기 위한 센서의 종류는 매우 많다. 그 중 로봇이 사용하는 대표적인 센서에는 거리 센서를 들 수 있다. LRF(Laser Range Finders) 및 적외선 거리센서가 가장 일반적이고, 최근에는 3D Sensors 인 키넥트, Xtion 등이 거리센서로서 많이 사용되고 있다. 그 이외에도 유저 인식, 물체 인식 등에 사용되는 컬러 카메라, 위치 추정에 쓰이는 관성센서, 음성인식에 사용되는 마이크폰, 토크 제어에 사용되는 토크센서 등 센싱해야 하는 정보에 대응하는 다양한 센서들이 존재한다.
 
-아래의 동영상은 ROS를 이용한것은 아니지만 필자의 연구실을 LRF 센서로 계측한 예제이다. ROS의 2D range finders 계열의 LRF 및 3D Sensors 를 이용하면 아래와 같은 결과물도 만들어 낼 수 있다.
+아래의 그림은 ROS를 이용한것은 아니지만 필자의 연구실을 LRF 센서로 계측한 예제이다. ROS의 2D range finders 계열의 LRF 및 3D Sensors 를 이용하면 아래와 같은 결과물도 만들어 낼 수 있다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=\columnwidth]{pictures/chapter8/lrf360.png}
+\caption{레이저 레인지 파인더로 만들어낸 3차원 지도}
+\end{figure}
 
 문제는 사용해야하는 센서는 정말 많다는 것이다. 단순히, 마이크로 프로세서에서 ADC로 값을 받을 수 있는 센서는 한계가 있다. 그 중 LRF, 3D Sensors, 카메라 등은 데이터 량이 많고, 처리에 상당한 스펙이 필요하기에 마이크로 프로세서로는 무리이고, PC를 이용하게 된다. 이에 따라 드라이버도 필요하고 OpenNI, OpenCV 등 포인트 처리, 영상 처리 등에 필요한 라이브러리도 필요하다.
 
 ROS 는 위에서 언급한 센서들의 드라이버, 라이브러리 사용 가능한 환경 등을 제공해주고 있다. 현재 모든 센서를 제공하는 것은 아니지만 점점 센서관련 패키지는 늘어나고 있고, 사용법이 같은 센서 예를들어 I2C, UART 등을 사용한 센서들은 사용방법도 통일화되고 있다. 센서 제조회사들도 적극적으로 ROS 센서 패키지를 지원하고 있어서 향후 나온 센서들의 ROS 지원에도 가속화가 되지 않을까 싶다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter8/sensors.png}
+\caption{ROS에서 사용 가능한 센서의 예}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{센서 패지키}\index{센서 패지키}
@@ -153,6 +173,11 @@ ROS 에 공개된 패키지가 얼마나 될까? 정확히는 몰라도 수천�
 
 그리고, ROS는 버전이 달라도 어느정도 호환성이 있기때문에 위의 공개된 패키지를 맘껏 이용가능하다.그렇다면 우리는 어떻게 이 패키지들을 사용할 수 있을까? 앞으로 이에 대해서 알아보도록 하자.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter8/openpkg1.png}
+\caption{ROS 패키지 목록}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{패키지 검색}\index{패키지 검색}
 
@@ -160,14 +185,29 @@ ROS 에 공개된 패키지가 얼마나 될까? 정확히는 몰라도 수천�
 
 그럼, 얼굴 인식과 관련된 용어로 검색해보자. 필자는 "face detect" 로 검색을 해보았다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter8/openpkg2.png}
+\caption{패키지 검색 방법}
+\end{figure}
+
 검색어가 적절하다면 위와 같이 관련 패키지가 상당히 검색된다.  우선, 가장 상단부의 pi\_face\_tracker 와 face\_detector 패키지가 가장 근접해 본다. 자세한 패키지 내역을 알기위해 각 wiki 페이지를 읽어보기 바란다. 필자는 처음에 face\_dector (http://wiki.ros.org/face\_detector) 를 선택했으나 패키지 설명 부분에서 kinect 및 Xtion과 같은 RGBD 카메라가 필요하다는 것을 확인하였고, 본래 목적인 USB 카메라로 사용할 수 없는 패키지이기에 단념했다.
 
 그 뒤, pi\_face\_tracker 를 검색해보니 매우 쓸만해 보였고 이 패키지를 사용하기로 결정했다. 안되면 다른 패키지를 찾으면 그만이거나 이 패키지를 참고삼아 제작하면 그만이다. 단, 주의할 것은 catkin 인지 rosbuild 인지 알아두는것이 좋고, 누가 제작하였는지, 오픈소스 라이선스는 어떤것을 채택하고 있는지 꼭 유심히 체크해봐야 한다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter8/openpkg3.png}
+\caption{패키지 정보}
+\end{figure}
 
 그리고 난 후, 패키지의 오픈소스 저장소 주소, 패키지 의존관계 등을 필히 숙지한다. 패키지를 설치하기 전에 의존하는 패키지는 우선적으로 설치를 해줘야만 해당 패키지를 사용할 수 있다. 그럼 다음 챕터에서 직접 설치해보자.
 
 %-------------------------------------------------------------------------------
 \subsection{패키지 설치}\index{패키지 설치}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter8/openpkg4.jpg}
+\caption{패키지 설치}
+\end{figure}
 
 우선, 제일 먼저 wiki 페이지에서 설치관련 정보를 확인하자. 위 설치 과정에서는 uvc\_cam 와 pi\_vision 두 가지 패키지를 설치하도록 되어 있는데 자세히 보니 현재 hydro 에서 채택하고 있는 catkin 빌드 시스템이 아닌 rosbuild 빌드 시스템의 빌드 명령어인 rosmake 가 사용되고 있음을 확인할 수 있다. 가끔씩 이렇게 이전 빌드 시스템을 사용하고 있는 오래된 패키지가 있다. 하지만 그렇다고 해서 설치 불가능 한것이 아니라 hydro 에서는 catkin 과 rosbuild 를 모두 사용할 수 있기 때문에 문제가 없다.
 
@@ -198,6 +238,11 @@ $ make
 %-------------------------------------------------------------------------------
 \subsection{패지키의 노드 실행}\index{패지키의 노드 실행}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter8/openpkg5.jpg}
+\caption{패지키의 노드 실행}
+\end{figure}
+
 일단, 위와 같이 패키지의 실행 방법을 확인하자. 그리 어려움은 없고 roslaunch 로 실행 가능하다. 그럼 우선, roscore 를 구동하고, 참고로 roscore는 앞으로 부터는 항상 구동해두는 습관을 가지도록 하자. 다음 부터는 별도로 설명하지 않겠다. 그 뒤, 별도의 다른 터미널 창을 열어 아래의 명령어로 카메라 드라이버를 구동하자.
 
 \begin{lstlisting}[language=ROS]
@@ -211,6 +256,11 @@ $ roslaunch pi_face_tracker face_tracker_uvc_cam.launch
 \end{lstlisting}
 
 지금까지 문제가 없었다면 아래 영상과 같이 얼굴의 몇가지 특징점을 찾아 얼굴 인식이 되는 결과를 확인할 수 있다. 아 그리고 참고로 터미널 창에서 "rostopic echo /roi" 라고 명령하면 현재 얼굴의 좌표점이 출력된다. 나중에 이 패키지를 이용하여 자신만의 패키지를 작성할 때 이 좌표를 받아 응용 노드를 작성할 수도 있다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter8/openpkg6.png}
+\caption{pi\_face\_tracker 실행 결과}
+\end{figure}
 
 ROS 에 공개된 패키지는 ROS가 널리 사용되기 시작하면서 급격히 증가하고 있다. 그 중 우리가 필요할 때 찾아쓰는 방법만 알아두면 미리 고민하고 노력해준 이들로 인하여 나의 작업은 한 단계를 넘어서서 내가 진정 집중해야할 부분에 시간을 쏟을 수 있게 된다. 이게 바로 ROS 의 기본 이념이다. 지식이 점점 쌓여져 더 상위단계로 접근하게 하여 로봇틱스의 발전을 가져오는 것! 나중에 이 로봇 운영체제 강좌가 끝날 무렵에는 이런 ROS 생태계를 위하여 자신의 소스를 공개하고 ROS wiki 에 등록하는 방법을 다루기로 하자.
 

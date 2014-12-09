@@ -1,6 +1,7 @@
 % -*- root: main.tex -*-
 % https://www.sharelatex.com/learn/Code_listing
 
+% \usepackage{upquote}
 \usepackage{listings}
 \usepackage{color}
 
@@ -24,7 +25,11 @@
   literate={\$}{{\textcolor{red}\$}}1   
 }
 
+% \newfontfamily\listingsfont[Scale=.7]{DejaVu Sans Mono}
+% \lstset{basicstyle=\listingsfont}
+
 \lstset{
+  % upquote=true,
   xleftmargin=5pt,
   xrightmargin=5pt,
   backgroundcolor=\color{backcolour},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
@@ -38,6 +43,7 @@
   extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
   frame=single,                    % adds a frame around the code
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  columns=fullflexible,
   keywordstyle=\color{blue},       % keyword style
   language=C++,                    % the language of the code
   morekeywords={*,...},            % if you want to add more keywords to the set

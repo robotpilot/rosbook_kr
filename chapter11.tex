@@ -3,7 +3,7 @@
 \chapterimage{chapter_head_11.pdf} 
 
 %-------------------------------------------------------------------------------
-\chapter{모바일 로봇}
+\chapter{SLAM과 내비게이션}
 
 %-------------------------------------------------------------------------------
 \section{SLAM과 내비게이션}\index{ROS}
@@ -15,6 +15,11 @@
 
 가 본적도 없는 미지의 공간까지 안내하는 내비게이터을 비서 부리 듯이 쉽게 사용하고 있다니 정말 멋진 시대에 살고 있지 않나 싶다. 이 내비게이터은 역사가 참으로 길다. 우선, 지도라는 것부터 사람이 하나하나 걸어다니며 측정하여 지도를 만들게 되고 이를 필사하여 나누어 가지고 이용하는 것이였다. 물론, 지금의 지도와는 다르게 오차를 포함되어 있겠지만 말이다. 과거에는 여행자가 이러한 지도를 가지고 해, 달, 별의 위치를 보며 현재 위치를 추정하고 먼 여행을 했을 테고, 나중에 들어서야 자석의 발견으로 나침판을 발명한 후로는 조금 더 진보 되었다고 볼 수 있겠다. 이는 육지 뿐만 아니라 바다에서도 마찬가지 였을 것이다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter11/compass.jpg}
+\caption{나참판 (pixabay.com, 라이선스:CC0)}
+\end{figure}
+
 우리가 현재 편리하게 사용하고 있는 내비게이터는 비교적 역사가 짧은데 1981년 일본의 혼다에서 '일렉트로 자이로케이터(Electro Gryrocator)\footnote{\url{http://en.wikipedia.org/wiki/Electro_Gyrocator}}’ 라는 3축 자이로스코프와 필름 지도를 기반으로 한 아날로그 방식이 처음 제안되었다(참고자료[2]). 그 후 미국 자동차용품업체 이택(Etak)의 전자 나침판과 바퀴에 센서를 장착하여 동작하는 전자식 내비게이션 ‘이택 내비게이터(Etak Navigator\footnote{\url{http://en.wikipedia.org/wiki/Etak}})’ 등이 나오기 시작했다. 그러나 전자 나침판과 바퀴에 센서를 장착하는 것은 비싼 자동차 가격에 더욱 부담이 되고 신뢰도에서도 문제가 있었다. 미국은 1970년대 부터 군사 목적으로 인공 위성을 이용한 위치 시스템을 개발하고 있었는데 2000년대에 그 중 24개의 GPS(Global Positioning System)\footnote{\url{http://en.wikipedia.org/wiki/Global_Positioning_System}} 위성을 개방하게 되었고 지금의 네비게이터 방식이 보급되기 시작하였다.
 
 이야기를 로봇쪽으로 돌려보자. 로봇에도 이 네비게이션 기능이 사용된다면 얼마든지 우리 환경에서 활보하며 활약 할 수 있을 것이다. 이미, 로봇 공학에서는 가장 기본 중에 기본으로 네비게이션 분야는 꾸준히 연구되고 있고 발전을 거듭하고 있다. 로봇 공학에서 네비게이션은 빼놓을 수 없고 그 만큼 중요하다. 우리는 이 강좌를 시작으로 네비게이션에 대해 알아보기로 한다.
@@ -24,6 +29,10 @@
 
 이 모바일 로봇의 기본이자 꽃은 바로 내비게이션이라고 할 수 있겠다. 내비게이션은 로봇이 정해진 목적지까지 이동하는 것으로, 말이야 쉽지만 로봇 자기 자신이 어디에 있는지, 그리고 주어진 환경의 지도를 가지고 있어야 한다는 것, 다양한 경로중에 최적화된 경로는 어떤 것인지, 그리고 도중에 로봇에게 장애물이 되는 벽, 가구, 물체 등을 피하여 이동하는 등 어디 하나 쉬운 미션이 하나도 없다. 
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter11/navigation_concept.png}
+\caption{내비게이션}
+\end{figure}
 
 로봇에 있어서 내비게이션을 위해서는 어떠한 것 들이 필요할까? 내비게이션 알고리즘에 따라 틀리겠지만 필수적으로는 아래의 기능 정도는 갖추고 있어야 할 것이다. 
 
@@ -36,13 +45,25 @@
 
 첫 번째는 지도이다. 내비게이터는 구매시 부터 매우 정확한 지도가 탑재되어 있고 이 지도를 기반으로 목적지까지 안내 받을 수 있게 된다. 그러나, 서비스 로봇이 사용되는 실내에서 지도가 따로 있을까? 내비게이터와 마찬가지로 지도가 필요함으로 사람이 직접 지도를 작성하여 로봇에게 주던지, 로봇 스스로가 지도를 작성하여야 할 것이다. 로봇이 스스로 혹은, 약간의 인간의 도움을 받아 지도를 작성하기 위해서 등장한 것이 바로 SLAM(Simultaneous localization and mapping)\footnote{\url{http://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping}}이다. 우리 말로는 "동시적 위치추정 및 지도 작성" 이라고 표현할 수 있겠다. 이는 로봇이 미지의 임의 공간을 이동하면서 주변을 센싱하며 현재 위치를 추정하는과 동시에 그 과정에서 지도를 작성하는 방법이다. 이 SLAM에는 다양한 방법이 있는데 좀 더 자세한 설명은 추후에 이어지는 강좌에서 설명하도록 하겠다.
 
-
-(출처:pixabay.com, 라이선스:CC0)
+\begin{figure}[h]
+\centering\includegraphics[width=0.3\columnwidth]{pictures/chapter11/treasure_map.png}
+\caption{지도 (출처:pixabay.com, 라이선스:CC0)}
+\end{figure}
 
 
 두 번째로 로봇 스스로 위치를 계측/추정할 수 있어야 한다. 자동차의 경우 GPS 를 이용하여 자기 위치를 추정하지만, 실내에서는 GPS를 사용할 수 없고 만약에 사용할 수 있다고 하더라도 정밀한 이동을 위해서는 오차가 큰 GPS 는 쓸모가 없다. 그래서, 로봇은 일반적으로 자신이 움직이는 이동량을 바퀴의 회전축의 회전량을 가지고 측정하게 된다. 하지만, 바퀴의 회전량이라는게 추측 항법(dead reckoning\footnote{\url{http://en.wikipedia.org/wiki/Dead_reckoning}}\footnote{\url{http://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/16311/www/s07/labs/NXTLabs/Lab\%203.html}}, 데드레커닝)이라고 하여 오차가 꾀 발생한다. 그래서, IMU 센서 등으로 관성 정보를 취득하여 위치보상을 통해 그 오차를 줄여주는 방법이 사용되고는 한다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter11/deadreckoning.png}
+\caption{데드레커닝에 필요한 정보(중심 위치, 바퀴나 거리, 바퀴 반지름)}
+\end{figure}
+
 추측 항법에 대해서 간략히 설명하겠다. 만약에, 위와 같이 로봇이 있을때, 바퀴간의 거리는 D, 바퀴의 반지름은 r 이락 하자. 그 후, 좌/우측 모터의 엔코더 값을 이용하여 수식(1)(2)(3)(4)로 변환 과정을 거치고 수식(5),(6)과 같이 로봇의 선속도(linear velocity: v)와 각속도(angular velocity: w)를 구할 수 있다. 그리고 최종적으로 Runge-Kutta 공식을 이용하여 식(7),(8), (9) 와 같이 이동한 위치, 각도의 근사값을 구할 수 있다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=\columnwidth]{pictures/chapter11/deadreckoning2.png}
+\caption{추측 항법(deadreckoning)}
+\end{figure}
 
 세 번째로는 벽, 물체 등의 장애물을 파악하는 방법인데 이는 센서가 절대적으로 사용된다. 거리센서, 비전센서 등 다양한 종류의 센서가 사용되는데 거리센서는 LRF, 초음파센서, 적외선 거리센서 등이 사용되며 비전센서에는 스테레오 카메라, 모노카메라, 전방향 옴니 카메라, 그리고 최근에 Depth camera 로 많이 사용되는 Kinect, xtion 등이 장애물 파악하는데에 사용된다. 이 센서에 대한 내용은 대표적인 센서를 대상으로 이전 강좌로 설명하였다. 목차를 참고하여 보도록 하자.
 
@@ -85,12 +106,25 @@ SLAM과 내비게이션을 위하여 로봇은 X-Y 평면상의 장애물을 계
 
 본 강좌에서는 이전 강좌에 이어서 거북이 플랫폼\footnote{\url{http://wiki.ros.org/kobuki}}을 사용할 예정이다. 단, SLAM을 위하여 아래와 같이 기존 거북이 본체에 터틀봇2의 패키지로 제공하는 스택(검은색 판)과 폴(은색 스택 받침)을 2단으로 쌓았다. 1단에는 랩톱이 들어가 있으며, 그 위의 2단에는 Hokuyo LRF인 UTM-30LX, Depth camera 인 Kinect 과 Xtion 이 각각 올라간다. 이는 조금 전에 언급한 SLAM 제약 사항을 모두 만족하는 조건이다. 본 강좌에서는 LRF 센서를 이용한 아래의 좌측 그림과 같은 로봇을 이용하여 설명할 예정이다. 내비게이션 강좌가 모두 끝나면 Kinect, Xtion 등도 추가로 설명하도록 하겠다.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\columnwidth]{pictures/chapter11/kobuki_sensors.png}
+\caption{LRF, Kinect, Xtion}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{SLAM 계측 대상 환경}
 
 SLAM 이 가능한 환경은 딱히 특정짓지는 않지만, Gmapping 의 알고리즘 상 특징 요소가 매우 적은 1) 장애물 하나도 없는 정사각 형태의 환경, 2) 장애물 하나 없이 양 벽이 평행하게 길게 이어진 복도, 3) 레이저 및 적외선이 반사되지 못하는 유리창 및 4) 산란되는 거울, 5) 호수, 바닷가 등의 경우 및 사용하는 센서의 특성에 따라 장애물 정보를 취득 못하는 환경은 제외된다.
 
 이번 강좌에서는 필자의 연구실에 마련된 실험 공간을 타겟 환경으로 정했다. 이 환경은 일반 가정집을 가정하여 침대, 책상, 테이블, 선반, 책장, 냉장고, TV, 소파 등으로 구성되어 있다. 아래에 실험 환경의 실제 사진과 3차원 정보를 첨부 사진으로 올렸으니 참고하기 바란다. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=40mm]{pictures/chapter11/room.jpg}
+\includegraphics[height=40mm]{pictures/chapter11/room_choreonoid.png}
+\caption{좌측: 계측 대상 환경, 우측: 오픈소스 로봇 시뮬레이터인 choreonoid 에서 본 계측 대상 환경}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{SLAM을 위한 ROS 패키지}
@@ -212,6 +246,7 @@ $ rosbag record -O scan_data /scan /tf
 \stepcounter{num}
 \thenum) 로봇 조종\\
 아래의 명령어로 유저가 직접 로봇을 조정하며 SLAM 작업을 한다. 여기서 중요한 점은 로봇의 속도를 너무 급하게 바꾸거나 너무 빠른 속도로 전/후진, 회전하지 않도록 주의한다. 그리고, 로봇을 이동시킬 때 계측할 환경의 구석 구석을 로봇이 돌아다니며 스캔할 필요가 있다. 이 부분은 경험이 필요한 부분이니 위 SLAM 작업을 많이 해보며 경험을 쌓아보도록 하자. 
+
 \vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ roslaunch kobuki_keyop safe_keyop.launch
@@ -228,6 +263,19 @@ $ rosrun map_server map_saver
 \end{lstlisting}
 
 1번에서 7번의 과정을 통하여 맵을 작성할 수 있다. 그 과정을 아래의 그림으로 나타내며, 그 결과물인 지도를 아래에 함께 첨부한다. 위 에서 언급한 실험 환경의 맵이 제대로 작성되었음을 확인 할 수 있다.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\columnwidth]{pictures/chapter11/slamtest1.png}
+\includegraphics[width=0.5\columnwidth]{pictures/chapter11/slamtest2.png}
+\caption{지도 작성을 위한 SLAM이 실행되고 있는 모습}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\columnwidth]{pictures/chapter11/slamtest_map.png}
+\caption{완성된 지도}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{미리 준비된 bag 파일을 이용한 SLAM}
@@ -265,6 +313,12 @@ $ rosrun map_server map_saver
 
 ROS 의 메시지(nav\_msgs/OccupancyGrid)로 발행될 때는 이를 다시 재정의하여 점유도를 정수 [0 ~ 100] 까지로 표현하고 있다. "0"에 가까울 수록 이동 가능한 자유 영역 (free area), "100"에 가까울 수록 이동 불가능한 점유 영역 (occupied area), 그리고 "-1" 은 특별히 확인되지 않은 미지 영역 (unknown area)으로 정의하고 있다.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\columnwidth]{pictures/chapter11/slam_map.png}
+\caption{완성된 점유 격자 지도}
+\end{figure}
+
 
 ROS 에서는 지도 정보를 portable graymap format 이라고 하는 *.pgm\footnote{\url{http://en.wikipedia.org/wiki/Netpbm_format}} 파일 형태를 저장/이용하고 있다. 또한, *.yaml 을 함께 포함하고 있어서 여기에 맵의 정보를 기재한다. 예를들어, 우리가 이전 강좌에서 작성한 지도의 정보를 확인하면 아래와 같은데 image 은 파일명, resolution은 지도의 해상도로 meters / pixel 단위이다.
 
@@ -296,6 +350,12 @@ free_thresh: 0.196
 두 번째는 나의 2) 위치 값이다. "나"라고 하면 여기서는 "센서"를 말하고, 이 센서의 위치는 로봇에 고정되어 있기 때문에 로봇이 움직이면 센서도 함께 움직인다. 그러니 센서의 위치 값은 로봇의 이동량인 오도메트리(odometry)에 의존하게 된다. 이를 계산하여 위치 값으로 제공할 필요가 있다.
 
 여기서 언급한 거리 값은 ROS 에서는 scan 이라는 이름으로 부르며, 위치 정보는 의존 관계에 따라 바뀌기 때문에 tf 라는 이름으로 부른다. (참고로 tf는 변환이라는 의미로 위치 정보 변환,  연결축 변환 등에 사용된다.) 이 scan과 tf 의 2 가지 정보를 기반으로 SLAM 실행하게 되고 우리가 원하는 지도를 작성할 수 있게 된다. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\columnwidth]{pictures/chapter11/tf_scan_slam_map.png}
+\caption{SLAM에 필요한 tf와 scan 데이터와 그 결과로서의 map의 관계}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{kobuki\_slam의 기능과 처리 과정}
@@ -340,12 +400,30 @@ slam\_gmapping 노드에서는 센서가 측정한 1) 거리 값 인 scan 정보
 \thenum) map\_saver\\
 map\_server 패키지의 map\_saver 노드는 이 지도 정보를 가지고 저장 가능한 map.pgm 파일과 이에 대한 정보 파일인 map.yaml 파일을 생성하게 된다.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{pictures/chapter11/slam_flow.png}
+\caption{kobuki\_slam 흐름도}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{로봇 각 부분의 상대 위치 변환 정보 (tf)}
 
 상대 위치 변환 정보를 시각화를 통하여 알아보면 아래의 그림과 같이 나타낼 수 있다. 그림이 상당히 크게 나왔는데 클릭하여 큰 원본 파일을 볼 수 있도록 하였다. 이 정보를 알고 있어야 뒤에 있는 kobuki\_tf 및 kobuki\_slam 패키지를 만들 수 있다. 위 그림은 "rosrun rqt\_tf\_tree rqt\_tf\_tree" 통해 확인 할 수 있는 tf\footnote{\url{http://wiki.ros.org/tf}} 의 tree 뷰어이고, 아래의 그림은 "rosrun rviz rviz" 에서 "tf" 플러그인을 추가하면 확인한 tf 정보이다. 
 
 즉, odom → base\_footprint → base\_link → base\_scan 순으로 위치 정보가 연관되어 있다. 우리가 SLAM 에서는 이 모든 tf 정보가 필요하다.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\columnwidth]{pictures/chapter11/slam_tf.png}
+\caption{로봇 각 부분의 상대 위치 변환 정보}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\columnwidth]{pictures/chapter11/rviz_slam_tf.png}
+\caption{RViz에서 확인해 본 tf 상대 위치 변환}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{kobuki\_tf 패키지 작성}
@@ -615,9 +693,11 @@ SLAM\footnote{\url{http://en.wikipedia.org/wiki/Simultaneous_localization_and_ma
 
 위치 추정에서 미국 나사의 아폴로 프로젝트에 실제 사용되어 유명해진 루돌프 칼만(Rudolf E. Kalman)이 개발한 칼만 필터(Kalman filter)가 많이 사용되어 왔는데, 이는 잡음(노이즈, noise)이 포함되어 있는 선형 시스템에서 대상체의 상태를 추적하는 재귀 필터를 말한다. 이는 기본적으로 베이즈 확률을 기반으로 한 것으로, 모델을 상정하고 이 모델을 이용하여 이전 상태로부터 현재 시점의 상태를 예측(Prediction)한다. 그 뒤 앞단계의 예측 값과 외부 계측기로 얻은 실제 측정 값 간의 오차를 이용하여 더 정확한 상태의 상태 값을 추정하는 보정(update) 단계를 거치게 된다. 이는 지속적으로 재귀 반복되어 정확도를 높여간다. 이 과정을 아래의 그림에서 매우 간단히 나타내었다. 참고하기 바란다.
 
-
-[ 칼만 필터의 기본 컨셉, 출처: \footnote{\url{http://en.wikipedia.org/wiki/Kalman_filter}}, CC0 라이선스 ]
-
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{pictures/chapter11/basic_concept_of_Kalman_filtering.png}
+\caption{칼만 필터의 기본 컨셉}
+\end{figure}
 
 단, 칼만 필터는 선형 시스템에만 해당, 적용된다. 우리 로봇 및 센서는 대부분 비선형 시스템인 경우가 많은데 이를 위해 칼만 필터를 수정한 확장 칼만필터, EKF (Extended Kalman Filter) 가 널리 이용된다. 이 이외에도 EKF 의 정확성을 보완한 무향 칼만 필터, UKF (Unscented Kalman Filter), 속도를 개선한 Fast Kalman filter 등 많은 KF 변종이 있으며 지금도 많이 연구되고 있다. 또한, 파티클 필터와 함께 사용하는 RBPF (Rao-Blackwellized Particle Filter) 등 다른 알고리즘과 함께 사용되는 경우도 흔히 찾아 볼 수 있다.
 
@@ -855,6 +935,12 @@ $ rosrun rviz rviz -d `rospack find kobuki_navigation`/rviz/kobuki_nav.rviz
 
 이를 실행시켜주면 아래와 같은 화면을 볼 수 있을 것이다. 우측 지도에 녹색 화살표가 잔뜩 보일텐데 이는 SLAM 이론편 강좌에서 설명하였던 파티클 필터의 각 입자들이다. 나중에 다시 설명하겠지만 내비게이션 또한 파티클 필터를 이용하기 때문이다. 그 녹색 화살표의 가운데 쯤에 있는 것이 거북이 로봇임을 확인 할 수 있을 것이다.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\columnwidth]{pictures/chapter11/navigation_rviz.png}
+\caption{RViz에서 확인 가능한 파티클(로봇 주위의 녹색 화살표)}
+\end{figure}
+
 \vspace{\baselineskip}
 \noindent
 \stepcounter{num}
@@ -868,6 +954,21 @@ $ rosrun rviz rviz -d `rospack find kobuki_navigation`/rviz/kobuki_nav.rviz
 모든 준비가 완료되었으면 내비게이션 명령을 내려보자. RViz 의 상단의 메뉴바 중에 "2D Nav Goal" 를 누르면 마찬가지로 매우 큰 녹색 화살표가 나타날 것이다. 이를 로봇을 이동시키고자 하는 위치에 클릭하고, 드래그 하여 방향도 설정해주도록 하자. 그러면 로봇은 작성된 지도를 기반으로 목적지까지 장애물을 피하여 이동할 것이다. 이는 아래의 동영상으로 설명을 대체 하기로 한다.
 
 다음 강좌에서는 위에서 실행했던 패키지들의 자세한 소스 설명 및 설정법에 대해서 추가 설명을 하도록 하자. SLAM 강좌와 비슷한 방식으로 실습편, 응용편, 이론편 강좌로 나누어 진행할 예정이다.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.24\columnwidth]{pictures/chapter11/navigation_test1.png}
+\includegraphics[width=0.24\columnwidth]{pictures/chapter11/navigation_test3.png}
+\includegraphics[width=0.24\columnwidth]{pictures/chapter11/navigation_test4.png}
+\includegraphics[width=0.24\columnwidth]{pictures/chapter11/navigation_test5.png}
+\caption{목적지 설정(큰 화살표) 및 로봇이 이동해 가는 모습}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\columnwidth]{pictures/chapter11/navigation_camera.png}
+\caption{로봇 장착된 카메라로 촬영된 내비게이션 동작 화면}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \section{내비게이션 응용편}\index{내비게이션 응용편}
@@ -902,6 +1003,12 @@ $ rosrun rviz rviz -d `rospack find kobuki_navigation`/rviz/kobuki_nav.rviz
 
 %-------------------------------------------------------------------------------
 \subsection{내비게이션에 필요한 정보}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{pictures/chapter11/navigation_full_flow.png}
+\caption{내비게이션 스택 설정에 관한 각 필수 노드와 토픽 관계도 (출처: http://wiki.ros.org/navigation/Tutorials/RobotSetup CC-BY 3.0 )}
+\end{figure}
 
 위 그림은 ROS의 내비게이션 패키지 구동에 필요한 필수 노드와 토픽들의 관계도를 설명한 그림이다. 이를 내비게이션에 필요한 정보(토픽)를 중심으로 설명하도록 하겠다.
 
@@ -942,6 +1049,12 @@ $ rqt_graph
 \end{lstlisting}
 
 이 상태에서 위와 같이 ROS 환경에서 실행 중인 노드와 토픽 정보를 확인할 수 있는 rqt\_graph 를 실행해주면 아래와 같이 그 정보들이 시각화되어 확인해 볼 수 있다. 아래의 다이어그램을 보면 알 수 있듯이, 위에서 설명한 내비게이션에 필요한 정보는 각각 /odom, /tf,  /scan, /map, /mobile\_base/commands/velocity 이라는 토픽명으로 발행/구독되고 있으며, move\_base\_simple/goal 는 ROS 의 시각화 툴인 RViz 에서 목표 좌표를 지정할 경우에 발행되게 되어 있다.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{pictures/chapter11/navigation_qt_graph.png}
+\caption{kobuki\_navigation 의 각 노드 및 토픽 상태}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{kobuki\_navigation 패키지}
@@ -1334,9 +1447,9 @@ local_costmap:
    publish_frequency: 2.0   #%* 발행주기*)
    static_map: false        #%* 사용자가 주어진 지도를 사용하는 가에 대한 설정*)
    rolling_window: true     #%* 국부 지도 윈도우 창 설정*)
-   width: 4.0               #%* 국부지도 윈도우 창의 넓이*)
-   height: 4.0              #%* 국부지도 윈도우 창의 넓이*)
-   resolution: 0.05         #%* 국부지도 윈도우 창의 해상도 (미터/셀)*)
+   width: 4.0                 #%* 국부지도 윈도우 창의 넓이*)
+   height: 4.0                #%* 국부지도 윈도우 창의 넓이*)
+   resolution: 0.05               #%* 국부지도 윈도우 창의 해상도 (미터/셀)*)
    transform_tolerance: 0.5 #%* 변환 허용 거리*)
 \end{lstlisting}
 
@@ -1409,6 +1522,12 @@ ROS 시각화 툴인 RViz의 설정 정보 파일 담은 파일이다. RViz 의 
 /rviz/kobuki_nav.rviz
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\columnwidth]{pictures/chapter11/kobuki_nav_rviz.png}
+\caption{ROS 시각화 툴인 RViz의 디스플레이}
+\end{figure}
+
 이상으로 내비게이션 패키지를 사용하기 위한 필요한 모든 내용을 설명하였다. 다음 강좌에서는 costmap, Adaptive Monte Carlo Localization (AMCL), Dynamic Window Approach (DWA) 에 대한 이론 설명을 하도록 하겠다.
 
 
@@ -1437,10 +1556,20 @@ costmap 은 0 에서 255까지의 값으로 표현된다. 그 값의 의미는 �
 \item 255 ~ 255 : 로봇이 이동 불가능한 점유 영역 (occupied area)
 \end{itemize}
 
-[ 장애물과의 거리와 costmap의 값의 관계도 ]
-(출처: \url{http://wiki.ros.org/costmap_2d?action=AttachFile&do=get&target=costmapspec.png}, CC BY 3.0)
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{pictures/chapter11/costmap_calculation.png}
+\caption{장애물과의 거리와 costmap의 값의 관계도 (출처: \url{http://wiki.ros.org/costmap_2d?action=AttachFile&do=get&target=costmapspec.png}, CC BY 3.0)}
+\end{figure}
+
 
 예를 들어 costmap 을 실제로 표현하면 아래와 같이 된다. 왼쪽(그레이스케일)과 오른쪽(컬러) 은 같은 시간, 같은 위치의 상태이지만 표현 방식을 두가지로 할 수 있다는 것을 보이고 있다. 왼쪽부터 설명하자면 가운데에 거북이가 있고 그 주위로 녹색 테두리가 로봇의 모델에 해당된다. 이 녹색 라인이 실제 벽에 부딛치면 로봇은 충돌하게 된다. 빨간색은 레이저 센서에서 얻은 거리 값으로 장애물을 표시한 것이며, 검은색으로 갈수록 충돌 가능성이 높은 위치가 된다는 것을 그레이 스케일로 나태내고 있다. 오른쪽 그림도 마찬가지 인데 노란색 셀이 실제 장애물, 하늘색 영역은 로봇 중심 위치가 이 영역으로 오게되면 충돌하게 된는 지점이고 굵은 빨간색 픽셀로 경계선을 긋고 있다. 파랑색은 안전한 지역을 말한다.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\columnwidth]{pictures/chapter11/costmap_gray.png}
+\caption{costmap 표현 방식 (그레이스케일, 컬러)}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{로봇 위치 추정을 위한 AMCL (Adaptive Monte Carlo Localization)}
@@ -1449,27 +1578,43 @@ costmap 은 0 에서 255까지의 값으로 표현된다. 그 값의 의미는 �
 
 몬테카를로 위치 추정(이하 MCL)의 궁긍적인 목적은 "주어진 환경 속에서 로봇이 어디에 위치하느냐" 이다. 즉, 지도상의 $x, y, \theta$ 의 좌표를 얻어야 한다. 이를 위해서 MCL 에서는 로봇이 위치하고 있을 가능성을 확률로 계산하여 나타낸다. 우선, 시간 $t$ 에서의 로봇의 위치($x, y, \theta$)를  $x_t$ 라고 하고, 시간 $t$ 까지의 거리 센서로 부터 얻은 거리 정보를 $z_{0...t} = \{z_0, z_1, ..., z_t\}$, 시간 $t$까지의 엔코더로부터 얻은 로봇의 이동 정보를 $u_{0...t} = \{u_0, u_1, ..., u_t\}$ 라고 하였을 때, 아래와 같이 belief (베이지안 갱신 공식을 이용한 사후 확률) 를 계산한다.
 
-
+\begin{equation}
+  bel(x_t) = P(x_t|z_{0\cdots t},u_{0\cdots t})
+\end{equation}
 
 로봇은 하드웨어적인 오차가 생길 수 있으므로 센서모델과 이동모델을 수립하고, 베이즈 필터(bayes filter) 의  예측(prediction)과 보정(update)를 아래와 같이 거친다. 
 
 우선 예측 단계에서는 로봇의 이동 모델 $p( x_t | x_{(t-1)}, u_{(t-1)} )$과 이전 위치에서의 확률 $bel(x_{(t-1)})$, 엔코더로부터 받은이동 정보 u 를 이용하여 다음 시간에서의 로봇의 위치 $bel'(x_t)$ 를 계산한다.
 
-
+\begin{equation}
+  bel'(x_t) = \int p(x_t | x_{t-1},u_{t-1})bel(x_{t-1})dx_{t-1}
+\end{equation}
 
 다음은 보정 단계인데, 이번에는 센서 모델 $p( z_t | x_t )$, 이전 위치에서의 확률 $bel(x_{(t-1)})$, 정규화 상수 $(\eta_t)$ 에타 를 이용하여 센서 정보를 기반으로 정확도를 올린 현재 위치의 확률  $bel(x_t)$을 구할 수 있다.
 
+\begin{equation}
+  bel(x_t) = \eta_t p(z_t|x_t)bel'(x_t)
+\end{equation}
 
+다음은 계산된 현재 위치의 확률 $bel(x_t)$ 를 이용하여 파티클 필터로 N 개의 파티클을 생성하여 위치 추정하는 순서인데이는 "로봇 운영체제 강좌: SLAM 이론편"의 파티클 필터(particle filter) 설명을 참고하기 바란다. MCL 에서는 파티클이라는 용어대신 샘플이라 하는데 전체적으로 SIR (Sampling Importance weighting Re-sampling) 과정을 거치게된다. 우선, 첫번째는 샘플링(sampling) 과정이다. 여기에서는 이전 위치에서의 확률 $bel(x_{t-1})$ 에서 로봇의 이동 모델 $p( x_t | x_{(t-1)}, u_{(t-1)}$ 을 이용하여 새로운 샘플 집합인 ${X’}_t$  를 추출하고, 이 샘플 집합 $X{’}_t$ 중 샘플 $i$ 인 ${x’}_t^{(i)}$ 와 거리 센서로 부터 얻은 거리 정보 $z_t$, 정규화상수 에타로 가중치 $\omega_t^{(i)}$ 를 구한다. 
 
-다음은 계산된 현재 위치의 확률 $bel(x_t)$ 를 이용하여 파티클 필터로 N 개의 파티클을 생성하여 위치 추정하는 순서인데이는 "로봇 운영체제 강좌: SLAM 이론편"의 파티클 필터(particle filter) 설명을 참고하기 바란다. MCL 에서는 파티클이라는 용어대신 샘플이라 하는데 전체적으로 SIR (Sampling Importance weighting Re-sampling) 과정을 거치게된다. 우선, 첫번째는 샘플링(sampling) 과정이다. 여기에서는 이전 위치에서의 확률 $bel(x_{t-1})$ 에서 로봇의 이동 모델 $p( x_t | x_{(t-1)}, u_{(t-1)}$ 을 이용하여 새로운 샘플 집합인 ${X’}_t$  를 추출하고, 이 샘플 집합 $X{’}_t$ 중 샘플 $i$ 인 ${x’}_t^{(i)}$ 와 거리 센서로 부터 얻은 거리 정보 $z_t$, 정규화상수 에타로 가중치 $w_t^{(i)}$ 를 구한다. 
-
+\begin{equation}
+  \omega_t^{(i)} = \eta p(z_t|x_t^{\prime(i)})
+\end{equation}
 
 마지막으로 리샘플링 과정에서는 샘플 ${x’}_t^{(i)}$와 가중치 $w_t^{(i)}$ 를 이용하여 $N$ 개의 새로운 $X_t$ 샘플링 (파티클) 집합을 만들어 내는 것이다. 
 
+\begin{equation}
+  X_t = \{x_t^{(j)} | j=1\cdots N}\}\sim\{x_t^{\prime(i)},\omega_t^{(i)}\}
+\end{equation}
 
+이렇게 SIR 과정을 되풀이 하면서 파티클을 이동시켜 가고, 로봇 위치 추정치는 그 정확도를 높여 가게 된다. 예를들어 아래의 그림과 같이 $t_1, t_2, t_3, t_4$ 로 갈 수록 점점 수렴하는 과정을 볼 수 있을 것이다. 마지막으로 이 모든 과정을 Sebastian Thrun 교수의 저서 "Probabilistic Robotics"  에서는 자세히 설명하고 있다. 시간이 된다면 꼭 찾아보기를 추천한다. 
 
-이렇게 SIR 과정을 되풀이 하면서 파티클을 이동시켜 가고, 로봇 위치 추정치는 그 정확도를 높여 가게 된다. 예를들어 아래의 그림과 같이 $t1, t2, t3, t4$ 로 갈 수록 점점 수렴하는 과정을 볼 수 있을 것이다. 마지막으로 이 모든 과정을 Sebastian Thrun 교수의 저서 "Probabilistic Robotics"  에서는 자세히 설명하고 있다. 시간이 된다면 꼭 찾아보기를 추천한다. 
-
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\columnwidth]{pictures/chapter11/amcl.png}
+\caption{로봇 위치 추정을 위한 AMCL 과정}
+\end{figure}
 
 이상으로 내비게이션 이론편을 마치기로 한다. 이동 경로 계획 및 장애물 회피할 때 많이 사용되는 Dynamic Window Approach (DWA) 에 대한 설명을 기한내에 못했는데 다음 기회에 이는 추가로 설명하도록 하겠다.
 

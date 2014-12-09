@@ -13,19 +13,38 @@
 
 ROS 에서 지원하는 로봇은 관련 위키 http://wiki.ros.org/Robots 에서 찾아 볼 수 있다. 그 수는 2014년 6월 현재 120여 가지에 달한다. 이 중 일부는 일반 유저가 공개한 커스텀 로봇이 포함되어 있기는 하지만 하나의 시스템이 지원하는 로봇이라는 점을 생각하면 적지 않은 수이다. 그 중 가장 많이 알려져 있는 로봇으로는 윌로우게러지(willowgarage)\footnote{http://www.willowgarage.com/}가 개발한 PR2와 터틀봇이 유명하다. 이 둘 모두 윌로우게러지 또는 OSRF(Open Source Robotics Foundation)\footnote{http://www.osrfoundation.org/} 가 개발에 참여한 로봇으로 ROS의 공식 지정 로봇이라고 봐도 이상하지 않다. 이 중에서 우리는 ROS의 학습에 있어서 실습을 터틀봇(Turtlebot)에 사용되는 거북이(Kobuki)를 중심으로 실습을 해볼 수 있도록 하겠다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=\columnwidth]{pictures/chapter10/robots.png}
+\caption{ROS Robots}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{TurtleBot}\index{TurtleBot}
 
 TurtleBot? 아마 처음 듣는 사람들도 있을 것이다. 터틀봇은 거북이 로봇 이라는 의미(?)로 우리가 사용하고 있는 ROS 의 대표적인 로봇이다. 터틀이라는 이름도 ROS의 심볼인 거북이에서 비롯된 것이다. 
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter10/turtle_icons.png}
+\caption{ROS의 각 버전의 거북이 심볼}
+\end{figure}
+
 터틀봇은 ROS를 처음다루는 사람들을 위해 나온 로봇으로, 오픈 로봇공학 플랫폼에 개발자, 학생 등이 많이 사용되고 있다. 현재까지 TurtleBot 1, 2 가 나왔으며, TurtlBot 1은 iRobot 사의 Roomba, TurtleBot 2는 Yujinrobot의 Kobuki를 하드웨어로 이용하고 있다. 그리고, 3차원 데이타 수집을 위하여 Microsoft 사의 Kinect 또는 Asus 의 Xition 을 사용하고 있다.
 
-개인적으로는, 3년전부터 TurtleBot 을 사용하고 있으며, 연구실 후배들중 몇명이 터틀봇을 이용하여 서비스로봇과 관련된 연구를 진행하고 있다. TurtleBot 1 은 현재 연구실 후배의 허접 납땜 신공으로 내부 회로 화재(?)로 잠시 쉬고 있는 상태이고, 터틀봇2는 현재 2대가 가동중이다. 청소로봇 구동 베이스를 기본으로 그 위에 노트북, 키넥트 또는 Xtion 등을 올리는 등 다양한 디바이스를 탑재 할 수 있도록 되어 있다. 
+\begin{figure}[h]
+\centering\includegraphics[height=40mm]{pictures/chapter10/turtlebot1.png}
+\centering\includegraphics[height=35mm]{pictures/chapter10/turtlebot2.jpg}
+\caption{좌측: TurtleBot 1 (Roomba), 우측: TurtleBot 2 (Kobuki)}
+\end{figure}
 
 특히, 이번 터틀봇2는 우리 나라 기업인 유진로봇이 개발하여 더욱 흥미롭다. ROS 진영에서 활동중인 국내 로봇 기업은 거의 전무한데, 얼마전부터 유진로봇 이름이 몇번 언급되고, ROS 윈도우 버전을 담당하는 등 그 활동을 넓혀왔다. 그리고, 터틀봇2까지 내놓은 상태고 매우 활발히 움직이고 있다. 이 이외에도 로보티즈의 모터 관련도 ROS 버전이 나온 상태이다. 아무쪼록 국내 로봇 기업이 ROS 진영에서 활발히 활동하는 모습을 보고싶다. 그래서 그런지 터틀봇2는 더욱 애착이 간다.
 
 %-------------------------------------------------------------------------------
 \subsection{TurtleBot2와 Kobuki}\index{TurtleBot2와 Kobuki}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.3\columnwidth]{pictures/chapter10/turtlebot2.png}
+\caption{Turtlebot2의 이미지}
+\end{figure}
 
 터틀봇은 매우 저렴한 가격이 가장 큰 무기로, TurtleBot 2의 기본 베이스인 Kobuki\footnote{http://garage.yujinrobot.com/robots/kobuki.html}\footnote{Kobuki 스팩과 이미지는 http://kobuki.yujinrobot.com/ 에서 공개한 정보를 기반으로 사용/재수정되어 작성 되었음을 밝힌다. 거북이 관련 문서/이미지 라이선스는 CC BY-SA 3.0 이다.} 의 경우 350 달러, TurtleBot 2 완제품 (도킹스테이션, 키넥트, 노트북, 폴과 스택등의 프레임 등)의 경우에는 1650달러에 판매되고 있다. TurtleBot 2 완제품의 경우 아래와 같은 사양으로 되어 있다.
 
@@ -77,10 +96,20 @@ Kobuki(거북이)는 유진로봇이 개발한 다목적 연구용 이동 로봇
 
 ROS 중급 강좌를 위한 로봇 플랫폼으로서는 손색이 없다고 말할 수 있다. 단! 이 강좌를 작성하기 위하여 거북이 자료를 찾아 봤지만 관련 정보가 분산되어 있는 느낌이 강하다. 거북이는 하드웨어 및 소프트웨어는 완성도가 높지만 이 부분이 좀 아쉽다. 오픈소스 진영은 매뉴얼 및 사후관리는 힘들다는 것은 익히 알고 있지만 상용 제품으로서 정말 아쉬운 부분이라고 할 수 있다. 그래서 이번 강좌에서는 이 거북이에 대해서 집중 조명을 해볼 예정이다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter10/kobuki_turtlebot2.png}
+\caption{Kobuki와 Turtlebot2}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{Kobuki 기본 구성}\index{Kobuki 기본 구성}
 
 기본 구성은 1) 거북이 본체, 2) 리튬이온 배터리 (4S1P 14.6V 2200mAh), 3) USB 케이블, 4) 충전 어댑터, 그리고 5) 퀵 메뉴얼로 구성 되어 있다. 거기에 본 강좌의 시리즈에서는 충전소인 6) 도킹 스테이션과 장시간 구동을 위하여 7)리튬이온 배터리 (4S2P 14.6V 4400mAh) 를 추가 하기로 하겠다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter10/kobuki_parts.png}
+\caption{Kobuki 기본 구성품}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{Kobuki 스펙}\index{Kobuki 스펙}
@@ -92,6 +121,7 @@ ROS 중급 강좌를 위한 로봇 플랫폼으로서는 손색이 없다고 말
 \item 모터 종류: Brushed DC Motor
 \item 모터 제조사: Standard Motor
 \item 모터 부품명: RP385-ST-2060
+%\footnote{\url{http://www.standardmotor.net/sc_webcat/ecat/product_view.php\?lang\=1\&cat\=115&id=72\&page\=1}}
 \end{itemize}
 
 \begin{itemize}[leftmargin=*]
@@ -160,6 +190,13 @@ ROS 중급 강좌를 위한 로봇 플랫폼으로서는 손색이 없다고 말
 \item 자율 충전 가능 공간: 충전 스테이션의 2미터 x 5미터 공간 이내
 \end{itemize}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\columnwidth]{pictures/chapter10/battery1.jpg}
+\includegraphics[width=0.4\columnwidth]{pictures/chapter10/battery2.jpg}
+\caption{좌측: 리튬 이온 14.8V, 2200mAh를 연결한 경우, 우측: 리튬 이온 14.8V, 4400mAh를 연결한 경우}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsubsection{기타}
 
@@ -185,6 +222,11 @@ ROS 중급 강좌를 위한 로봇 플랫폼으로서는 손색이 없다고 말
 
 거북이에 대한 자세한 설명이 없다보니 처음 거북이를 이용하는 유저들에는 상당히 당혹 스러운 경우가 많을 것이다. 우선, 자신의 거북이의 각 부분을 아래의 그림과 맞추어 가며 모터, 센서, 단자 등이 어디에 위치해 있는가를 살펴두기로 하자. 이는 이어지는 강좌에서 프로그램시에 꼭 필요하다. 
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter10/kobuki_dimension.png}
+\caption{Kobuki 본체의 각 부분의 설명}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{Kobuki 제어패널}\index{Kobuki 제어패널}
 
@@ -196,6 +238,16 @@ ROS 중급 강좌를 위한 로봇 플랫폼으로서는 손색이 없다고 말
 \item Molex PN : 5566-02B2\footnote{\scriptsize\url{http://www.molex.com/molex/products/datasheet.jsp?part=active/0039299022_PCB_HEADERS.xml}}  (12V,5A )
 \item Molex PN : 3928-9068\footnote{\scriptsize\url{http://www.molex.com/molex/products/datasheet.jsp?part=active/0039289068_PCB_HEADERS.xml}}  (19V,2A )
 \end{itemize}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter10/kobuki_pannel.png}
+\caption{Kobuki의 제어패널}
+\end{figure}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.6\columnwidth]{pictures/chapter10/kobuki_power.png}
+\caption{Kobuki의 외부 전원}
+\end{figure}
 
 [참고사항] 
 거북이의 상태 표기 LED
@@ -212,6 +264,16 @@ ROS 중급 강좌를 위한 로봇 플랫폼으로서는 손색이 없다고 말
 %-------------------------------------------------------------------------------
 \subsubsection{통신 포트의 각 핀의 설명}
 거북이이는 통신, 디지털  입/출력, 아날로그 입력, 외부 전력 공급 등을 위하여 D-Sub25핀을 제공하고 있다. 제사한 사항은 각 핀의 명칭, 기능 등을 아래의 표에서 설명하고 있으니 참고하기 바란다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter10/kobuki_dsub25.png}
+\caption{Kobuki의 D-Sub25 통신 포트}
+\end{figure}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter10/kobuki_dsub25_num.png}
+\caption{통신 포트의 각 핀의 설명}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsubsection{SBC 및 MCU와의 연결}
@@ -237,6 +299,11 @@ ROS 중급 강좌를 위한 로봇 플랫폼으로서는 손색이 없다고 말
 통신 프로토콜은 아래의 글을 참조하도록 하자.
 \url{http://yujinrobot.github.io/kobuki/doxygen/enAppendixProtocolSpecification.html}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter10/kobuki_connect.png}
+\caption{SBC 및 MCU와의 연결 방법}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsubsection{통신포트 관련 회로도}
 
@@ -255,6 +322,11 @@ ROS 중급 강좌를 위한 로봇 플랫폼으로서는 손색이 없다고 말
 \item{\color{limegreen}녹색 점멸}: 로봇이 도킹되어 충전 중인 상태
 \item{\color{limegreen}녹색}: 로봇이 도킹되어 있고, 충전이 완료된 상태
 \end{itemize}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter10/kobuki_docking_station.png}
+\caption{Kobuki 도킹 스테이션}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{Kobuki 펌웨어 업데이트}
@@ -629,6 +701,11 @@ kobuki\_soft 는 많이 알려지지는 않았지만 ROS의 시각화툴인 RViz
 
 본 강좌의 진행에 앞서서 필자의 개발 환경을 미리 알리고 시작하도록 하겠다. 꼭 반드시 동일할 필요는 없지만, 원할한 강좌 진행을 위해서는 아래와 같이 개발 환경을 권장한다. 이 이외에 환경에서의 질문에 대해서는 질응답은 하지만 실제 필자가 테스트해 볼 수 있는 상황이 아니기 때문에 대처하기 어려울 수도 있다. 필자의 소프트웨어 개발환경으로는 아래와 같다. ROS Indigo의 설치는 "로봇 운영체제 강좌 : Indigo 설치" 를 참고하기 바란다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter10/develop_environment.png}
+\caption{개발환경}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsubsection{PC 1 (Desktop)}
 
@@ -689,7 +766,7 @@ sudo apt-get install ssh
 \end{lstlisting}
 
 %-------------------------------------------------------------------------------
-\subsubsection{랩톱}
+\subsubsection{데스크톱}
 
 \vspace{\baselineskip}
 \noindent\stepcounter{num}
@@ -796,6 +873,11 @@ roslaunch kobuki_keyop keyop.launch
 \item q : 종료
 \end{itemize}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter10/kobuki_test.png}
+\caption{Kobuki의 전진 방향}
+\end{figure}
+
 \vspace{\baselineskip}
 \noindent
 참고로, 아래와 같이 "safe\_keyop.launch" 으로 실행할 경우, 과도한 속도 변화 및 범퍼, 절벽감지, 휠 드랍 센서등의 반응에 따라 위험한 상황을 피할 수 있게 하는 방법도 있다. 또한, 속도를 급변하게 변화시키는 것이 아닌 부드러운 변화 곡선을 만들어서 원격 제어시에 속도 변화가 있더라도 부드럽게 구동 이동키실 수 있다. 사용자의 작은 실수로 로봇이 손상되는 것을 막기 위함이기 때문에 이러한 상황이 요구된다면 아래의 방법을 권장하는 바이다.
@@ -859,6 +941,11 @@ $ rostopic list
 \begin{lstlisting}[language=ROS]
 $ rqt_graph
 \end{lstlisting}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter10/rqt_graph_kobuki.png}
+\caption{Kobuki의 노드 전개 상황}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{수신 토픽}
@@ -1335,6 +1422,11 @@ transforms:
 $ rosrun rqt_tf_tree rqt_tf_tree 
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter10/rqt_tf_tree_kobuki.png}
+\caption{tf\_tree를 통한 변환 확인}
+\end{figure}
+
 정말 장황한 토픽 설명을 마쳤다. ROS에서 각각의 프로세서인 노드간의 통신으로 토픽과 서비스, 액션 등을 이용하게 되는데 토픽은 그 중 가장 널리 사용되는 메시지 통신 방식으로 꼭 알아둬야 하는 부분이기 때문이다. 토픽에 대한 더 자세한 사항은 "ROS 정보 명령어 (rostopic)" 강좌를 참고하기 바라며 다음 강좌로 넘어가기로 하겠다.
 
 %-------------------------------------------------------------------------------
@@ -1361,8 +1453,17 @@ rosrun rqt_robot_monitor rqt_robot_monitor
 
 아래의 그림과 같이, 로봇과 랩톱의 링크 와치독 정보, 배터리 상태, 범퍼, 절벽감지, 휠 드랍, 모터 전류, 자이로 센서값, 아날로그 디지털 입력값을 확인 가능하다. 아무런 문제가 없는 경우, 아래와 같이 표시된다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter10/rqt_robot_monitor.png}
+\caption{rqt\_robot\_monitor를 통한 로봇 상태 파악}
+\end{figure}
 
 만약에, 문제가 있다면 아래와 같이 표시가 되는데 임의로 범퍼를 벽에 부딛쳤을때의 값이다. Warned Device 에 경고마크가 표시되며 문제를 알려준다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter10/diagnostics_warning.png}
+\caption{진단 정보 (diagnostics information)}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{계기판 (dashboard)}
@@ -1384,6 +1485,11 @@ rosrun kobuki_dashboard kobuki_dashboard
 아래의 그림과 같이, 정보를 확인하거나 LED를 제어 가능한 GUI 형태의 계기판을 실행되었다. 
 
 각 부분을 클릭하면 아래와 같이 계기판이 추가된다. 하나 하나 테스트 해보기 바란다. 단, 필자가 이글을 작성하는 시점에서는 모터, 배터리에 대한 GUI가 이상하다. 나중에 관련 이슈를 보고해야 할 듯 싶다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter10/kobuki_dashboard.png}
+\caption{계기판 (dashboard)}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{기능 테스트 (CUI 버전)}
@@ -1459,6 +1565,11 @@ $ sudo apt-get install ros-indigo-kobuki-qtestsuite
 kobuki_qtestsuite
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter10/kobuki_qtestsuite.png}
+\caption{kobuki\_qtestsuite를 이용한 기능 테스트}
+\end{figure}
+
 Kobuki의 진단툴, 계기판, CUI 및 GUI 기능 테스트 관련 패키지에 대해서 알아 보았다. 본질에서 벗어나는 부가적인 강좌가 되어 버렸지만 앞서 말한바와 같이 kobuki\_testsuite의 각 기능들을 살펴보면 나중에 거북이 관련 프로그래밍에 큰 도움이 될 듯 싶다. 그러면 또 다음 강좌로 넘어가 보자.
 
 %-------------------------------------------------------------------------------
@@ -1525,6 +1636,10 @@ make
 $ ./stm32flash -b 115200 -w ../kobuki_firmware-latest.hex /dev/ttyUSB0
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.4\columnwidth]{pictures/chapter10/firmware_download.png}
+\caption{펌웨어 다운로드 모드 변환 스위치}
+\end{figure}
 
 업데이트를 마쳤으면, 스위치를 원래 상태로 돌리고 로봇을 재부팅하면 완료된다. 제대로 되었는지 확인하기 위해서 앞에서 설명한 방법 중 하나를 실행하면 된다. 아래와 같이 펌웨어가 최신 버전으로 업데이트 되었음을 확인할 수 있다.
 
@@ -1545,6 +1660,16 @@ $ roslaunch kobuki_node minimal.launch --screen
 이 때에 사용되는 하드웨어적인 구성으로는 도킹 스테이션에 적외선(IR) 발신부 3개 (중앙, 좌/우측)와 거북이 본체에 적외선 수신부 3개, 그리고 도킹을 위한 도킹 단자와 충전 상태 표시 LED 로 구성되어 있다.
 
 참고로, 도킹을 위해서는 도킹 스테이션과 로봇은 도킹 스테이션을 기준으로 수평 2미터, 수직 정면 방향으로 5미터 정도의 구간에서 정확한 동작을 하게 되어 있다. 또한 도킹 스테이션의 앞에는 아무런 장애물이 없어야 한다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter10/kobuki_docking_station.png}
+\caption{거북이와 도킹 스테이션}
+\end{figure}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter10/recharge.png}
+\caption{도킹후 충전에 사용되는 충전 단자}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{도킹과 자동 충전}
@@ -1586,6 +1711,14 @@ $ roslaunch kobuki_auto_docking compact.launch --screen
 $ roslaunch kobuki_auto_docking activate.launch --screen
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\columnwidth]{pictures/chapter10/kobuki_docking1.png}
+\includegraphics[width=0.4\columnwidth]{pictures/chapter10/kobuki_docking2.png}
+\caption{도킹과 자동 충전}
+\end{figure}
+
+
 \vspace{\baselineskip}
 \textbf{[참고사항]} 거북이의 상태 표기 LED : 상태 표기 LED (Status LED)는 패널의 맨 왼쪽에 위치하고 있으며, 거북이의 현재 배터리 상태를 표기함
 \begin{itemize}[leftmargin=*]
@@ -1620,6 +1753,11 @@ FAR_CENTER  =  8
 FAR_RIGHT = 32
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter10/docking_region.png}
+\caption{도킹 스테이션의 적외선 발신 범위}
+\end{figure}
+
 (출처:참고자료[2])
 
 
@@ -1644,6 +1782,10 @@ data: [0, 0, 32]
 
 현재, 오른쪽에 위치한 적외선 수신부(data[2])가 32이므로 이는 거북이가 도킹 스테이션의 우측 영역에서 멀리 떨어져 있다는 것을 의미한다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter10/dock_ir.png}
+\caption{적외선 수신부의 위치와 방향}
+\end{figure}
 
 (출처:참고자료[2])
 
@@ -1739,6 +1881,11 @@ $ roslaunch kobuki_softnode full.launch
 $ rosrun rviz rviz
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter10/rviz_kobuki.png}
+\caption{가상 로봇 실행}
+\end{figure}
+
 자! 그럼 다음에는 가상의 로봇을 구동시켜 보자. 지금까지 사용하였던 keyop.launch 런치파일을 실행하여 키보드로 직접 구동시켜 보자. 
 
 \vspace{\baselineskip}
@@ -1767,12 +1914,27 @@ $ roslaunch kobuki_keyop keyop.launch
 $ rostopic echo /odom
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter10/rviz_odom.png}
+\caption{odom 토픽 확인을 위한 odometry 디스플레이 추가}
+\end{figure}
+
 이제 다시 "keyop.launch" 노드를 이용하여 가상의 거북이를 움직여보자. 좀 전과는 달리 빨간 화살표가 로봇의 궤적에 따라 표시됨을 확인할 수 있을 것이다. 이 오도메트리 정보는 이동 로봇에 있어서는 자기 자신이 어디에 있는지에 대한 정보의 기본이 되기 때문에 매우 기본적인 요소이다. 일단, 오도메트리 정보가 제대로 표시되는지만 체크하였다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter10/rviz_kobuki_keyop_launch.png}
+\caption{keyop.launch를 이용한 가상 로봇 이동}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{tf 토픽 확인}
 
 거북이 구성 요소들의 상대 좌표 정보를 담은 tf의 경우 이전처럼 rostopic 명령어로 확인할 수 있지만 odom 과 마찬가지로 RViz 로 확인해보고, 계층 구조에 대해서는 rqt\_tf\_tree 를 통하여 살펴보도록 하자. 이번에는 RViz 의 왼쪽 하단의 "Add"를 클릭 후, 나오는 시각화 생성 화면에서 "TF" 를 선택하여 추가하도록 하자. 그러면 화면의 거북이 모델에 odom, base\_footprint, gyro\_link, wheel\_left\_link, wheel\_right\_link 등이 표시된다. 여기서, 다시 "keyop.launch" 노드를 이용하여 가상의 거북이를 움직여보자. 거북이가 움직이면서 wheel\_left\_link, wheel\_right\_link 의 tf 마크가 회전하는 것을 아래의 동영상처럼 확인할 수 있을 것이다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter8/rviz_kobuki_tf.png}
+\caption{RViz에서의 tf 토픽 확인}
+\end{figure}
 
 이번에는 아래 명령어로 rqt\_tf\_tree 를 실행하도록 하자. 그러면 아래의 그림과 같이, 각 부분의 요소들이 tf 로 상대 위치가 변환되어 연관되어 있음을 확인할 수 있다. 이를 통해 나중에는 로봇위에 장착하는 센서들의 위치등도 표현 가능하다. 이 부분에 대한 자세한 사항은 네비게이션 강좌로 넘기기로 하겠다.
 
@@ -1780,6 +1942,11 @@ $ rostopic echo /odom
 \begin{lstlisting}[language=ROS]
 $ rosrun rqt_tf_tree rqt_tf_tree 
 \end{lstlisting}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter10/rqt_tf_tree_kobuki_tf.png}
+\caption{rqt\_tf\_tree를 통한 tf 토픽 확인}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{가상 네비게이션}
@@ -1800,6 +1967,11 @@ $ sudo apt-get install ros-indigo-navigation ros-indigo-yujin-maps
 $ roslaunch kobuki_softapps nav_demo.launch
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter10/nav_demo.png}
+\caption{nav\_demo.launch를 실행한 모습}
+\end{figure}
+
 RViz 를 이용한 거북이의 가상 시뮬레이션에 대해서 간략히 알아보았다. 더 자세한 시뮬레이션에 대한 내용은 거북이의 네비게이션 강좌를 마치고 추가로 진행할 예정이다.
 
 %-------------------------------------------------------------------------------
@@ -1808,6 +1980,11 @@ RViz 를 이용한 거북이의 가상 시뮬레이션에 대해서 간략히 �
 %-------------------------------------------------------------------------------
 \subsection{Gazebo}\index{gazebo}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.3\columnwidth]{pictures/chapter10/gazebo.png}
+\caption{gazebo}
+\end{figure}
+
 가제보(Gazebo\footnote{\url{http://gazebosim.org/}})는 로봇 개발에 필요한 3차원 시뮬레이션을 위한 로봇, 센서, 환경 모델 등을 지원하고 물리 엔진을 탑재하여 실제와 근사한 결과를 얻을 수 있는 3차원 시뮬레이터이다. 
 
 로봇을 위한 2/3차원 시뮬레이터\footnote{\url{http://en.wikipedia.org/wiki/Robotics_simulator}}로서는 그 동안 오픈 진영에는  RoKiSim, Robo Analyzer, OpenRAVE, ARS, breve, EZPhysics, Gazebo, Khepera Simulator, Klamp't, LpzRobots, miniBloq, Moby, MORSE, OpenHRP3, Choreonoid, OpenSim, ORCASim, Robotics Toolbox for MATLAB, Simbad 3D Robot Simulator, SimRobot, Stage, STDR Simulator, UCHILSIM, v-rep, UWSim 등이 있었고 현재도 다양한 시뮬레이터들이 등장하고 있다.
@@ -1815,6 +1992,11 @@ RViz 를 이용한 거북이의 가상 시뮬레이션에 대해서 간략히 �
 또한, 상업용으로도 Actin, anyKode Marilou, Cogmation RobotSim, Microsoft Robotics Developer Studio (MRDS), SimplyCube, V-REP PRO, Visual Components, Webots, WorkCellSimulator, Workspace5 등 많은 시뮬레이터 등이 등장했고 또는 없어지기 했었다. 
 
 현재 소개하는 Gazebo 는 최근에 나온 오픈 진영 시뮬레이터 중 가장 좋은 평가를 받고 있고, 미국 DARPA Robotics Challenge\footnote{\url{http://www.darpa.mil/Our_Work/TTO/Programs/DARPA_Robotics_Challenge.aspx}} 챌린지의 공식 시뮬레이터로 선정되어 개발에 더욱 박차를 가하고 있는 상황이다. 더욱이 ROS 에서는 그 태생이 Player/Stage, Gazebo 를 기본 시뮬레이터로 사용하고 있어서 ROS와의 호완\footnote{\url{http://wiki.ros.org/gazebo_ros_pkgs}}도 매우 좋다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter10/darpa_hose_atlas.jpg}
+\caption{Bostom Dynamics사의 Atlas 로봇}
+\end{figure}
 
 다른 시뮬레이터와 어떤 점이 다른지에 대해 알아보기 위해 가제보 관련 위키를 찾아본 결과, 아래와 같은 특징을 가지고 있었다.
 
@@ -1875,6 +2057,11 @@ $ sudo apt-get install libsdformat1 libsdformat-dev gazebo2
 $ gazebo
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter10/gazebo3d.png}
+\caption{gazebo 초기 화면}
+\end{figure}
+
 이제는 거북이를 가제보 시뮬레이터상에서 동작하기 위하여 관련된 패키지들을 설치해주자. 설치할 패키지로는 가제보와 ROS와의 연동을 위한 gazebo\_ros\_pkgs 메타 패키지와 거북이의 3차원 시뮬레이션 관련 패키지인 kobuki\_desktop 메타 패키지이다.
 
 \vspace{\baselineskip}
@@ -1892,6 +2079,11 @@ $ sudo apt-get install ros-indigo-gazebo-ros ros-indigo-gazebo-plugins ros-indig
 $ roslaunch kobuki_gazebo kobuki_empty_world.launch
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter10/gazebo_kobuki.png}
+\caption{gazebo상의 kobuki의 3차원 모습}
+\end{figure}
+
 위의 상태에서 아래의 원격 제어 런치 파일을 실행하면 가제보 환경 속 가상의 거북이를 제어 가능하다.
 
 \vspace{\baselineskip}
@@ -1906,6 +2098,11 @@ world 파일 위치: /opt/ros/indigo/share/kobuki\_gazebo/worlds/playground.worl
 \begin{lstlisting}[language=ROS]
 $ roslaunch kobuki_gazebo kobuki_playground.launch
 \end{lstlisting}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter10/gazebo_kobuki_playground.png}
+\caption{kobuki\_playground.launch를 시행하였을 때의 모습}
+\end{figure}
 
 가제보 환경 속의 가상 거북이 로봇은 외형만을 갖춘게 아니라 위 캡쳐의 좌측 하단의 특성 창에서 확인할 수 있는 것 처럼 각각의 몸체는 충돌을 체크할 수 있고, 위치를 계측하고, 범퍼 3개, 절벽 감지 센서, IMU 센서가 가상으로 사용 가능할 수 있도록 설정되어 있다. 이를 이용한 예제가 아래의 런치 파일이다. 이를 실행하게 되면 가상의 거북이는 테이블 위에서 랜덤하게 이동하면서 절벽을 감지하거나 벽에 부딛쳤을 경우, 그 상황을 회피하여 테이블 위에서 돌아다니게 되어 있다. 학습에 매우 좋은 예제이니 꼭 참고해 보기 바란다.
 

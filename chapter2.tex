@@ -19,6 +19,13 @@
 \item ROS: Indigo Igloo
 \end{itemize}
 
+\begin{figure}[h]
+\centering\includegraphics[height=30mm]{pictures/chapter2/ubuntu_14_04.jpg}
+\centering\includegraphics[height=30mm]{pictures/chapter2/indigo_igloo.png}
+\caption{우분투 Trusty 버전과 ROS Indigo 버전의 로고}
+\end{figure}
+
+
 %-------------------------------------------------------------------------------
 \subsection{ROS Indigo 설치 방법}\index{ROS Indigo 설치 방법}
 \label{sec:ROSInstallation}
@@ -404,13 +411,28 @@ qtcreator
 \noindent
 위의 명령어로 아래와 같이 QtCreator 가 실행됨을 확인 할 수 있다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter2/qtcreator1.png}
+\caption{QtCreator IDE}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsubsection{ROS 패키지를 프로젝트로 불러오기}
 앞서 말한바와 같이 QtCreator는 CMakeLists.txt 를 사용한다. 그렇기에 ROS 패키지는 단순히 아래와 화면의 OpenProject 버튼을 클릭하여 해당 ROS 패키지의 CMakeLists.txt 를 선택하면 손쉽게 프로젝트로 불러올 수 있다.
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter2/qtcreator2.png}
+\caption{QtCreator: 프로젝트 열기}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsubsection{ROS 패키지를 프로젝트로 불러오기}
 컴파일의 경우에는 단순히 Ctrl + B 로 컴파일 하면 catkin\_make 가 실행된다. 단, 빌드 관련은 해당 패키지와 같은 위치의 폴더에 새로운 폴더로 생성된다. 예를 들어 tms\_rp\_action 이라는 패키지를 컴파일하면 "build-tms\_rp\_action-Desktop-Default" 이라는 폴더에 빌드 관련이 모두 놓이게 된다. 즉,  원래는 ~/catkin\_ws/build 와 ~/catkin\_ws/devel 에 보관되어야 할 파일들이 따로 컴파일 되어 새로운 장소에 놓이게 되므로 실행을 위해서는 나중에 다시 한번 catkin\_make 를 해줘야 한다. 이는 매번 해줄 필요는 없고 개발도중에는 QtCreator 에서 개발, 디버깅을 한 후에 완료되어 실행할때만 따로 catkin\_make 를 해준다고 보면된다. 
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter2/qtcreator3.png}
+\caption{QtCreator: 프로젝트 전개 모습}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \section{ROS 동작 테스트}\index{ROS 동작 테스트}
@@ -429,6 +451,11 @@ qtcreator
 roscore
 \end{lstlisting}
 
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter2/roscore.png}
+\caption{caption}
+\end{figure}
+
 %-------------------------------------------------------------------------------
 \subsection{turtlesim 패키지의 turtlesim\_node 실행}
 새로운 터미널을 열어 다음과 같은 명렁어를 실행한다. 그러면 다음와 같은 메시지를 보게 되며, turtlesim 패키지의 turtlesim\_node 를 실행하게 된다. 별도의 창에 파란색 바탕의 화면에 거북이 한 마리가 보일 것이다. (거북이 모양은 실행에 따라 랜덤으로 바뀌기 때문에 필자의 모양과는 다를 수 있다.)
@@ -438,6 +465,11 @@ rosrun turtlesim turtlesim_node
 [ INFO] [1378628396.169086362]: Starting turtlesim with node name /turtlesim
 [ INFO] [1378628396.178989006]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
 \end{lstlisting}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter2/turtlesim_node.png}
+\caption{turtlesim\_node 노드를 실행한 모습}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{turtlesim 패키지의 turtle\_teleop\_key 실행}
@@ -449,6 +481,11 @@ Reading from keyboard
 ---------------------------
 Use arrow keys to move the turtle.
 \end{lstlisting}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter2/turtlesim_node_move.png}
+\caption{turtle\_teleop\_key 노드를 실행하여 화면위의 거북이를 이동시킨 모습}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{rqt\_graph 패키지의 rqt\_graph 실행}
@@ -463,6 +500,11 @@ rosrun rqt_graph rqt_graph
 그리고 화살표 사이의 네모박스 turtle1 토픽의 하위 토픽인 /turtle1/cmd\_vel 는 두 노드간의 토픽의 이름으로, teleop\_turtle 노드에서 키보드로 입력한 속도 명령이 turtlesim 으로 토픽을 통해 메세지(msg 데이타)가 송수되고 있다는 내용이다. 
 
 즉, 위에서 실행한 두 노드를 이용하여 키보드 명령을 로봇 시뮬레이션에게 전달해 줬다는 내용이다. 자세한 내용은 추후에 ROS 강좌 에서 하도록 하고, 여기까지 진행이 원만히 되었다면, ROS 구동 테스트는 끝나게 된다.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter2/turtlesim_node_graph.png}
+\caption{노드들의 정보를 볼 수 있는 GUI 형태의 rqt\_graph 노드}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{노드의 종료}
