@@ -30,12 +30,16 @@
 \newcounter{num}
 % \newcounter{num}\setcounter{num}{0}
 % \stepcounter{num}\circled{\thenum}
+% \usepackage[english]{babel}
+\renewcommand{\figurename}{그림}
+
 %-------------------------------------------------------------------------------
 
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
 \input{code} % parameters to insert source code
 
 \usepackage[T1]{fontenc} % this encoding has all the printable ASCII characters
+\usepackage[multiple]{footmisc} % for multiple footnote 1,2,3
 
 \begin{document}
 
@@ -77,7 +81,7 @@
 
 \noindent \textsc{Published by OROCA (www.oroca.org)}\\ % Publisher
 
-\noindent \textit{Ver 0.3, \today}\\ % Printing/edition date
+\noindent \textit{Ver 0.4, \today}\\ % Printing/edition date
 
 \begin{figure}[h]
 \includegraphics[scale=0.3]{cc-logo}

@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 2.1 $
+% $ biblatex bbl format version 2.3 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -19,56 +19,158 @@
 
 \refsection{0}
   \sortlist{entry}{nyt}
-    \entry{article_key}{article}{}
-      \name{labelname}{1}{}{%
-        {{hash=26a8b4a95216218b2dfc1460f6d4c494}{Smith}{S\bibinitperiod}{James}{J\bibinitperiod}{}{}{}{}}%
+    \entry{dellaert1999monte}{inproceedings}{}
+      \name{labelname}{4}{}{%
+        {{hash=44074d3cb57c174a8b15ccc9a576ac0d}{Dellaert}{D\bibinitperiod}{Frank}{F\bibinitperiod}{}{}{}{}}%
+        {{hash=93b0c4a7857a82a8f94e256475887c74}{Fox}{F\bibinitperiod}{Dieter}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=98f4ab1bc2ac191d8f8a0651315ce9c0}{Burgard}{B\bibinitperiod}{Wolfram}{W\bibinitperiod}{}{}{}{}}%
+        {{hash=5112ea130eadef0764fce0145b8b9f91}{Thrun}{T\bibinitperiod}{Sebastian}{S\bibinitperiod}{}{}{}{}}%
       }
-      \name{author}{1}{}{%
-        {{hash=26a8b4a95216218b2dfc1460f6d4c494}{Smith}{S\bibinitperiod}{James}{J\bibinitperiod}{}{}{}{}}%
+      \name{author}{4}{}{%
+        {{hash=44074d3cb57c174a8b15ccc9a576ac0d}{Dellaert}{D\bibinitperiod}{Frank}{F\bibinitperiod}{}{}{}{}}%
+        {{hash=93b0c4a7857a82a8f94e256475887c74}{Fox}{F\bibinitperiod}{Dieter}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=98f4ab1bc2ac191d8f8a0651315ce9c0}{Burgard}{B\bibinitperiod}{Wolfram}{W\bibinitperiod}{}{}{}{}}%
+        {{hash=5112ea130eadef0764fce0145b8b9f91}{Thrun}{T\bibinitperiod}{Sebastian}{S\bibinitperiod}{}{}{}{}}%
       }
-      \list{location}{1}{%
-        {City}%
+      \list{organization}{1}{%
+        {IEEE}%
       }
-      \list{publisher}{1}{%
-        {Publisher}%
-      }
-      \strng{namehash}{26a8b4a95216218b2dfc1460f6d4c494}
-      \strng{fullhash}{26a8b4a95216218b2dfc1460f6d4c494}
-      \field{labelalpha}{Smi13}
-      \field{sortinit}{S}
-      \field{labeltitle}{Article title}
-      \field{month}{03}
-      \field{number}{6}
-      \field{title}{Article title}
-      \field{volume}{14}
-      \field{year}{2013}
-      \field{pages}{1\bibrangedash 8}
+      \strng{namehash}{d3ff0b2aada6d177943ebd9abcc871de}
+      \strng{fullhash}{fb7b462d2cb96f0c5470e3d882b4d7a8}
+      \field{labelalpha}{Del+99}
+      \field{sortinit}{D}
+      \field{labeltitle}{Monte carlo localization for mobile robots}
+      \field{booktitle}{Robotics and Automation, 1999. Proceedings. 1999 IEEE International Conference on}
+      \field{title}{Monte carlo localization for mobile robots}
+      \field{volume}{2}
+      \field{year}{1999}
+      \field{pages}{1322\bibrangedash 1328}
     \endentry
-    \entry{book_key}{book}{}
-      \name{labelname}{1}{}{%
-        {{hash=5d0ddda3a367ceb26fbaeca02e391c22}{Smith}{S\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+    \entry{fox1999monte}{article}{}
+      \name{labelname}{4}{}{%
+        {{hash=93b0c4a7857a82a8f94e256475887c74}{Fox}{F\bibinitperiod}{Dieter}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=98f4ab1bc2ac191d8f8a0651315ce9c0}{Burgard}{B\bibinitperiod}{Wolfram}{W\bibinitperiod}{}{}{}{}}%
+        {{hash=44074d3cb57c174a8b15ccc9a576ac0d}{Dellaert}{D\bibinitperiod}{Frank}{F\bibinitperiod}{}{}{}{}}%
+        {{hash=5112ea130eadef0764fce0145b8b9f91}{Thrun}{T\bibinitperiod}{Sebastian}{S\bibinitperiod}{}{}{}{}}%
       }
-      \name{author}{1}{}{%
-        {{hash=5d0ddda3a367ceb26fbaeca02e391c22}{Smith}{S\bibinitperiod}{John}{J\bibinitperiod}{}{}{}{}}%
+      \name{author}{4}{}{%
+        {{hash=93b0c4a7857a82a8f94e256475887c74}{Fox}{F\bibinitperiod}{Dieter}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=98f4ab1bc2ac191d8f8a0651315ce9c0}{Burgard}{B\bibinitperiod}{Wolfram}{W\bibinitperiod}{}{}{}{}}%
+        {{hash=44074d3cb57c174a8b15ccc9a576ac0d}{Dellaert}{D\bibinitperiod}{Frank}{F\bibinitperiod}{}{}{}{}}%
+        {{hash=5112ea130eadef0764fce0145b8b9f91}{Thrun}{T\bibinitperiod}{Sebastian}{S\bibinitperiod}{}{}{}{}}%
       }
-      \list{location}{1}{%
-        {City}%
+      \strng{namehash}{4c2c32ed0376c8d6850cbf597dc69941}
+      \strng{fullhash}{370ba952b650fec3aa7093ddfb674f51}
+      \field{labelalpha}{Fox+99}
+      \field{sortinit}{F}
+      \field{labeltitle}{Monte carlo localization: Efficient position estimation for mobile robots}
+      \field{journaltitle}{AAAI/IAAI}
+      \field{title}{Monte carlo localization: Efficient position estimation for mobile robots}
+      \field{volume}{1999}
+      \field{year}{1999}
+      \field{pages}{343\bibrangedash 349}
+    \endentry
+    \entry{grisetti2005improving}{inproceedings}{}
+      \name{labelname}{3}{}{%
+        {{hash=1aa4adfed9f6f5be21fca54e130eacb5}{Grisetti}{G\bibinitperiod}{Giorgio}{G\bibinitperiod}{}{}{}{}}%
+        {{hash=5d87e0c36213202151bff64fdd9346a3}{Stachniss}{S\bibinitperiod}{Cyrill}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=98f4ab1bc2ac191d8f8a0651315ce9c0}{Burgard}{B\bibinitperiod}{Wolfram}{W\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=1aa4adfed9f6f5be21fca54e130eacb5}{Grisetti}{G\bibinitperiod}{Giorgio}{G\bibinitperiod}{}{}{}{}}%
+        {{hash=5d87e0c36213202151bff64fdd9346a3}{Stachniss}{S\bibinitperiod}{Cyrill}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=98f4ab1bc2ac191d8f8a0651315ce9c0}{Burgard}{B\bibinitperiod}{Wolfram}{W\bibinitperiod}{}{}{}{}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{46e0c8d908edcfca5bd82f3ddfe938a4}
+      \strng{fullhash}{46e0c8d908edcfca5bd82f3ddfe938a4}
+      \field{labelalpha}{GSB05}
+      \field{sortinit}{G}
+      \field{labeltitle}{Improving grid-based slam with rao-blackwellized particle filters by adaptive proposals and selective resampling}
+      \field{booktitle}{Robotics and Automation, 2005. ICRA 2005. Proceedings of the 2005 IEEE International Conference on}
+      \field{title}{Improving grid-based slam with rao-blackwellized particle filters by adaptive proposals and selective resampling}
+      \field{year}{2005}
+      \field{pages}{2432\bibrangedash 2437}
+    \endentry
+    \entry{grisetti2007improved}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=1aa4adfed9f6f5be21fca54e130eacb5}{Grisetti}{G\bibinitperiod}{Giorgio}{G\bibinitperiod}{}{}{}{}}%
+        {{hash=5d87e0c36213202151bff64fdd9346a3}{Stachniss}{S\bibinitperiod}{Cyrill}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=98f4ab1bc2ac191d8f8a0651315ce9c0}{Burgard}{B\bibinitperiod}{Wolfram}{W\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=1aa4adfed9f6f5be21fca54e130eacb5}{Grisetti}{G\bibinitperiod}{Giorgio}{G\bibinitperiod}{}{}{}{}}%
+        {{hash=5d87e0c36213202151bff64fdd9346a3}{Stachniss}{S\bibinitperiod}{Cyrill}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=98f4ab1bc2ac191d8f8a0651315ce9c0}{Burgard}{B\bibinitperiod}{Wolfram}{W\bibinitperiod}{}{}{}{}}%
       }
       \list{publisher}{1}{%
-        {Publisher}%
+        {IEEE}%
       }
-      \strng{namehash}{5d0ddda3a367ceb26fbaeca02e391c22}
-      \strng{fullhash}{5d0ddda3a367ceb26fbaeca02e391c22}
-      \field{labelalpha}{Smi12}
-      \field{sortinit}{S}
-      \field{labeltitle}{Book title}
-      \field{edition}{1}
-      \field{month}{01}
-      \field{series}{2}
-      \field{title}{Book title}
-      \field{volume}{3}
-      \field{year}{2012}
-      \field{pages}{123\bibrangedash 200}
+      \strng{namehash}{46e0c8d908edcfca5bd82f3ddfe938a4}
+      \strng{fullhash}{46e0c8d908edcfca5bd82f3ddfe938a4}
+      \field{labelalpha}{GSB07}
+      \field{sortinit}{G}
+      \field{labeltitle}{Improved techniques for grid mapping with rao-blackwellized particle filters}
+      \field{journaltitle}{Robotics, IEEE Transactions on}
+      \field{number}{1}
+      \field{title}{Improved techniques for grid mapping with rao-blackwellized particle filters}
+      \field{volume}{23}
+      \field{year}{2007}
+      \field{pages}{34\bibrangedash 46}
+    \endentry
+    \entry{pyo2014floor}{article}{}
+      \name{labelname}{5}{}{%
+        {{hash=e5f5f7bd2bf8bb33fc6e28f86132170b}{Pyo}{P\bibinitperiod}{Yoonseok}{Y\bibinitperiod}{}{}{}{}}%
+        {{hash=ab3172ff3196487821f0da443a80beae}{Hasegawa}{H\bibinitperiod}{Tsutomu}{T\bibinitperiod}{}{}{}{}}%
+        {{hash=d870f76f20772ea0d5630e6da46b281a}{Tsuji}{T\bibinitperiod}{Tokuo}{T\bibinitperiod}{}{}{}{}}%
+        {{hash=e5b4546fc8efd476e65aa23661a6d847}{Kurazume}{K\bibinitperiod}{Ryo}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=69a2495572b25cce3542e7a41e688524}{Morooka}{M\bibinitperiod}{Ken'ichi}{K\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{5}{}{%
+        {{hash=e5f5f7bd2bf8bb33fc6e28f86132170b}{Pyo}{P\bibinitperiod}{Yoonseok}{Y\bibinitperiod}{}{}{}{}}%
+        {{hash=ab3172ff3196487821f0da443a80beae}{Hasegawa}{H\bibinitperiod}{Tsutomu}{T\bibinitperiod}{}{}{}{}}%
+        {{hash=d870f76f20772ea0d5630e6da46b281a}{Tsuji}{T\bibinitperiod}{Tokuo}{T\bibinitperiod}{}{}{}{}}%
+        {{hash=e5b4546fc8efd476e65aa23661a6d847}{Kurazume}{K\bibinitperiod}{Ryo}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=69a2495572b25cce3542e7a41e688524}{Morooka}{M\bibinitperiod}{Ken'ichi}{K\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Multidisciplinary Digital Publishing Institute}%
+      }
+      \strng{namehash}{f35885f526c539aaaffd5a79b83f4ca1}
+      \strng{fullhash}{9008b55d33a67a974954247a813338ab}
+      \field{labelalpha}{Pyo+14}
+      \field{sortinit}{P}
+      \field{labeltitle}{Floor Sensing System Using Laser Reflectivity for Localizing Everyday Objects and Robot}
+      \field{journaltitle}{Sensors}
+      \field{number}{4}
+      \field{title}{Floor Sensing System Using Laser Reflectivity for Localizing Everyday Objects and Robot}
+      \field{volume}{14}
+      \field{year}{2014}
+      \field{pages}{7524\bibrangedash 7540}
+    \endentry
+    \entry{thrun2005probabilistic}{book}{}
+      \name{labelname}{3}{}{%
+        {{hash=5112ea130eadef0764fce0145b8b9f91}{Thrun}{T\bibinitperiod}{Sebastian}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=98f4ab1bc2ac191d8f8a0651315ce9c0}{Burgard}{B\bibinitperiod}{Wolfram}{W\bibinitperiod}{}{}{}{}}%
+        {{hash=93b0c4a7857a82a8f94e256475887c74}{Fox}{F\bibinitperiod}{Dieter}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=5112ea130eadef0764fce0145b8b9f91}{Thrun}{T\bibinitperiod}{Sebastian}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=98f4ab1bc2ac191d8f8a0651315ce9c0}{Burgard}{B\bibinitperiod}{Wolfram}{W\bibinitperiod}{}{}{}{}}%
+        {{hash=93b0c4a7857a82a8f94e256475887c74}{Fox}{F\bibinitperiod}{Dieter}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {MIT press}%
+      }
+      \strng{namehash}{cb3e97dbc1e8d4a631a5b656776c23d3}
+      \strng{fullhash}{cb3e97dbc1e8d4a631a5b656776c23d3}
+      \field{labelalpha}{TBF05}
+      \field{sortinit}{T}
+      \field{labeltitle}{Probabilistic robotics}
+      \field{title}{Probabilistic robotics}
+      \field{year}{2005}
     \endentry
   \endsortlist
 \endrefsection
