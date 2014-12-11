@@ -230,7 +230,7 @@ $ cd ~/catkin_ws/
 $ catkin_make
 $ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 $ echo "export ROS_MASTER_URI=http://xxx.xxx.xxx.xxx:11311" >> ~/.bashrc
-$ echo "export ROS_IP=xxx.xxx.xxx.xxx" >> ~/.bashrc
+$ echo "export ROS_HOSTNAME=xxx.xxx.xxx.xxx" >> ~/.bashrc
 $ source ~/.bashrc
 \end{lstlisting}
 
@@ -261,7 +261,7 @@ source /opt/ros/indigo/setup.bash
 source ~/catkin_ws/devel/setup.bash
 # Set ROS Network
 export ROS_MASTER_URI=http://xxx.xxx.xxx.xxx:11311
-export ROS_IP=xxx.xxx.xxx.xxx
+export ROS_HOSTNAME=xxx.xxx.xxx.xxx
 # set ROS alias command
 alias cw='cd ~/catkin_ws'
 alias cs='cd ~/catkin_ws/src'
@@ -306,11 +306,11 @@ export ROS_HOSTNAME=192.168.4.100
 \end{lstlisting}
 
 \begin{exercise}[ifconfig]
-리눅스에서 자신의 IP를 알아보는 방법으로는 ifconfig 명령어를 이용하는 방법이 제일 간단하다. 아래의 예제처럼 터미널창에서 ifconfig를 실행해보자. 유선이라면 eth, 무선이라면 wlan 의 항목의 inet addr 부분의 IP가 자신의 IP이다. 필자의 경우, 유선랜을 이용하지만 일부로 무선랜도 켜보았다. 아래의 예제에서의 IP는 192.168.4.100 이다.
+리눅스에서 자신의 IP를 알아보는 방법으로는 ifconfig 명령어를 이용하는 방법이 제일 간단하다. 아래의 예제처럼 터미널창에서 ifconfig를 실행해보자. 유선이라면 eth, 무선이라면 wlan 의 항목의 inet addr 부분의 IP가 자신의 IP이다. 필자의 경우, 유선랜을 이용하지만 일부로 무선랜도 켜보았다. 아래의 예제에서의 유선 접속시의 IP는 192.168.4.100 이다.
 \begin{lstlisting}[language=ROS, backgroundcolor=\color{ocre!10}, numbers=none]
 $ ifconfig
 eth0   Link encap:Ethernet  HWaddr xx:xx:xx:xx:xx:xx  
-          inet addr:\textbf{192.168.4.100}  Bcast:192.168.4.255  Mask:255.255.255.0
+          inet addr:%*\textbf{\textcolor{red}{192.168.4.100}}*)  Bcast:192.168.4.255  Mask:255.255.255.0
           inet6 addr: fexx::d6xx:7exx:f1xx:xx2/64 Scope:Link
 
 lo       Link encap:Local Loopback  
@@ -325,14 +325,15 @@ wlan1 Link encap:Ethernet  HWaddr xx:xx:xx:xx:xx:xx
 
 %-------------------------------------------------------------------------------
 \subsubsection{단축 명령어}
-ROS 개발 작업에서 자주 사용하는 명령어를 단축 명령어로 설정하는 방법에 대해서 알아보도록 하자. 아래의 cw, cs, cm 은 필자가 만들어둔 단축 명령어이다. 이 단축 명령어는 리눅스에서 사용하는 alias 라는 단축 명령어를 이용하여 작성하였다. 
+ROS 개발 작업에서 자주 사용하는 명령어를 단축 명령어로 설정하는 방법에 대해서 알아보도록 하자. 아래의 cw, cs, cm 은 필자가 만들어둔 단축 명령어이다. 이 단축 명령어는 리눅스에서 사용하는 alias 라는 단축 명령어를 이용하여 작성하였다.\\
 
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \item cw 는 미리 설정해 둔 catkin 작업 폴더인 ~/catkin\_ws 로 이동한다. 
 \item cs 는 catkin 작업 폴더 중 소스 파일이 담겨있는 ~/catkin\_ws/src 로 이동한다. 
 \item cm 는 catkin 작업 폴더인 ~/catkin\_ws 로 이동한 후, catkin\_make 명령어로 ROS 패키지를 빌드하게 된다.
 \end{itemize}
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=bash]
 # set ROS alias command
 alias cw='cd ~/catkin_ws'
@@ -341,7 +342,7 @@ alias cm='cd ~/catkin_ws && catkin_make'
 \end{lstlisting}
 
 \begin{exercise}[ROS 환경 설정 확인 방법]
-아래처럼 export \textbar grep ROS 명령어를 이용하여 자신이 현재 설정한 ROS 환경 설정들을 확인할 수 있다.
+아래처럼 export \textbar~grep ROS 명령어를 이용하여 자신이 현재 설정한 ROS 환경 설정들을 확인할 수 있다.
 \begin{lstlisting}[language=bash, backgroundcolor=\color{ocre!10}, numbers=none]
 $ export | grep ROS
 declare -x ROSLISP_PACKAGE_DIRECTORIES="/home/xxx/catkin_ws/devel/share/common-lisp"
@@ -361,22 +362,23 @@ declare -x ROS_TEST_RESULTS_DIR="/home/xxx/catkin_ws/build/test_results"
 %-------------------------------------------------------------------------------
 \subsection{통합 개발 환경 (Integrated Development Environment, IDE)}
 
-IDE는 코딩, 디버그, 컴파일, 배포 등 프로그램 개발에 관련된 모든 작업을 하나의 프로그램 안에서 처리하는 환경을 제공하는 소프트웨어를 말한다. 아마 많은 개발자들이 자신만이 즐겨쓰는 IDE는 한 두개쯤은 있을 것이라고 생각한다. 
+IDE는 코딩, 디버그, 컴파일, 배포 등 프로그램 개발에 관련된 모든 작업을 하나의 프로그램 안에서 처리하는 환경을 제공하는 소프트웨어를 말한다. 아마 많은 개발자들이 자신만이 즐겨쓰는 IDE는 한두 개쯤은 있을 것으로 생각한다. 
 
-ROS 또한 여러 IDE\footnote{ROS 위키, "IDE", http://wiki.ros.org/IDEs}를 사용할 수 있는데, 많이 사용되는 IDE로는 Eclipse, CodeBlocks, Emacs, Vim, NetBeans, QtCreator 등이 있다. 필자의 경우, 처음에는 Eclipse 를 사용하였으나 Eclipse가 최근 버전에 와서는 매우 무겁게 느껴졌으며, ROS의 catkin 빌드 시스템 사용에 있어서 많은 불편을 느꼈다. 그래서, 다른 IDE 를 구축하고자 여러 IDE 를 검토해 봐다. 그 중 가장 적합한 툴로는 QtCreator\footnote{Qt Project, http://qt-project.org/}\footnote{Qt Download page, http://qt-project.org/downloads}가 아닐까 싶다. ROS 의 개발/디버깅 툴인 rqt 같은 경우나, RViz 같은 경우에도 QT로 만들어져 있고, 사용자는 QT 플러그인으로 기존 툴과 플러그인을 개발도 가능하다는 점에서 QT의 편집기인 QtCreator 는 매우 유용하다고 볼 수 있다. 또한 QT 를 이용하지 않더라도 범용적인 에디터로써의 기능도 충분히 갖추고 있을뿐 아니라, 프로젝트를 CMakeLists.txt 를 통하여 바로 열수가 있어서 catkin\_make 에도 매우 편리하다.
+ROS 또한 여러 IDE\footnote{ROS 위키, IDEs, \url{http://wiki.ros.org/IDEs}}를 사용할 수 있는데, 많이 사용되는 IDE로는 Eclipse, CodeBlocks, Emacs, Vim, NetBeans, QtCreator 등이 있다. 필자의 경우, 처음에는 Eclipse 를 사용 하였으나 Eclipse가 최근 버전에 와서는 매우 무겁게 느껴졌으며, ROS의 catkin 빌드 시스템 사용에 있어서 많은 불편을 느꼈다. 그래서, 다른 IDE 를 구축하고자 여러 IDE 를 검토해 봐다. 그 중 가장 적합한 툴로는 QtCreator\footnote{Qt Project, \url{http://qt-project.org/}}\footnote{Qt Download page, \url{http://qt-project.org/downloads}}가 아닐까 싶다. ROS 의 개발/디버깅 툴인 rqt 같은 경우나, RViz 같은 경우에도 Qt로 만들어져 있고, 사용자는 Qt 플러그인으로 기존 툴과 플러그인을 개발도 가능하다는 점에서 Qt의 편집기인 QtCreator 는 매우 유용하다고 볼 수 있다. 또한 Qt 를 이용하지 않더라도 범용적인 에디터로써의 기능도 충분히 갖추고 있을뿐 아니라, 프로젝트를 CMakeLists.txt 를 통하여 바로 불러올 수 있어서 catkin\_make 사용에 있어서 매우 편리하다.
 
-아래의 내용은 QtCreator 로 ROS 개발 환경을 꾸미는 내용을 담고 있다. 반드시 QtCreator 를 이용하여 개발할 필요는 없으므로 QtCreator 를 IDE로 사용하지 않더라도 본 강좌 이외의 후속 강좌들을 사용하는데에는 아무런 문제가 없음을 미리 밝혀둔다.
+아래의 내용은 QtCreator 로 ROS 개발 환경을 꾸미는 내용을 담고 있다. 반드시 QtCreator 를 이용하여 개발할 필요는 없으므로 QtCreator 를 IDE로 사용하지 않더라도 뒤에 따르는 내용을 이해하는 데에는 아무런 문제가 없음을 미리 밝혀둔다.
 
 %-------------------------------------------------------------------------------
 \subsubsection{QtCreator 설치}
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ sudo apt-get install qtcreator
 \end{lstlisting}
 
 %-------------------------------------------------------------------------------
 \subsubsection{QtCreator 구동}
-QtCreator를 아이콘으로 실행시켜도 구동에는 문제 없으나 우리가 ~/.bashrc 에 기술해둔 ROS 경로 등의 설정을 QtCreator 에도 적용하기 위해서는 새로운 터미널 창을 열어, 아래와 같이 실행해줘야 한다.
+QtCreator를 아이콘으로 실행시켜도 구동에는 문제 없으나 우리가 \textasciitilde/.bashrc 에 기술해둔 ROS 경로 등의 설정을 QtCreator 에도 적용하기 위해서는 새로운 터미널 창을 열어, 아래와 같이 실행해줘야 한다. 즉, QtCreator 를 실행할때 환경 설정 파일인 \textasciitilde/.bashrc 에 기술해 놓은 설정을 모두 적용하게 된다.\\
 
 \begin{lstlisting}[language=ROS]
 $ qtcreator
@@ -386,25 +388,25 @@ $ qtcreator
 위의 명령어로 아래와 같이 QtCreator 가 실행됨을 확인 할 수 있다.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter2/qtcreator1.png}
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter2/qtcreator1.png}
 \caption{QtCreator IDE}
 \end{figure}
 
 %-------------------------------------------------------------------------------
 \subsubsection{ROS 패키지를 프로젝트로 불러오기}
-앞서 말한바와 같이 QtCreator는 CMakeLists.txt 를 사용한다. 그렇기에 ROS 패키지는 단순히 아래와 화면의 OpenProject 버튼을 클릭하여 해당 ROS 패키지의 CMakeLists.txt 를 선택하면 손쉽게 프로젝트로 불러올 수 있다.
-
-\begin{figure}[h]
-\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter2/qtcreator2.png}
-\caption{QtCreator: 프로젝트 열기}
-\end{figure}
+앞서 말한바와 같이 QtCreator는 기본적으로 CMakeLists.txt 를 사용하고 있고, ROS 패키지도 CMakeLists.txt 기반이기에 단순히 아래와 화면의 OpenProject 버튼을 클릭하여 해당 ROS 패키지의 CMakeLists.txt 를 선택하면 손쉽게 프로젝트로 불러올 수 있다.
 
 %-------------------------------------------------------------------------------
 \subsubsection{ROS 패키지를 프로젝트로 불러오기}
-컴파일의 경우에는 단순히 Ctrl + B 로 컴파일 하면 catkin\_make 가 실행된다. 단, 빌드 관련은 해당 패키지와 같은 위치의 폴더에 새로운 폴더로 생성된다. 예를 들어 tms\_rp\_action 이라는 패키지를 컴파일하면 "build-tms\_rp\_action-Desktop-Default" 이라는 폴더에 빌드 관련이 모두 놓이게 된다. 즉,  원래는 ~/catkin\_ws/build 와 ~/catkin\_ws/devel 에 보관되어야 할 파일들이 따로 컴파일 되어 새로운 장소에 놓이게 되므로 실행을 위해서는 나중에 다시 한번 catkin\_make 를 해줘야 한다. 이는 매번 해줄 필요는 없고 개발도중에는 QtCreator 에서 개발, 디버깅을 한 후에 완료되어 실행할때만 따로 catkin\_make 를 해준다고 보면된다. 
+컴파일의 경우에는 단순히 Ctrl + b 로 컴파일 하면 catkin\_make 가 실행된다. 단, 빌드 관련은 해당 패키지와 같은 위치의 폴더에 새로운 폴더로 생성된다. 예를 들어 tms\_rp\_action 이라는 패키지를 컴파일하면 build-tms\_rp\_action-Desktop-Default 이라는 폴더에 빌드 관련이 모두 놓이게 된다. 즉,  원래는 ~/catkin\_ws/build 와 ~/catkin\_ws/devel 에 보관되어야 할 파일들이 따로 컴파일 되어 새로운 장소에 놓이게 되므로 실행을 위해서는 나중에 다시 한번 catkin\_make 를 해줘야 한다. 이는 매번 해줄 필요는 없고 개발 도중에는 QtCreator 에서 개발, 디버깅한 후에 완료되어 실행할 때만 따로 catkin\_make 를 해주면 된다. 
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter2/qtcreator3.png}
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter2/qtcreator2.png}
+\caption{QtCreator: 프로젝트 열기}
+\end{figure}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter2/qtcreator3.png}
 \caption{QtCreator: 프로젝트 전개 모습}
 \end{figure}
 
@@ -415,11 +417,11 @@ $ qtcreator
 \subsection{turtlesim 패키지}
 일단, ROS를 설치하긴 했는데, 제대로 작동되는지 궁금하신분들을 위해 ROS에서 제공하는 간단한 예제 노드를 실행하는 방법에 대해 설명한다. 예제는 turtlesim 이라는 패캐지(노드의 묶음)로 ROS의 심볼인 거북이 모양을 한 로봇이 화면에 나타나고 키보드로 로봇의 이동을 간단히 조종해 보는 노드(프로그램)이다.
 
-이번 강좌부터는 "노드", "패키지", "코어" 등 ROS 의 고유의 용어들이 많이 등장하는데 이번 강좌에서는 단순히 이런게 있구나 알아두기 바라며, 자세한 설명은 "ROS 강좌 : 08. ROS 컨셉", "ROS 강좌 : 09. ROS 용어" 등에서 설명하도록 하겠다. 이번 강좌는 ROS 가 문제없이 설치됨을 확인하는가 동시에, 본격적인 ROS 강좌가 들어가기 전에 몸풀기 운동 정도로 생각하자.
+이번 내용부터는 노드(Node), 패키지(package), roscore 등 ROS 의 고유의 용어들이 많이 등장하는데 이번 강좌에서는 단순히 이런게 있구나 알아두기 바라며, 자세한 설명은 \textbf{섹션~\ref{sec:RosTerm}~\nameref{sec:RosTerm}(pp.\pageref{sec:RosTerm})} 에서 설명하도록 하겠다. 이번 강좌는 ROS 가 문제없이 설치됨을 확인정도 이기 때문에 본격적인 ROS 강좌가 들어가기 전에 몸풀기 운동 정도로 생각하자.
 
 %-------------------------------------------------------------------------------
 \subsection{roscore 실행}
-새로운 터미널을 열어 다음과 같은 명렁어를 실행한다. 그러면, 모든 ROS 시스템을 관할하는 로스코어(roscore)가 실행되게 된다.
+새로운 터미널을 열어 다음과 같은 명렁어를 실행한다. 그러면 모든 ROS 시스템을 관할하는 roscore가 실행되게 된다.
 \\
 \begin{lstlisting}[language=ROS]
 $ roscore
@@ -427,7 +429,7 @@ $ roscore
 
 \begin{figure}[h]
 \centering\includegraphics[width=0.7\columnwidth]{pictures/chapter2/roscore.png}
-\caption{caption}
+\caption{roscore가 실행된 화면}
 \end{figure}
 
 %-------------------------------------------------------------------------------
@@ -436,18 +438,21 @@ $ roscore
 \\
 \begin{lstlisting}[language=ROS]
 $ rosrun turtlesim turtlesim_node
-[ INFO] [1378628396.169086362]: Starting turtlesim with node name /turtlesim
-[ INFO] [1378628396.178989006]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
+[ INFO] [1418273733.244561023]: Starting turtlesim with node name /turtlesim
+[ INFO] [1418273733.249333831]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
 \end{lstlisting}
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter2/turtlesim_node.png}
-\caption{turtlesim\_node 노드를 실행한 모습}
+\centering
+\includegraphics[width=0.49\columnwidth]{pictures/chapter2/turtlesim_node.png}
+\includegraphics[width=0.49\columnwidth]{pictures/chapter2/turtlesim_node_move.png}
+\caption{turtlesim\_node 노드를 실행하고 turtle\_teleop\_key 노드를 실행하여 화면위의 거북이를 이동시킨 모습}
+\label{fig:turtlesim_node}
 \end{figure}
 
 %-------------------------------------------------------------------------------
 \subsection{turtlesim 패키지의 turtle\_teleop\_key 실행}
-새로운 터미널을 열어 다음과 같은 명렁어를 실행한다. 그러면 다음과 같은 메시지를 보게 되며, turtlesim 패키지의 turtle\_teleop\_key를 실행하게 된다. 이 터미널 창 위에서 키보드의 화살표(← → ↑ ↓)를 이용하여 거북이를 제어하게 된다. 간단하므로 직접 해보길 바란다. 제어하게 되면 화면 속의 거북이가 움직이게 되는데, 이는 간단히 시뮬레이션이지만 실제 로봇도 이와 같은 방법으로 원격조정이 가능하게 된다.
+새로운 터미널을 열어 다음과 같은 명렁어를 실행한다. 그러면 다음과 같은 메시지를 보게 되며, turtlesim 패키지의 turtle\_teleop\_key를 실행하게 된다. 이 \textbf{터미널 창 위}에서 키보드의 화살표(← → ↑ ↓)를 이용하여 그림\ref{fig:turtlesim_node}의 우측과 같이 거북이를 제어하게 된다. 간단하므로 직접 해보길 바란다. 제어하게 되면 화면 속의 거북이가 움직이게 되는데, 이는 간단히 시뮬레이션이지만 실제 로봇도 이와 같은 방법으로 원격조정이 가능하게 된다.
 \\
 \begin{lstlisting}[language=ROS]
 $ rosrun turtlesim turtle_teleop_key
@@ -456,28 +461,24 @@ Reading from keyboard
 Use arrow keys to move the turtle.
 \end{lstlisting}
 
-\begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter2/turtlesim_node_move.png}
-\caption{turtle\_teleop\_key 노드를 실행하여 화면위의 거북이를 이동시킨 모습}
-\end{figure}
-
 %-------------------------------------------------------------------------------
 \subsection{rqt\_graph 패키지의 rqt\_graph 실행}
-새로운 터미널을 열어 다음와 같은 명렁어를 실행한다. 그러면 rqt\_graph 패키지의 rqt\_graph를 실행하게 된다. 그 결과 다음과 같은 그래프를 볼 수 있을 것이다. 이는 현재 실행중인 노드(프로그램)들의 정보를 그래프로 볼 수 있는 노드이다.
+새로운 터미널을 열어 다음와 같은 명렁어를 실행한다. 그러면 rqt\_graph 패키지의 rqt\_graph 노드가 실행되게 된다. 그 결과 그림\ref{fig:turtlesim_node_graph} 같은 그래프를 볼 수 있을 것이다. 이는 현재 실행중인 노드(프로그램)들의 정보를 그래프로 볼 수 있는 노드이다.
 \\
 \begin{lstlisting}[language=ROS]
 $ rosrun rqt_graph rqt_graph
 \end{lstlisting}
 
-아래의 rqt\_graph 노드는 현재 실행 중인 노드들의 정보를 볼 수 있는 GUI 형태의 노드이다. 동그라미는 노드를 의미하고, 네모는 토픽을 의미한다. 다음의 그림을 자세히 보자. /teleop\_turtle 노드로부터 화살표가 그어져 /turtlesim 으로 이어져 있다. 이는 두 노드가 실행 중 이고, 이 두 노드 간에는 메시지 통신이 이루어 지고 있다는 설명이다. 
+rqt\_graph 노드는 현재 실행 중인 노드들의 정보를 볼 수 있는 GUI 형태의 노드이다. 동그라미는 노드를 의미하고, 네모는 토픽을 의미한다. 다음의 그림을 자세히 보자. /teleop\_turtle 노드로부터 화살표가 그어져 /turtlesim 으로 이어져 있다. 이는 두 노드가 실행 중 이고, 이 두 노드 간에는 메시지 통신이 이루어 지고 있다는 설명이다. 
 
-그리고 화살표 사이의 네모박스 turtle1 토픽의 하위 토픽인 /turtle1/cmd\_vel 는 두 노드간의 토픽의 이름으로, teleop\_turtle 노드에서 키보드로 입력한 속도 명령이 turtlesim 으로 토픽을 통해 메세지(msg 데이타)가 송수되고 있다는 내용이다. 
+그리고 화살표 사이의 네모박스 turtle1 토픽의 하위 토픽인 /turtle1/cmd\_vel 는 두 노드간의 토픽의 이름으로, teleop\_turtle 노드에서 키보드로 입력한 속도 명령이 turtlesim 으로 토픽을 통해 메세지(msg 데이타)가 송신되고 있다는 내용이다. 
 
-즉, 위에서 실행한 두 노드를 이용하여 키보드 명령을 로봇 시뮬레이션에게 전달해 줬다는 내용이다. 자세한 내용은 추후에 ROS 강좌 에서 하도록 하고, 여기까지 진행이 원만히 되었다면, ROS 구동 테스트는 끝나게 된다.
+즉, 위에서 실행한 두 노드를 이용하여 키보드 명령을 로봇 시뮬레이션에게 전달해 줬다는 내용이다. 자세한 내용은 추후 이어지는 내용에서 하도록 하고, 여기까지 진행이 원만히 되었다면, ROS 구동 테스트는 끝나게 된다.
 
 \begin{figure}[h]
 \centering\includegraphics[width=0.8\columnwidth]{pictures/chapter2/turtlesim_node_graph.png}
 \caption{노드들의 정보를 볼 수 있는 GUI 형태의 rqt\_graph 노드}
+\label{fig:turtlesim_node_graph}
 \end{figure}
 
 %-------------------------------------------------------------------------------
