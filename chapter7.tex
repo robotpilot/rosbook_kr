@@ -192,6 +192,7 @@ $ cd msg                  %*(작성한 msg 폴더로 이동)*)
 $ gedit msgTutorial.msg   %*(msgTutorial.msg 파일 신규 작성 및 내용 수정)*)
 \end{lstlisting}
 
+\noindent
 내용으로는 아래와 같이 int32 메시지 형식에 data라는 이름의 메시지를 만들어주자.
 
 \begin{lstlisting}[language=ROS]
@@ -462,6 +463,7 @@ $ cd srv                    %*(작성한 srv 폴더로 이동*)
 $ gedit srvTutorial.srv     %*(srvTutorial.srv 파일 신규 작성 및 내용 수정*)
 \end{lstlisting}
 
+\noindent
 내용으로는 아래와 같이 int64 형식의 a, b라는 서비스 요청(request)과, sum 라는 이라는 서비스 응답(response)을 만들어주자. "---" 는 요청과 응답을 구분시켜주는 구분자이다.
 
 \begin{lstlisting}[language=ROS]
@@ -594,7 +596,7 @@ int main(int argc, char **argv)
 %-------------------------------------------------------------------------------
 \subsection{ROS 노드 빌드}
 
-\begin{lstlisting}[language=make]
+\begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws && catkin_make %*(catkin 폴더로 이동 후 catkin 빌드 실행)*)
 \end{lstlisting}
 

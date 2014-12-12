@@ -48,14 +48,14 @@ RViz는 ROS의 3차원 시각화 툴이다. ROS 네트워크상의 데이터를 
 ROS 설치시에 기본 설치라고도 부를 수 있는 "Desktop-Full Install" 를 설치하게되면 RViz는 기본적으로 설치되어 있다. 만약에 "Desktop-Full Install" 으로 설치하지 않았거나, RViz 가 설치되어 있지 않을 경우에는 아래의 명령어로 설치할 수있다.
 
 \begin{lstlisting}[language=ROS]
-sudo apt-get install ros-indigo-rviz
+$ sudo apt-get install ros-indigo-rviz
 \end{lstlisting}
 
 \noindent
 RViz 의 실행 명령어는 아래와 같다. (단, roscore 가 실행되어 있어야 한다.)
 
 \begin{lstlisting}[language=ROS]
-rosrun rviz rviz
+$ rosrun rviz rviz
 \end{lstlisting}
 
 \newpage
@@ -118,7 +118,7 @@ ROS 설치시에 기본 설치라고도 부를 수 있는 "Desktop-Full Install"
 
 \vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
-sudo apt-get install ros-indigo-rqt ros-indigo-rqt-common-plugins
+$ sudo apt-get install ros-indigo-rqt ros-indigo-rqt-common-plugins
 \end{lstlisting}
 
 추가로, rqt\_graph 에서는 그래프 생성을 위하여 추가적으로 설치해야할 파일이 있다. rqt\_graph 에서는 PyQtGraph, MatPlot, QwtPlot 을 지원하는데 우리는 rqt\_graph 가 추천하는 PyQtGraph 을 사용하도록 하자.
@@ -127,7 +127,7 @@ http://www.pyqtgraph.org/downloads/python-pyqtgraph\_0.9.8-1\_all.deb 에서 deb
 
 \vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
-rqt_graph
+$ rqt_graph
 \end{lstlisting}
 
 \begin{figure}[h]
@@ -142,7 +142,7 @@ rqt_graph
 실행은 아래와 같다. 단순히 rqt 라고 실행해주면 된다. (정식 실행명령어는 rosrun rqt\_gui rqt\_gui 이다)
 
 \begin{lstlisting}[language=ROS]
-rqt
+$ rqt
 \end{lstlisting}
 
 rqt 를 실행해주면 아래와 같이 rqt gui 화면이 나온다.처음 구동하였다면 아무런 표시가 없이 덩그러니 메뉴만 표시된다. 이는 rqt가 직접적으로 수행하는 프로그램인 플러그인이 지정되지 않았기 때문이다. 메뉴를 간단히 설명하자면, File의 경우, 단순히 rqt를 종료하는 서브메뉴만 있다. 플러그인(Plugins) 에는 27가지의 플러그인이 있다. 이를 선택하여 이용하게 된다. 동작(Running) 은 현재 동작중인 플러그인이 표시되어 필요치 않을시에 동작을 중단시킬 수 있는 메뉴이다. 끝으로 시각(Perspectives)은 현재 구동중인 플러그인을 셋트로 다음에도 같은 셋트를 이용하고 싶을때 저장하여 동일한 플러그인들을 실행할때 쓰는 메뉴이다.
@@ -219,7 +219,7 @@ $ rosrun turtlesim turtlesim_node
 다음으로, rqt\_plot 을 아래의 조건으로 구동하여 좌표를 작성한다. (원래는 rqt 를 구동후에 Plot 플러그인을 불러와서 GUI환경에서 토픽을 설정하면 되야하지만, 현재 버전에서는 이상하게 구동하지 않는다. 그러므로 아래의 명령어로 대채하여 설명한다.)
 
 \begin{lstlisting}[language=ROS]
-rqt_plot /turtle1/pose/
+$ rqt_plot /turtle1/pose/
 \end{lstlisting}
 
 다음으로, turtlesim 패키지의 turtle\_teleop\_key 을 구동하여, 화면속의 거북이를 이리저리 움직여보자.

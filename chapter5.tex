@@ -489,6 +489,7 @@ Publications:
 \noindent
 rosnode info 명령어를 이용하면 지정한 노드의 정보를 확인가능하다. 기본적으로, Publications, Subscriptions, Services 등을 확인할 수 있으며, 노드 실행 URI 및 토픽 입출력에 대한 정보들도 확인 가능하다. 많은 정보 출력으로 위에서는 내용을 생략해 두었으므 꼭 실행해보길 권장한다.
 
+\vspace{\baselineskip}
 \noindent
 \stepcounter{num}\circled{\thenum} rosnode machine [PC이름 또는 IP] : 해당 PC에서 실행되고 있는 노드 목록 확인
 \begin{lstlisting}[language=ROS]
@@ -552,9 +553,9 @@ $ rosnode cleanup
 ※ 아래의 예제를 실행하기 전에 모든 노드를 종료하도록 하자. 그리고 난후, 각각 다른 터미널창에서 아래의 명령어를 실행하여 turtlesim\_node 및 turtle\_teleop\_key를 실행해주자.
 
 \begin{lstlisting}[language=ROS]
-roscore
-rosrun turtlesim turtlesim_node 
-rosrun turtlesim turtle_teleop_key
+$ roscore
+$ rosrun turtlesim turtlesim_node 
+$ rosrun turtlesim turtle_teleop_key
 \end{lstlisting}
 
 \setcounter{num}{0}
@@ -721,9 +722,9 @@ publishing and latching message for 3.0 seconds
 ※ 아래의 예제를 실행하기 전에 모든 노드를 종료하도록 하자. 그리고 난후, 각각 다른 터미널창에서 아래의 명령어를 실행하여 turtlesim\_node 및 turtle\_teleop\_key를 실행해주자.
 
 \begin{lstlisting}[language=ROS]
-roscore
-rosrun turtlesim turtlesim_node 
-rosrun turtlesim turtle_teleop_key
+$ roscore
+$ rosrun turtlesim turtlesim_node 
+$ rosrun turtlesim turtle_teleop_key
 \end{lstlisting}
 
 \setcounter{num}{0}
@@ -838,9 +839,9 @@ $ rosservice call /turtle1/set_pen 255 0 0 5 0
 ※ 아래의 예제를 실행하기 전에 모든 노드를 종료하도록 하자. 그리고 난후, 각각 다른 터미널창에서 아래의 명령어를 실행하여 turtlesim\_node 및 turtle\_teleop\_key를 실행해주자.
 
 \begin{lstlisting}[language=ROS]
-roscore
-rosrun turtlesim turtlesim_node 
-rosrun turtlesim turtle_teleop_key
+$ roscore
+$ rosrun turtlesim turtlesim_node 
+$ rosrun turtlesim turtle_teleop_key
 \end{lstlisting}
 
 \setcounter{num}{0}
@@ -1059,11 +1060,10 @@ costmap_2d
 \noindent
 ※ 아래의 예제를 실행하기 전에 모든 노드를 종료하도록 하자. 그리고 난후, 각각 다른 터미널창에서 아래의 명령어를 실행하여 turtlesim\_node 및 turtle\_teleop\_key를 실행해주자.
 
-[leftmargin=*]
 \begin{lstlisting}[language=ROS]
-roscore
-rosrun turtlesim turtlesim_node 
-rosrun turtlesim turtle_teleop_key
+$ roscore
+$ rosrun turtlesim turtlesim_node 
+$ rosrun turtlesim turtle_teleop_key
 \end{lstlisting}
 
 \setcounter{num}{0}
@@ -1168,9 +1168,9 @@ turtlesim
 
 \vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
-roscore
-rosrun turtlesim turtlesim_node 
-rosrun turtlesim turtle_teleop_key
+$ roscore
+$ rosrun turtlesim turtlesim_node 
+$ rosrun turtlesim turtle_teleop_key
 \end{lstlisting}
 
 \setcounter{num}{0}

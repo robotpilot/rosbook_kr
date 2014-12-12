@@ -49,7 +49,7 @@ ROS 에서는 USB 카메라와 관련하여 아래와 같은 다양한 패키지
 새로운 터미널을 하나 열고, 아래와 같이 "lsusb" 명령어로 접속이 제대로 되었는지 확인 가능하다. 일반적으로 UVC\footnote{http://en.wikipedia.org/wiki/USB\_video\_device\_class} 계열인 경우, 아무 문제 없이 아래의 빨간 메시지처럼 자신의 카메라를 확인할 수 있다. 
 
 \begin{lstlisting}[language=ROS]
-lsusb
+$ lsusb
 Bus 002 Device 004: ID 1a40:0101 Terminus Technology Inc. 4-Port HUB
 Bus 002 Device 003: ID 048d:1336 Integrated Technology Express, Inc. SD/MMC Cardreader
 Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
@@ -127,7 +127,7 @@ $ $rostopic list
 image:=/image\_raw 이라는 옵션이 붙는데, 맨뒤의 "/image\_raw" 라는 것은 좀 전에 토픽 리스트로 확인한 토픽을 이미지로 보기위한 옵션이다.
 
 \begin{lstlisting}[language=ROS]
-rosrun image_view image_view image:=/image_raw
+$ rosrun image_view image_view image:=/image_raw
 \end{lstlisting}
 
 \noindent
@@ -150,7 +150,7 @@ rosrun image_view image_view image:=/image_raw
 RViz 관련하여 더 자세한 사항은 "ROS 도구 (RViz)" 강좌를 참조하도록 하자.
 
 \begin{lstlisting}[language=ROS]
-rosrun rviz rviz
+$ rosrun rviz rviz
 \end{lstlisting}
 
 \noindent
@@ -204,8 +204,8 @@ export ROS_IP=192.168.1.100
 그 다음 ROS 마스터에서만 roscore를 구동해주고, uvc\_camera\_node 노드를 구동해 주면 된다.
 
 \begin{lstlisting}[language=ROS]
-roscore
-rosrun uvc_camera uvc_camera_node
+$ roscore
+$ rosrun uvc_camera uvc_camera_node
 \end{lstlisting}
 
 %-------------------------------------------------------------------------------
@@ -219,7 +219,7 @@ export ROS_IP=192.168.1.120
 \end{lstlisting}
 
 \begin{lstlisting}[language=ROS]
-rosrun image_view image_view image:=/image_raw
+$ rosrun image_view image_view image:=/image_raw
 \end{lstlisting}
 
 %-------------------------------------------------------------------------------
@@ -278,7 +278,7 @@ ROS 에서는 SICK 사의 LRF지원하는 sicks300, sicktoolbox, sicktoolbox\_wr
 \subsubsection{urg-node 패키지 설치}
 
 \begin{lstlisting}[language=ROS]
-sudo apt-get install ros-indigo-urg-node 
+$ sudo apt-get install ros-indigo-urg-node 
 \end{lstlisting}
 
 %-------------------------------------------------------------------------------
@@ -309,7 +309,7 @@ chmod 명령어로 권한이 변경되었음을 확인할 수 있다.
 본 강좌 부터는 roscore는 실행되어 있다는 전제로 설명하겠다. roscore 설명은 섹션~\ref{subsec:Roscore}~\nameref{subsec:Roscore}(pp.\pageref{subsec:Roscore})를 참고하기 바란다.
 
 \begin{lstlisting}[language=ROS]
-rosrun urg_node urg_node 
+$ rosrun urg_node urg_node 
 \end{lstlisting}
 
 %-------------------------------------------------------------------------------
@@ -464,7 +464,7 @@ OpenNI (Open Natural Interaction)\footnote{OpenNI, http://en.wikipedia.org/wiki/
 \thenum) 우선, ROS의 OpenNI 관련 패키지를 다운로드/설치 한다.
 
 \begin{lstlisting}[language=ROS]
-sudo apt-get install ros-indigo-openni2-camera ros-indigo-openni2-launch
+$ sudo apt-get install ros-indigo-openni2-camera ros-indigo-openni2-launch
 \end{lstlisting}
 
 \vspace{\baselineskip}
@@ -473,9 +473,9 @@ sudo apt-get install ros-indigo-openni2-camera ros-indigo-openni2-launch
 \thenum) Xtion 을 구입하게 되면 동봉된 CD에 Xtion 드라이브가 있다. 함께 설치해주도록 하자.
 
 \begin{lstlisting}[language=ROS]
-tar -xvf Sensor-Bin-Linux-x64-v5.1.0.41.tar.bz2
-cd Sensor-Bin-Linux-x64-v5.1.0.41/
-sudo sh install.sh 
+$ tar -xvf Sensor-Bin-Linux-x64-v5.1.0.41.tar.bz2
+$ cd Sensor-Bin-Linux-x64-v5.1.0.41/
+$ sudo sh install.sh 
 \end{lstlisting}
 
 \vspace{\baselineskip}
@@ -515,7 +515,7 @@ Global Options → Fixed Frame 을 "camera\_depth\_frame" 로 변경한다.
 rviz 좌측 하단의 Add 클릭한 후, PointCloud2를 선택하여 추가한다. 아래 그림과 같이 세부 설정을 바꿔준다.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter9/rviz_pc2.png}
+\centering\includegraphics[width=\columnwidth]{pictures/chapter9/rviz_pc2.png}
 \caption{RViz PointCloud2 디스플레이}
 \end{figure}
 
@@ -523,7 +523,7 @@ rviz 좌측 하단의 Add 클릭한 후, PointCloud2를 선택하여 추가한�
 \noindent
 \stepcounter{num}
 \thenum) 데이터 확인
-
+\noindent
 위 그림과 같이, PCD 값을 확인할 수 있다. 현재, 색을 X축을 기준으로 하였기에 X축을 기준으로 멀어질 수록 보라색에 가깝게 된다.
 
 %-------------------------------------------------------------------------------
