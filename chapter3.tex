@@ -88,8 +88,10 @@ ROS의 사용은 기본적으로 \textbf{섹션~\ref{sec:ROSInstallation}~\namer
 
 \newpage
 
+\noindent
 다음 그림들을 참고해가며 우분투를 설치하도록 하자. 우분투 설치가 마무리 되면 우분투 배포판이 나온 이후의 갱신에 대해서 다음의 명령어로 업데이트와 업그레이드를 해주도록 하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ sudo apt-get update && sudo apt-get upgrade
 \end{lstlisting}
@@ -124,13 +126,16 @@ $ sudo apt-get update && sudo apt-get upgrade
 
 ROS Indigo 설치는 \textbf{섹션~\ref{sec:SimpleInstallation}}에서 설명한 간단 설치 방법으로 설치하도록 하겠다. 터미널 창을 열고 (Ctrl + Alt + t) 다음과 같이 간단 설치용 스크립트를 다운로드 한 후, 스크립트를 실행하여 ROS Indigo 설치하도록 하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ wget https://raw.githubusercontent.com/oroca/oroca-ros-pkg/master/ros_indigo_install.sh
 $ sh ros_indigo_install.sh
 \end{lstlisting}
 
-이제 모든 설치 작업이 완료되었다. 제대로 설치가 됐는지 알아보기 위하여 다음과 같이 roscore를 실행, 그리고 또 다른 새로운 터미널 창을 열고 turtlesim\_node를 구동하면 그림와 같이 실행될 것이다. 이 거북이를 보게 된다면 성공적으로 설치가 완료된 것이다.
+\noindent
+이제 모든 설치 작업이 완료되었다. 제대로 설치가 됐는지 알아보기 위하여 다음과 같이 roscore를 실행, 그리고 또 다른 새로운 터미널 창을 열고 turtlesim\_node를 구동하면 그림와 같이 실행될 것이다. 이 거북이를 보게 된다면 성공적으로 설치가 완료된 것이다. 추가적인 개발 환경 설정은 \textbf{섹션~\ref{subsec:envrionment}~\nameref{subsec:envrionment}(pp.\pageref{subsec:envrionment})}을 참고하도록 하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ roscore
 $ rosrun turtlesim turtlesim_node
@@ -138,27 +143,160 @@ $ rosrun turtlesim turtlesim_node
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.49\columnwidth]{pictures/chapter3/vm24.png}
+\includegraphics[width=0.6\columnwidth]{pictures/chapter3/vm24.png}
 \end{figure}
 
 %-------------------------------------------------------------------------------
 \newpage
 \section{라즈베리파이에 ROS Indigo 설치하기}\index{라즈베리파이에 ROS Indigo 설치하기}
 
-%-------------------------------------------------------------------------------
-\subsection{개발 환경}\index{개발 환경}
+라즈베리파이(Raspberry Pi\footnote{\url{http://www.raspberrypi.org/}})는 영국의 라즈베리파이재단\footnote{\url{http://www.raspberrypi.org/education-fund/}}에서 아이들의 컴퓨터 교육을 위해 개발한 싱글보드컴퓨터(SBC, Single Board Computer)이다. 그러한 이유에서, 가격도 거의 최저 마진에 가깝다. 모델 A의 경우 25달러, 모델 B의 경우 35달러에 판매되고 있다. 이는 라즈베리파이 재단 총감독인 에벤 업튼(Eben Upton)이 어린이들의 교과서 가격에 맞추어 가격을 책정했기 때문이라고 한다. 필자가 처음 컴퓨터를 접했을 때는 인텔 486 컴퓨터 및 초창기 펜티엄으로, CPU는 133MHz~300MHz 에 가격은 대략 250만원에 상당했다. 그 시절과 비교하면 대략 두 배의 성능의 CPU성능에 크기는 신용카드의 크기로 축소되었고 가격은 4만원 정도로 1/60로 떨어졌다. 
 
-%-------------------------------------------------------------------------------
-\subsection{ROS Indigo 설치하기}\index{ROS Indigo 설치하기}
+또한, C언어, 자바, 파이썬, 루비 등의 프로그래밍 언어뿐만 아니라, 어린이용 GUI방식의 스크래치(Scratch) 프로그래밍도 사용할 수 있도록 되어있다. 더욱이 매력적인 것은 데스크톱에서 찾아 볼 수 없는 범용 입출력 포트인 GPIO 를 제공하고 있어서 전자 공작 및 로봇 제어 등의 학습에도 이용 가능하게 되어있다는 것이다. 다른 싱글보드컴퓨터와는 달리 에벤 업튼이 꿈꾸는 컴퓨터의 보급 및 어린이들의 교육에 매우 적절한 제품이 아닐까 싶다. 또한 라즈베리파이는 단순한 보드에 그치지 않고, 많은 유저들의 참여로 웹 서버, 데이터베이스, 파일서버, 미디어 센터, 게임기 등의 다양한 프로젝트가 진행 중이며, 최근에는 GPIO를 이용한 전자공작 교육 및 로봇 제어 등에도 사용되고 있다\cite{lp2013raspberry}.
 
-% http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Indigo%20on%20Raspberry%20Pi
+이 만큼 라즈베리파이는 그 활용도가 높은데 오늘은 로봇쪽으로 활용하기 위해 ROS 설치법에 대해 알아보도록 하자. 우선 ROS 를 설치하기 전에 라즈페리파이의 공식 OS인 데비안 데비안 계열의 Raspbian\footnote{\url{http://www.raspbian.org/}}을 설치하도록 하자. 라즈베리파이 공식 웹페이지(\url{http://www.raspberrypi.org/downloads/})에 접속하여 RASPBIAN 최신판을 다운로드 하자.
+
+\begin{figure}[h]
+\centering\includegraphics[width=\columnwidth]{pictures/chapter3/raspberrypi_raspbian_download.png}
+\caption{라즈베리파이의 다양한 OS 지원}
+\end{figure}
+
+\newpage
+
+\noindent
+다운로드가 완료되면 터미널 창을 열어 다음과 같이 압축 해제를 해주어 이미지 파일을 얻도록 하자.
+
+\vspace{\baselineskip}
+\begin{lstlisting}[language=ROS]
+$ unzip  2014-09-09-wheezy-raspbian.zip
+\end{lstlisting}
+
+\noindent
+압축 해제한 이미지 파일을 SD 카드에 넣도록 하자. 완전 포맷되지 않은 SD 카드의 경우, 기존 파티션을 삭제 하도록 하자. 파티션 수정을 위하여 GUI를 지원하는 disks를 이용할 것이다. 터미널 창에서 gnome-disks 를 실행하자. 그 뒤 디스크 목록에서 해당 SD 카드를 선택하면 기존에 사용했던 SD 카드라면 그림\ref{fig:partition_init1} 좌측과 같이 기존 파티션들이 보일 것이다. 그 하단의 \textbf{-} 버튼을 클릭하여 기존 파티션을 모두 삭제하여 모든 영역을 Free Space로 만들면 그림\ref{fig:partition_init1} 우측과 같은 결과를 얻을 수 있다.
+
+\vspace{\baselineskip}
+\begin{lstlisting}[language=ROS]
+$ gnome-disks
+\end{lstlisting}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.49\columnwidth]{pictures/chapter3/odroid_partition1.png}
+\includegraphics[width=0.48\columnwidth]{pictures/chapter3/odroid_partition2.png}
+\caption{기존 파티션(좌)과 파티션 초기화(우)}
+\label{fig:partition_init1}
+\end{figure}
+
+\noindent
+그 다음 그림\ref{fig:raspbian_partition} 좌측의 disks 화면의 우측 상단의 버튼을 클릭하여 Restore disk image... 을 실행하자. 그림\ref{fig:raspbian_partition}의 추측 그림처럼 imgae to Restore 의 파일 선택에서 이전 압축 해제한 이미지 파일을 선택하고 Start Restoring 를 클릭하면 라즈비안 이미지가 리스토어 되게 된다. 리스토어가 완료되면 그림\ref{fig:raspbian_partition_new} 과 같이 새로운 파티션들이 생성 되었음을 확인할 수 있다.
+
+\vspace{\baselineskip}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\columnwidth]{pictures/chapter3/odroid_sd.png}
+\includegraphics[width=0.5\columnwidth]{pictures/chapter3/raspberrypi_disks2.png}
+\caption{디스크가 초기화된 상태(좌), 리스토어 준비 과정(우)}
+\label{fig:raspbian_partition}
+\end{figure}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.6\columnwidth]{pictures/chapter3/raspberrypi_disks3.png}
+\caption{새롭게 구성된 파티션}
+\label{fig:raspbian_partition_new}
+\end{figure}
+
+\newpage
+
+\begin{exercise}[SD 카드에 이미지 파일 넣는 다른 방법]
+disks 이외에도 dd bs=4M if=2014-09-09-wheezy-raspbian.img of=/dev/sdd 처럼 dd 명령어를 이용하는 방법이 있으며, 윈도우즈의 경우 Win32DiskImage\footnote{\url{http://sourceforge.net/projects/win32diskimager/}}를 이용하여 손쉽게 이미지 파이을 SD카드에 넣을 수 있다.
+\end{exercise}
+
+\vspace{\baselineskip}
+라즈베리파이 이미지 파일이 들어있는 SD 카드를 라즈베리파이에 삽입한 후, 전원을 넣고 부팅되면 그림\ref{fig:raspberrypi_raspbian_on}와 같이 라즈비안이 실행된다. 참고로 초기 로그인시 아이디는 \textbf{pi} 이며 패스워드는 \textbf{raspberry}이다. 나중에 직접 패스워드를 변경 해주도록 하자.
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.9\columnwidth]{pictures/chapter3/raspberrypi_raspbian_desktop.png}
+\caption{라즈비안의 데스트콥 화면}
+\label{fig:raspberrypi_raspbian_on}
+\end{figure}
+
+우선, 현재 SD 메모리의 일부 부분만 사용할 수 있도록 되어 있기 때문에 메모리를 리사이즈 할 필요가 있다. 기본 탑재 터미널인 lxterminal을 실행하여 다음과 같이 라즈비안 설정을 실행하자. 그 후 그림\ref{fig:raspberrypi_expand_filesystem1}와 같이 메모리 리사이즈를 하기 위하여 1. Expand Filesystem 를 선택하여 리사이징을 해주자.
+
+\vspace{\baselineskip}
+\begin{lstlisting}[language=ROS]
+$ sudo raspi-config
+\end{lstlisting}
+
+\begin{figure}[h]
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter3/raspberrypi_expand_filesystem1.png}
+\caption{라즈비안 설정}
+\label{fig:raspberrypi_expand_filesystem1}
+\end{figure}
+
+\begin{figure}[h]
+\centering\includegraphics[width=\columnwidth]{pictures/chapter3/raspberrypi_expand_filesystem2.png}
+\caption{SD 메모리의 리사이징}
+\label{fig:raspberrypi_expand_filesystem2}
+\end{figure}
+
+리사이징이 완료되었으며 아래와 같이 재부팅이 되고 다시 라즈비안 데스크톱이 실행되면 다음의 명령어로 ROS Indigo\footnote{\url{http://wiki.ros.org/ROSberryPi/}}를 시작해보자.
+
+\begin{lstlisting}[language=ROS]
+$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu wheezy main" > /etc/apt/sources.list.d/ros-latest.list'
+$ wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo apt-get install python-setuptools
+$ sudo easy_install pip
+$ sudo pip install -U rosdep rosinstall_generator wstool rosinstall
+$ sudo rosdep init
+$ rosdep update
+\end{lstlisting}
+
+다음에는 다음과 같이 catkin work space 폴더를 만들고 catkin\_make 가 정상 작동하는지 확인해야 하는 것이 기본적인 ROS 설치 방법이나 라즈비안의 경우 catkin\_make가 바이너리 파일로 제공되지 않는다. 다음과 같은 순서로 catkin\_make 를 설치하도록 하자. 이 과정에는 의존관계에 있어서 libconsole\_bridg 및 Liblz4-dev 설치 과정이 포함되어 있다. 이는 대략 2시간이 소요된다.
+
+\begin{lstlisting}[language=ROS]
+$ source /opt/ros/indigo/setup.bash
+$ mkdir -p ~/catkin_ws/src
+$ cd ~/catkin_ws/src
+$ rosinstall_generator ros_comm --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-ros_comm-wet.rosinstall
+$ wstool init -j8 src indigo-ros_comm-wet.rosinstall
+$ mkdir ~/ros_catkin_ws/external_src
+$ sudo apt-get install checkinstall cmake
+$ cd ~/ros_catkin_ws/external_src
+$ sudo apt-get install libboost-system-dev libboost-thread-dev
+$ git clone https://github.com/ros/console_bridge.git
+$ cd console_bridge
+$ cmake .
+$ sudo checkinstall make install
+\end{lstlisting}
+
+checkinstall이 실행되고 EOF 구문에서 엔터키를 누르고, 2번째 항목에 console\_bridg 라 적혀있는 부분을 libconsole\_bridg 으로 변경하자.
+
+\begin{lstlisting}[language=ROS]
+$ cd ~/ros_catkin_ws/external_src
+$ wget http://archive.raspbian.org/raspbian/pool/main/l/lz4/liblz4-1_0.0~r122-2_armhf.deb
+$ wget http://archive.raspbian.org/raspbian/pool/main/l/lz4/liblz4-dev_0.0~r122-2_armhf.deb
+$ sudo dpkg -i liblz4-1_0.0~r122-2_armhf.deb liblz4-dev_0.0~r122-2_armhf.deb
+$ cd ~/ros_catkin_ws
+$ rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:wheezy
+$ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/indigo
+\end{lstlisting}
+
+이제 catkin\_make 와 관련된 모든 프로그램을 설치 하였다. 마지막으로 catkin\_make 가 정상 작동하는지 그리고 roscore 가 동작하는지 살펴보자. 추가적인 개발 환경 설정은 \textbf{섹션~\ref{subsec:envrionment}~\nameref{subsec:envrionment}(pp.\pageref{subsec:envrionment})}을 참고하도록 하자.
+
+\begin{lstlisting}[language=ROS]
+$ cd ~/catkin_ws/
+$ catkin_make
+$ roscore
+\end{lstlisting}
 
 %-------------------------------------------------------------------------------
 \newpage
 \section{오드로이드에 ROS Indigo 설치하기}\index{오드로이드에 ROS Indigo 설치하기}
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter3/odroid.jpg}
+\centering\includegraphics[width=0.45\columnwidth]{pictures/chapter3/odroid.jpg}
 \caption{ODROID-U3}
 \end{figure}
 
@@ -170,73 +308,69 @@ $ rosrun turtlesim turtlesim_node
 $ xz -dv ubuntu-14.04.1lts-lubuntu-odroid-u-20141124.img.xz
 \end{lstlisting}
 
-다운로드한 이미지 파일을 SD 카드에 넣도록 하자. 완전 포맷되지 않은 SD 카드의 경우, 기존 파티션을 삭제 하도록 하자. 이를 위해서 우선 오드로이드가 아닌 데스크톱의 우분투에서 disks 를 시작 프로그램에서 선택하여 실행하자. 그 뒤 디스크 목록에서 해당 SD 카드를 선택하면 그림\ref{fig:partition_old} 좌측과 같이 기존 파티션들이 보일 것이다. 그 하단의 - 버튼을 클릭하여 기존 파티션을 모두 삭제하여 모든 영역을 Free Space로 만들면 그림\ref{fig:partition_old} 우측과 같은 결과를 얻을 수 있다.
+압축 해제한 이미지 파일을 SD 카드에 넣도록 하자. 완전 포맷되지 않은 SD 카드의 경우, 기존 파티션을 삭제 하도록 하자. 파티션 수정을 위하여 GUI를 지원하는 disks를 이용할 것이다. 터미널 창에서 gnome-disks 를 실행하자. 그 뒤 디스크 목록에서 해당 SD 카드를 선택하면 기존에 사용했던 SD 카드라면 그림\ref{fig:partition_init2} 좌측과 같이 기존 파티션들이 보일 것이다. 그 하단의 \textbf{-} 버튼을 클릭하여 기존 파티션을 모두 삭제하여 모든 영역을 Free Space로 만들면 그림\ref{fig:partition_init2} 우측과 같은 결과를 얻을 수 있다.
+
+\vspace{\baselineskip}
+\begin{lstlisting}[language=ROS]
+$ gnome-disks
+\end{lstlisting}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.45\columnwidth]{pictures/chapter3/odroid_partition1.png}
-\includegraphics[width=0.44\columnwidth]{pictures/chapter3/odroid_partition2.png}
-\caption{기존 파티션(좌)과 파티션 삭제(ㅇ)}
-\label{fig:partition_old}
+\includegraphics[width=0.49\columnwidth]{pictures/chapter3/odroid_partition1.png}
+\includegraphics[width=0.48\columnwidth]{pictures/chapter3/odroid_partition2.png}
+\caption{기존 파티션(좌)과 파티션 초기화(우)}
+\label{fig:partition_init2}
 \end{figure}
 
-그 다음 그림\ref{fig:partition_cleaned} 와 같은 disks 화면의 우측 상단의 버튼을 클릭하여 Restore disk image... 을 실행하자. 그림\ref{fig:open_img}처럼 imgae to Restore 의 파일 선택에서 이전 압축 해제한 이미지 파일을 선택하고 Start Restoring 를 클릭하면 10분 정도의 시간이 걸려 루분투 이미지가 리스토어 되게 된다. 리스토어가 완료되면 그림\ref{fig:partition_new} 과 같이 새로운 파티션들이 생성 되었음을 확인할 수 있다.
+그 다음 그림\ref{fig:partition_restore} 좌측과 같이 disks 화면의 우측 상단의 버튼을 클릭하여 Restore disk image... 을 실행하자. 그림\ref{fig:partition_restore} 우측처럼 imgae to Restore 의 파일 선택에서 이전 압축 해제한 이미지 파일을 선택하고 Start Restoring 를 클릭하면 루분투 이미지가 리스토어 되게 된다. 리스토어가 완료되면 그림\ref{fig:lubuntu_partition_new} 과 같이 새로운 파티션들이 생성 되었음을 확인할 수 있다.
 
-\begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter3/odroid_sd.png}
-\caption{디스크가 초기화된 상태}
-\label{fig:partition_cleaned}
-\end{figure}
-
-\begin{figure}[h]
-\centering\includegraphics[width=0.49\columnwidth]{pictures/chapter3/odroid_restore.png}
-\caption{리스토어 준비 과정}
-\label{fig:open_img}
-\end{figure}
+\begin{exercise}[SD 카드에 이미지 파일 넣는 다른 방법]
+disks 이외에도 dd bs=4M if=ubuntu-14.04.1lts-lubuntu-odroid-u-20141124.img of=/dev/sdd 처럼 dd 명령어를 이용하는 방법이 있으며, 윈도우즈의 경우 Win32DiskImage\footnote{\url{http://sourceforge.net/projects/win32diskimager/}}를 이용하여 손쉽게 이미지 파이을 SD카드에 넣을 수 있다.
+\end{exercise}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\columnwidth]{pictures/chapter3/odroid_partition3.png}
-\caption{기존 파티션 삭제}
-\label{fig:partition_new}
+\includegraphics[width=0.49\columnwidth]{pictures/chapter3/odroid_sd.png}
+\includegraphics[width=0.49\columnwidth]{pictures/chapter3/odroid_restore.png}
+\caption{디스크가 초기화된 상태(좌), 리스토어 준비 과정}
+\label{fig:partition_restore}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\columnwidth]{pictures/chapter3/odroid_partition3.png}
+\caption{새롭게 구성된 파티션}
+\label{fig:lubuntu_partition_new}
 \end{figure}
 
 리스토어한 SD 카드를 오드로이드에 삽입한 후, 전원을 넣고 부팅되면 그림\ref{fig:lxde}와 같이 루분투의 LXDE 데스크톱 환경을 볼 수 있다. 참고로 초기에는 로그인시 패스워드를 요구하지 않는다. 나중에 직접 패스워드를 지정해주도록 하자.
 
+현재 SD 메모리의 일부 부분만 사용할 수 있도록 되어 있기 때문에 메모리를 리사이즈 할 필요가 있다. LXDE 화면 하단의 xterm 을 실행하여 다음과 같이 오드로이드 유틸리티를 실행하자. 그 후 그림\ref{fig:odroid_utility}와 같이 메모리 리사이즈를 하기 위하여 4.Resize your root partition 를 선택하여 리사이징을 해주자. 리사이징이 완료되었으며 아래와 같이 재부팅을 하자.
+
+\begin{lstlisting}[language=ROS]
+$ sudo odroid-utility.sh 
+$ sudo reboot 
+\end{lstlisting}
+
 \begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter3/odroid_LXDE.png}
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter3/odroid_LXDE.png}
 \caption{LXDE 데스크톱}
 \label{fig:lxde}
 \end{figure}
 
-우선, 현재 SD 메모리의 일부 부분만 사용할 수 있도록 되어 있기 때문에 메모리를 리사이즈 할 필요가 있다. LXDE 화면 하단의 xterm 을 실행하여 다음과 같이 오드로이드 유틸리티를 실행하자. 그 후 그림\ref{fig:odroid_utility}와 같이 메모리 리사이즈를 하기 위하여 4.Resize your root partition 를 선택하여 리사이징을 해주자.
-
-\begin{lstlisting}[language=ROS]
-$ sudo  odroid-utility.sh 
-\end{lstlisting}
-
-\begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter3/odroid_option1.png}
-\caption{오드로이드 유틸리티 화면}
-\label{fig:odroid_utility}
-\end{figure}
-
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.4\columnwidth]{pictures/chapter3/odroid_option2.png}
-\includegraphics[width=0.4\columnwidth]{pictures/chapter3/odroid_option3.png}
-\caption{리사이징 과정}
+\includegraphics[width=0.49\columnwidth]{pictures/chapter3/odroid_option1.png}
+\includegraphics[width=0.49\columnwidth]{pictures/chapter3/odroid_option2.png}
+\caption{오드로이드 유틸리티 화면과 리사이징 과정}
+\label{fig:odroid_utility}
 \end{figure}
 
 \newpage
 
-리사이징이 완료되었으며 아래와 같이 재부팅을 하자.
-
-\begin{lstlisting}[language=ROS]
-$ sudo reboot 
-\end{lstlisting}
-
-그다음 다음의 명령어로 ROS Indigo를 설치하자.
+그 다음 다음의 명령어로 ROS Indigo를 설치하자.
 
 \begin{lstlisting}[language=ROS]
 $ sudo update-locale LANG=C LANGUAGE=C LC_ALL=C LC_MESSAGES=POSIX
@@ -252,7 +386,7 @@ $ source ~/.bashrc
 $ sudo apt-get install python-rosinstall
 \end{lstlisting}
 
-다음에는 다음과 같이 catkin work space 폴더를 만들고 catkin\_make 가 정상 작동하는지 살펴보자.
+다음에는 다음과 같이 catkin work space 폴더를 만들고 catkin\_make 가 정상 작동하는지 살펴보자. 마지막으로 마지막으로 roscore 가 동작하는지 확인까지 마치면 모든 설치가 완료된 것이다. 추가적인 개발 환경 설정은 \textbf{섹션~\ref{subsec:envrionment}~\nameref{subsec:envrionment}(pp.\pageref{subsec:envrionment})}을 참고하도록 하자.
 
 \begin{lstlisting}[language=ROS]
 $ source /opt/ros/indigo/setup.bash
@@ -261,13 +395,14 @@ $ cd ~/catkin_ws/src
 $ catkin_init_workspace
 $ cd ~/catkin_ws/
 $ catkin_make
-\end{lstlisting}
-
-마지막으로 roscore 가 동작하는지 테스트하면 모든 설치가 완료된 것이다.
-
-\begin{lstlisting}[language=ROS]
 $ roscore
 \end{lstlisting}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\columnwidth]{pictures/chapter3/odroid_roscore.png}
+\caption{roscore 테스트}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 

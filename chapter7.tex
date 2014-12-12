@@ -90,14 +90,14 @@ ROS 메시지 통신에서 사용되는 발행자(Publisher) 와 구독자(Subsc
 %-------------------------------------------------------------------------------
 \subsection{패키지 생성}
 
-아래의 명령어는 "oroca\_ros\_tutorials" 라는 패키지를 생성하는 명령어이다. 이 패키지는 의존하는 패키지로 "std\_msgs"와 "roscpp"를 옵션으로 달아주었다. 로스의 표준 메시지 패키지인 std\_msgs 와 로스에서 c/c++을 사용하기 위하여 클라이언트라이브러인 roscpp를 사용하겠다는 것으로 패키지 생성에 앞어서 미리 설치해야한다는 의미이다. 이러한 의존하는 패키지의 설정은 패키지 생성할 때 지정할 수도 있지만, 생성 후 package.xml 에서 직접 입력하여도 된다.
+아래의 명령어는 "oroca\_ros\_tutorials" 라는 패키지를 생성하는 명령어이다. 이 패키지는 의존하는 패키지로 "std\_msgs"와 "roscpp"를 옵션으로 달아주었다. ROS의 표준 메시지 패키지인 std\_msgs 와 ROS에서 c/c++을 사용하기 위하여 클라이언트라이브러인 roscpp를 사용하겠다는 것으로 패키지 생성에 앞어서 미리 설치해야한다는 의미이다. 이러한 의존하는 패키지의 설정은 패키지 생성할 때 지정할 수도 있지만, 생성 후 package.xml 에서 직접 입력하여도 된다.
 
 \begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/src
 $ catkin_create_pkg oroca_ros_tutorials std_msgs roscpp
 \end{lstlisting}
 
-위와 같이 패키지를 생성하였으면 "~/catkin\_ws/src"에 "oroca\_ros\_tutorials" 라는 패키지 폴더 및 ROS 패키지가 갖추어야할 기본 내부 폴더 및 CMakeLists.txt 와 package.xml가 생성된다. 다음은 아래와 같이 ls 명령어를 입력하여 내용을 보던가 윈도우의 탐색기와 같은 역할을 하는 GUI기반의 Nautilus를 이용하여 패키지 내부를 살펴보도록 하자.
+위와 같이 패키지를 생성하였으면 "\textasciitilde/catkin\_ws/src"에 "oroca\_ros\_tutorials" 라는 패키지 폴더 및 ROS 패키지가 갖추어야할 기본 내부 폴더 및 CMakeLists.txt 와 package.xml가 생성된다. 다음은 아래와 같이 ls 명령어를 입력하여 내용을 보던가 윈도우의 탐색기와 같은 역할을 하는 GUI기반의 Nautilus를 이용하여 패키지 내부를 살펴보도록 하자.
 
 \begin{lstlisting}[language=bash]
 $ ls
@@ -314,7 +314,7 @@ $ catkin_make     %*(catkin 빌드 실행)*)
 \end{lstlisting}
 
 위의 명령어로 oroca\_ros\_tutorials 패키지의 메지시 파일, 발행자 노드, 구독자 노드가 빌드되었다. 
-oroca\_ros\_tutorials 패키지의 소스는 ~/catkin\_ws/src/oroca\_ros\_tutorials/src 에 존재하고,oroca\_ros\_tutorials 패키지의 메시지 파일은 ~/catkin\_ws/src/oroca\_ros\_tutorials/msg 에 존재한다.
+oroca\_ros\_tutorials 패키지의 소스는 \textasciitilde/catkin\_ws/src/oroca\_ros\_tutorials/src 에 존재하고,oroca\_ros\_tutorials 패키지의 메시지 파일은 \textasciitilde/catkin\_ws/src/oroca\_ros\_tutorials/msg 에 존재한다.
 
 이를 기반으로 빌드된 결과물은 ~/catkin\_ws 의 /build 및 /devel 에 각각 생성된다.
 /build 에는 캐킨 빌드에서 사용된 설정 내용이 저장되며, /devel/lib/oroca\_ros\_tutorials 에는 실행 파일이, /devel/include/oroca\_ros\_tutorials 에는 메시지 파일로부터 자동 생성된 메시지 헤더파일이 저장된다. 각 생성 결과물이 궁금하다면 이 경로에 생성된 결과물을 확인해 보자.
@@ -613,9 +613,9 @@ int main(int argc, char **argv)
 $ cd ~/catkin_ws && catkin_make %*(catkin 폴더로 이동 후 catkin 빌드 실행)*)
 \end{lstlisting}
 
-위의 명령어로 oroca\_ros\_tutorials 패키지의 서비스 파일, 서비스 서버 노드 및 클라이언트 노드가 빌드되었다. oroca\_ros\_tutorials 패키지의 소스는 ~/catkin\_ws/src/oroca\_ros\_tutorials/src 에 존재하고, oroca\_ros\_tutorials 패키지의 서비스 파일은 ~/catkin\_ws/src/oroca\_ros\_tutorials/srv 에 존재한다.
+위의 명령어로 oroca\_ros\_tutorials 패키지의 서비스 파일, 서비스 서버 노드 및 클라이언트 노드가 빌드되었다. oroca\_ros\_tutorials 패키지의 소스는 \textasciitilde/catkin\_ws/src/oroca\_ros\_tutorials/src 에 존재하고, oroca\_ros\_tutorials 패키지의 서비스 파일은 \textasciitilde/catkin\_ws/src/oroca\_ros\_tutorials/srv 에 존재한다.
 
-이를 기반으로 빌드된 결과물은 ~/catkin\_ws/build 및 ~/catkin\_ws/devel 에 각각 생성된다. ~/catkin\_ws/build 에는 캐킨 빌드에서 사용된 설정 내용이 저장되며, ~/catkin\_ws/devel/lib/oroca\_ros\_tutorials 에는 실행 파일이, ~/catkin\_ws/devel/include/oroca\_ros\_tutorials 에는 메시지 파일로부터 자동 생성된 서비스 헤더파일이 저장된다. 각 생성 결과물이 궁금하다면 이 경로에 생성된 결과물을 확인해 보자.
+이를 기반으로 빌드된 결과물은 \textasciitilde/catkin\_ws/build 및 \textasciitilde/catkin\_ws/devel 에 각각 생성된다. \textasciitilde/catkin\_ws/build 에는 캐킨 빌드에서 사용된 설정 내용이 저장되며, \textasciitilde/catkin\_ws/devel/lib/oroca\_ros\_tutorials 에는 실행 파일이, \textasciitilde/catkin\_ws/devel/include/oroca\_ros\_tutorials 에는 메시지 파일로부터 자동 생성된 서비스 헤더파일이 저장된다. 각 생성 결과물이 궁금하다면 이 경로에 생성된 결과물을 확인해 보자.
 
 %-------------------------------------------------------------------------------
 \subsection{서비스 서버 실행}
@@ -862,25 +862,25 @@ result: 2
 
 
 %-------------------------------------------------------------------------------
-\section{로스런치 사용법}\index{로스런치 사용법}
+\section{ROS런치 사용법}\index{ROS런치 사용법}
 
 %-------------------------------------------------------------------------------
-\subsection{로스런치}\index{로스런치}
+\subsection{ROS런치}\index{ROS런치}
 
 \begin{definition}[roslaunch]
-로스런(rosrun)이 하나의 노드를 실행하는 명령어라면 로스런치(roslaunch\footnote{ROS Wiki roslaunch, http://wiki.ros.org/roslaunch})는 복 수개의 노드를 실행하는 개념이다. 이 명령어를 통해 정해진 단일 혹은 복수의 노드를 실행시킬 수 있다. 
+rosrun이 하나의 노드를 실행하는 명령어라면 ROS런치(roslaunch\footnote{ROS Wiki roslaunch, http://wiki.ros.org/roslaunch})는 복 수개의 노드를 실행하는 개념이다. 이 명령어를 통해 정해진 단일 혹은 복수의 노드를 실행시킬 수 있다. 
 
-그 이외의 기능으로 실행시에 패키지의 매개변수를 변경, 노드 명의 변경, 노드 네임 스페이스 설정, ROS\_ROOT 및 ROS\_PACKAGE\_PATH 설정, 이름 변경, 환경 변수 변경 등의 실행시 변경할 수 있는 많은 옵션들을 갖춘 노드 실행에 특화된 로스 명령어이다. 
+그 이외의 기능으로 실행시에 패키지의 매개변수를 변경, 노드 명의 변경, 노드 네임 스페이스 설정, ROS\_ROOT 및 ROS\_PACKAGE\_PATH 설정, 이름 변경, 환경 변수 변경 등의 실행시 변경할 수 있는 많은 옵션들을 갖춘 노드 실행에 특화된 ROS 명령어이다. 
 
-로스런치는 "*.launch" 라는 로스런치파일을 사용하여 실행 노드에 대한 설정을 해주는데 이는 XML 기반으로 되어 있으며, 태그별 옵션을 제공하고 있다. 실행 명령어로는 "roslaunch 패키지명 로스런치파일" 이다.
+ROS런치는 "*.launch" 라는 ROS런치파일을 사용하여 실행 노드에 대한 설정을 해주는데 이는 XML 기반으로 되어 있으며, 태그별 옵션을 제공하고 있다. 실행 명령어로는 "roslaunch 패키지명 ROS런치파일" 이다.
 \end{definition}
 
 %-------------------------------------------------------------------------------
-\subsection{로스런치의 활용}\index{로스런치의 활용}
+\subsection{ROS런치의 활용}\index{ROS런치의 활용}
 
-로스런치의 활용으로 이전 강좌인 "로봇 운영체제 강좌 : 15. 메시지 발행자 노드와 구독자 노드 작성 및 실행" 에서 작성한 ros\_tutorial\_msg\_publisher 와  ros\_tutorial\_msg\_subscriber 를 이름을 바꾸어서 실행해보자. 그냥 이름을 바꾸어 의미가 없으니, 발신자 노드와 구독자 노드를 각각 두 개씩 구동하여 서로간에 별도로 메시지 통신을 해보도록 하겠다.
+ROS런치의 활용으로 이전 강좌인 "로봇 운영체제 강좌 : 15. 메시지 발행자 노드와 구독자 노드 작성 및 실행" 에서 작성한 ros\_tutorial\_msg\_publisher 와  ros\_tutorial\_msg\_subscriber 를 이름을 바꾸어서 실행해보자. 그냥 이름을 바꾸어 의미가 없으니, 발신자 노드와 구독자 노드를 각각 두 개씩 구동하여 서로간에 별도로 메시지 통신을 해보도록 하겠다.
 
-우선, *.launch 파일을 작성하자. 로스런치 파일은 *.launch 이라는 파일명을 가지고 있으며, 노드 폴더에 로스런치를 저장할 launch 라는 폴더를 생성해줘야 한다. 아래의 명령어대로 폴더를 생성하고 새롭게 union.launch 이라는 파일으로 로스런치 파일을 생성해보자.
+우선, *.launch 파일을 작성하자. ROS런치 파일은 *.launch 이라는 파일명을 가지고 있으며, 노드 폴더에 ROS런치를 저장할 launch 라는 폴더를 생성해줘야 한다. 아래의 명령어대로 폴더를 생성하고 새롭게 union.launch 이라는 파일으로 ROS런치 파일을 생성해보자.
 
 \begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/src/oroca_ros_tutorials
@@ -902,11 +902,11 @@ $ gedit union.launch
 \end{lstlisting}
 
 \begin{description}
-\item[\textless launch\textgreater] 는 로스런치 태그로써 이 태그안에는 로스런치에 필요한 태그들이 기술된다.
-\item[\textless node\textgreater] 는 로스런치로 실행할 노드를 기술하게 된다. 옵션으로는 pkg, type, name 이 있다. pkg는 패키지의 이름, type는 실제 실행할 노드의 이름, name은 type를 실행하되 실행할때 붙여지는 이름이다.  
+\item[\textless launch\textgreater] 는 ROS런치 태그로써 이 태그안에는 ROS런치에 필요한 태그들이 기술된다.
+\item[\textless node\textgreater] 는 ROS런치로 실행할 노드를 기술하게 된다. 옵션으로는 pkg, type, name 이 있다. pkg는 패키지의 이름, type는 실제 실행할 노드의 이름, name은 type를 실행하되 실행할때 붙여지는 이름이다.  
 \end{description}
 
-로스런치파일의 작성을 마쳤으면 아래와 같이 로스런치를 실행해주자.
+ROS런치파일의 작성을 마쳤으면 아래와 같이 ROS런치를 실행해주자.
 
 \begin{lstlisting}[language=ROS]
 $ roslaunch oroca_ros_tutorials union.launch
@@ -923,7 +923,7 @@ $ rosnode list
 /rosout
 \end{lstlisting}
 
-문제는,"발신자 노드와 구독자 노드를 각각 두 개씩 구동하여 서로간에 별도로 메시지 통신" 하게한다는 첫 의도와는 다르게 rqt\_graph 를 통해 보면 서로간의 메시지를 모두 구독하고 있다는 것이다. 이는 단순히 실행되는 노드의 이름만을 변경해 주었을뿐 사용되는 메시지의 이름을 바꿔주지 않았기 때문이다. 이 문제를 다른 로스런치 태그를 사용하여 해결해보자.
+문제는,"발신자 노드와 구독자 노드를 각각 두 개씩 구동하여 서로간에 별도로 메시지 통신" 하게한다는 첫 의도와는 다르게 rqt\_graph 를 통해 보면 서로간의 메시지를 모두 구독하고 있다는 것이다. 이는 단순히 실행되는 노드의 이름만을 변경해 주었을뿐 사용되는 메시지의 이름을 바꿔주지 않았기 때문이다. 이 문제를 다른 ROS런치 태그를 사용하여 해결해보자.
 
 \begin{figure}[h]
 \centering\includegraphics[width=0.9\columnwidth]{pictures/chapter7/rqt_graph_oroca_ros_tutorials_union1.png}
@@ -974,22 +974,22 @@ $ rqt_graph
 \end{figure}
 
 %-------------------------------------------------------------------------------
-\subsection{로스런치에 사용되는 태그}
+\subsection{ROS런치에 사용되는 태그}
 
-로스런치는 로스런치 파일에서 XML\footnote{ROS Wiki roslaunch XML,  http://wiki.ros.org/roslaunch/XML}을 어떻게 작성하냐에 따라 다양한 응용이 가능할 것이다. 현재 로스런치에서 사용되는 태그들은 아래와 같다. 많이 사용되는 태그는 위에서 설명했고 그 이외에 필요한 부분에 대해서는 직접 찾아가보며 익혀보도록 하자. 각 태그에 링크로 설명 페이지의 주소를 걸어두었으니 필요한 태그의 공식 설명을 참조해보길 바란다.
+ROS런치는 ROS런치 파일에서 XML\footnote{ROS Wiki roslaunch XML,  http://wiki.ros.org/roslaunch/XML}을 어떻게 작성하냐에 따라 다양한 응용이 가능할 것이다. 현재 ROS런치에서 사용되는 태그들은 아래와 같다. 많이 사용되는 태그는 위에서 설명했고 그 이외에 필요한 부분에 대해서는 직접 찾아가보며 익혀보도록 하자. 각 태그에 링크로 설명 페이지의 주소를 걸어두었으니 필요한 태그의 공식 설명을 참조해보길 바란다.
 
 \begin{description}
-\item[\textless launch\textgreater] 로스런치 구문의 시작과 끝을 가르킨다.
+\item[\textless launch\textgreater] ROS런치 구문의 시작과 끝을 가르킨다.
 \item[\textless node\textgreater] 노드 실행에 대한 태그이다. 패키지, 노드명, 실행명을 변경할 수 있다.
 \item[\textless machine\textgreater] 노드를 실행하는 PC의 이름, address,  ros-root,  ros-package-path 등을 설정할 수 있다.
-\item[\textless include\textgreater] 다른 패키지 및 같은 패키지에 속해있는 다른 로스런치를 불러와 하나의 파일처럼 실행 시킬 수 있다.
-\item[\textless remap\textgreater] 토픽 이름 등의 노드에서 사용중인 로스변수의 이름을 변경할 수 있다. 
+\item[\textless include\textgreater] 다른 패키지 및 같은 패키지에 속해있는 다른 ROS런치를 불러와 하나의 파일처럼 실행 시킬 수 있다.
+\item[\textless remap\textgreater] 토픽 이름 등의 노드에서 사용중인 ROS변수의 이름을 변경할 수 있다. 
 \item[\textless env\textgreater] 환경 변수를 변경한다.
-\item[\textless param\textgreater] 로스 매개변수를 변경한다
-\item[\textless rosparam\textgreater] 로스런치에서 rosparam 의 명령어를 이용하는 태그이다.
+\item[\textless param\textgreater] ROS 매개변수를 변경한다
+\item[\textless rosparam\textgreater] ROS런치에서 rosparam 의 명령어를 이용하는 태그이다.
 \item[\textless group\textgreater] 실행되는 노드를 그룹화할때 사용되는 태그이다.
 \item[\textless test\textgreater] 노드를 테스트할 때 사용되는 태그로 \textless node\textgreater 와 비슷하지만 테스트에 사용되는 옵션들이 추가되어 있다.
-\item[\textless arg\textgreater] 로스런치에서 사용되는 변수를 정의할 수 있고, 로스런치에서 변수처럼 재사용되어 주소 및 대체 이름등에 사용된다.
+\item[\textless arg\textgreater] ROS런치에서 사용되는 변수를 정의할 수 있고, ROS런치에서 변수처럼 재사용되어 주소 및 대체 이름등에 사용된다.
 \end{description}
 
 %-------------------------------------------------------------------------------

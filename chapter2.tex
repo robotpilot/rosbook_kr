@@ -4,6 +4,7 @@
 
 %-------------------------------------------------------------------------------
 \chapter{ROS 설치 (일반PC)}
+\label{cha:RosInstall}
 
 %-------------------------------------------------------------------------------
 \section{ROS Indigo 설치}\index{ROS Indigo 설치}
@@ -239,6 +240,7 @@ $ source ~/.bashrc
 
 %-------------------------------------------------------------------------------
 \subsection{환경 설정}\index{환경 설정}
+\label{subsec:envrionment}
 
 ROS 설치 과정에서 사용된 다음 명렁어처럼 환경 설정 파일을 불러오는 것은 새로운 터미널 창을 열때마다 매번 실행 해줘야 한다. 이러한 번거로운 작업을 없애기 위하여 새로운 터미널 창을 열때마다 정해진 환경 설정 파일을 읽어오도록 설정해주도록 하자. 그 이외에도 ROS 네트워크 설정 및 자주 사용하는 명령어를 단축 명령어도 설정하도록 하자.
 \\
@@ -329,7 +331,7 @@ ROS 개발 작업에서 자주 사용하는 명령어를 단축 명령어로 설
 
 \begin{itemize}[leftmargin=*]
 \item cw 는 미리 설정해 둔 catkin 작업 폴더인 ~/catkin\_ws 로 이동한다. 
-\item cs 는 catkin 작업 폴더 중 소스 파일이 담겨있는 ~/catkin\_ws/src 로 이동한다. 
+\item cs 는 catkin 작업 폴더 중 소스 파일이 담겨있는 \textasciitilde/catkin\_ws/src 로 이동한다. 
 \item cm 는 catkin 작업 폴더인 ~/catkin\_ws 로 이동한 후, catkin\_make 명령어로 ROS 패키지를 빌드하게 된다.
 \end{itemize}
 
@@ -398,7 +400,7 @@ $ qtcreator
 
 %-------------------------------------------------------------------------------
 \subsubsection{ROS 패키지를 프로젝트로 불러오기}
-컴파일의 경우에는 단순히 Ctrl + b 로 컴파일 하면 catkin\_make 가 실행된다. 단, 빌드 관련은 해당 패키지와 같은 위치의 폴더에 새로운 폴더로 생성된다. 예를 들어 tms\_rp\_action 이라는 패키지를 컴파일하면 build-tms\_rp\_action-Desktop-Default 이라는 폴더에 빌드 관련이 모두 놓이게 된다. 즉,  원래는 ~/catkin\_ws/build 와 ~/catkin\_ws/devel 에 보관되어야 할 파일들이 따로 컴파일 되어 새로운 장소에 놓이게 되므로 실행을 위해서는 나중에 다시 한번 catkin\_make 를 해줘야 한다. 이는 매번 해줄 필요는 없고 개발 도중에는 QtCreator 에서 개발, 디버깅한 후에 완료되어 실행할 때만 따로 catkin\_make 를 해주면 된다. 
+컴파일의 경우에는 단순히 Ctrl + b 로 컴파일 하면 catkin\_make 가 실행된다. 단, 빌드 관련은 해당 패키지와 같은 위치의 폴더에 새로운 폴더로 생성된다. 예를 들어 tms\_rp\_action 이라는 패키지를 컴파일하면 build-tms\_rp\_action-Desktop-Default 이라는 폴더에 빌드 관련이 모두 놓이게 된다. 즉,  원래는 \textasciitilde/catkin\_ws/build 와 \textasciitilde/catkin\_ws/devel 에 보관되어야 할 파일들이 따로 컴파일 되어 새로운 장소에 놓이게 되므로 실행을 위해서는 나중에 다시 한번 catkin\_make 를 해줘야 한다. 이는 매번 해줄 필요는 없고 개발 도중에는 QtCreator 에서 개발, 디버깅한 후에 완료되어 실행할 때만 따로 catkin\_make 를 해주면 된다. 
 
 \begin{figure}[h]
 \centering\includegraphics[width=0.9\columnwidth]{pictures/chapter2/qtcreator2.png}

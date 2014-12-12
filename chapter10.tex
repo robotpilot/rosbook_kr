@@ -84,6 +84,7 @@ FreeBSD Documentation License.
 
 %-------------------------------------------------------------------------------
 \section{Kobuki 하드웨어}\index{Kobuki 하드웨어}
+\label{sec:KobukiHardware}
 
 %-------------------------------------------------------------------------------
 \subsection{Kobuki \& Turtlebot2}\index{Kobuki}\index{turtlebot2}
@@ -331,7 +332,7 @@ ROS 중급 강좌를 위한 로봇 플랫폼으로서는 손색이 없다고 말
 %-------------------------------------------------------------------------------
 \subsection{Kobuki 펌웨어 업데이트}
 
-하드웨어 강좌에 걸맞지 않을지는 몰라도 처음 셋팅에 필요할듯 싶어 추가하였다. 업데이트와 관련하여 추가 설명이 많을 듯 싶어서 따로 강좌를 만들었다. "로봇 운영체제 강좌 : Kobuki의 펌웨어 업그레이드" 강좌를 참고하도록 하자.
+하드웨어 강좌에 걸맞지 않을지는 몰라도 처음 셋팅에 필요할듯 싶어 추가하였다. 업데이트와 관련하여 추가 설명은 \textbf{서브섹션~\ref{subsec:FirmwareUpdate}~(pp.\pageref{subsec:FirmwareUpdate})}을 참조하기 바란다.
 
 %-------------------------------------------------------------------------------
 \subsection{Kobuki 모델}
@@ -381,7 +382,7 @@ ROS 중급 강좌를 위한 로봇 플랫폼으로서는 손색이 없다고 말
 \noindent
 \stepcounter{num}
 \thenum-4) 임베디드\\
-: MCU 에서 제어 가능하지만 자세한 정보는 찾아 볼 수 없다. "로봇 운영체제 강좌 : Kobuki의 하드웨어" 강좌에서 말한 시리얼 통신을 위한 통신 프로토콜을 참조하도록 하자.\\
+: MCU 에서 제어 가능하지만 자세한 정보는 찾아 볼 수 없다. \textbf{섹션~\ref{sec:KobukiHardware}~\nameref{sec:KobukiHardware}(pp.\pageref{sec:KobukiHardware})}에서 설명한 시리얼 통신을 위한 통신 프로토콜을 참조하도록 하자.\\
 
 윈도우즈, 리눅스, 맥, 임베디드를 위한 SDK에 대한 더 자세한 사항은 아래의 페이지를 참고하도록 하자.\\
 Kobuki c++ library : \url{http://yujinrobot.github.io/kobuki/doxygen/enMainPage.html}
@@ -697,13 +698,13 @@ kobuki\_soft 는 많이 알려지지는 않았지만 ROS의 시각화툴인 RViz
 : 매우 빠른속도로 돌진하게 된다. 주의 하도록 하자.
 
 %-------------------------------------------------------------------------------
-\subsection{개발환경}
+\subsection{개발 환경}
 
-본 강좌의 진행에 앞서서 필자의 개발 환경을 미리 알리고 시작하도록 하겠다. 꼭 반드시 동일할 필요는 없지만, 원할한 강좌 진행을 위해서는 아래와 같이 개발 환경을 권장한다. 이 이외에 환경에서의 질문에 대해서는 질응답은 하지만 실제 필자가 테스트해 볼 수 있는 상황이 아니기 때문에 대처하기 어려울 수도 있다. 필자의 소프트웨어 개발환경으로는 아래와 같다. ROS Indigo의 설치는 "로봇 운영체제 강좌 : Indigo 설치" 를 참고하기 바란다.
+본 강좌의 진행에 앞서서 필자의 개발 환경을 미리 알리고 시작하도록 하겠다. 꼭 반드시 동일할 필요는 없지만, 원할한 강좌 진행을 위해서는 아래와 같이 개발 환경을 권장한다. 이 이외에 환경에서의 질문에 대해서는 질응답은 하지만 실제 필자가 테스트해 볼 수 있는 상황이 아니기 때문에 대처하기 어려울 수도 있다. 필자의 소프트웨어 개발환경으로는 아래와 같다. ROS Indigo의 설치는 \textbf{섹션~\ref{sec:ROSInstallation}~\nameref{sec:ROSInstallation}(pp.\pageref{sec:ROSInstallation})}를 참고하기 바란다.
 
 \begin{figure}[h]
 \centering\includegraphics[width=0.8\columnwidth]{pictures/chapter10/develop_environment.png}
-\caption{개발환경}
+\caption{개발 환경}
 \end{figure}
 
 %-------------------------------------------------------------------------------
@@ -738,11 +739,11 @@ kobuki\_soft 는 많이 알려지지는 않았지만 ROS의 시각화툴인 RViz
 
 \vspace{\baselineskip}
 \noindent\stepcounter{num}
-\thenum) 랩톱에 "로봇 운영체제 강좌 : Indigo 설치" 를 참고하여 ROS Indigo 를 설치하자. 
+\thenum) 랩톱에 \textbf{섹션~\ref{sec:ROSInstallation}~\nameref{sec:ROSInstallation}(pp.\pageref{sec:ROSInstallation})} 를 참고하여 ROS Indigo 를 설치하자. 
 
 \vspace{\baselineskip}
 \noindent\stepcounter{num}
-\thenum) "로봇 운영체제 강좌 : Indigo 설치" 의 "4. 환경 설정" 에서 랩톱의 경우에는 아래와 같이 설정하도록 하자. ROS\_MASTER\_URI 는 데스크톱의 IP를 와 ROS\_IP 에는 랩톱 자기 자신의  IP 로 설정해주도록 하자. 각각의 아이피는 새로운 터미널 창에서 ifconfig 명령어로 확인 할 수 있다.
+\thenum) \textbf{섹션~\ref{sec:ROSInstallation}~\nameref{sec:ROSInstallation}(pp.\pageref{sec:ROSInstallation})} 의 환경 설정 부분은 랩톱의 경우에는 아래와 같이 설정하도록 하자. ROS\_MASTER\_URI 는 데스크톱의 IP를 와 ROS\_IP 에는 랩톱 자기 자신의  IP 로 설정해주도록 하자. 각각의 아이피는 새로운 터미널 창에서 ifconfig 명령어로 확인 할 수 있다.
 
 \begin{lstlisting}[language=bash]
 export ROS_MASTER_URI=http://%*데스크톱의아이피*):11311
@@ -770,11 +771,11 @@ sudo apt-get install ssh
 
 \vspace{\baselineskip}
 \noindent\stepcounter{num}
-\thenum) 데스크톱에 "로봇 운영체제 강좌 : Indigo 설치" 를 참고하여 ROS Indigo 를 설치하자. 
+\thenum) 데스크톱에 \textbf{섹션~\ref{sec:ROSInstallation}~\nameref{sec:ROSInstallation}(pp.\pageref{sec:ROSInstallation})} 를 참고하여 ROS Indigo 를 설치하자. 
 
 \vspace{\baselineskip}
 \noindent\stepcounter{num}
-\thenum) "로봇 운영체제 강좌 : Indigo 설치" 의 "4. 환경 설정" 에서 데스크톱의 경우에는 ROS\_MASTER\_URI 와 ROS\_IP 모두 데스크톱의 IP로 설정해주도록 하자. 
+\thenum) \textbf{섹션~\ref{sec:ROSInstallation}~\nameref{sec:ROSInstallation}(pp.\pageref{sec:ROSInstallation})} 의 환경 설정 부분은 데스크톱의 경우에는 ROS\_MASTER\_URI 와 ROS\_IP 모두 데스크톱의 IP로 설정해주도록 하자. 
 
 \begin{lstlisting}[language=bash]
 export ROS_MASTER_URI=http://%*데스크톱의아이피*):11311
@@ -894,9 +895,11 @@ roslaunch kobuki_keyop safe_keyop.launch
 %-------------------------------------------------------------------------------
 \subsection{거북이 노드의 토픽}
 
-우선, "로봇 운영체제 강좌 : Kobuki 구동 테스트" 의 글에서 처럼 "roslaunch kobuki\_node minimal.launch" 으로 거북이를 구동시켜 주자. 거북이를 구동시키게 되면 kobuki\_node 노드가 작동되고 거북이의 범퍼, 절벽, 들림센서, 모터 구동부 등이 토픽 형태로 발행 및 수신하게 된다.  오늘은 이 토픽들을 확인해 볼 예정이다.
+\textbf{섹션~\ref{sec:ROSInstallation}~\nameref{sec:ROSInstallation}(pp.\pageref{sec:ROSInstallation})} 
 
-데스크톱에서 거북이를 포함하여 아무런 노드가 실행하지 않은 상태에서 roscore만을 구동시킨 상태라면 "rostopic list" 으로 토픽 리스트를 살펴봐도 /rosout, /rosout\_agg 밖에 나오지 않는다. 하지만 위와 같이 kobuki\_node 를 실행하게 되면 아래와 같이 kobuki\_node에서 사용되는 다양한 토픽들을 확인할 수 있다.
+roslaunch kobuki\_node minimal.launch 으로 거북이를 구동시켜 주자. 거북이를 구동시키게 되면 kobuki\_node 노드가 작동되고 거북이의 범퍼, 절벽, 들림센서, 모터 구동부 등이 토픽 형태로 발행 및 수신하게 된다.  오늘은 이 토픽들을 확인해 볼 예정이다.
+
+데스크톱에서 거북이를 포함하여 아무런 노드가 실행하지 않은 상태에서 roscore만을 구동시킨 상태라면 rostopic list 으로 토픽 리스트를 살펴봐도 /rosout, /rosout\_agg 밖에 나오지 않는다. 하지만 위와 같이 kobuki\_node 를 실행하게 되면 아래와 같이 kobuki\_node에서 사용되는 다양한 토픽들을 확인할 수 있다.
 
 \begin{lstlisting}[language=ROS]
 $ rostopic list
@@ -1577,8 +1580,9 @@ Kobuki의 진단툴, 계기판, CUI 및 GUI 기능 테스트 관련 패키지에
 
 %-------------------------------------------------------------------------------
 \subsection{펌웨어 버전 확인}
+\label{subsec:FirmwareUpdate}
 
-거북이의 펌웨어를 확인하기 위한 방법으로는 2가지가 존재한다. 하나의 "kobuki\_node"를 실행할 때, "--screen" 옵션을 붙여주는 방법과 또 다른 하나는 "kobuki\_node"를 실행 후에 "/mobile\_base/version\_info" 토픽을 살펴보는 방법이다.
+거북이의 펌웨어를 확인하기 위한 방법으로는 2가지가 존재한다. 하나의 kobuki\_node를 실행할 때, --screen 옵션을 붙여주는 방법과 또 다른 하나는 kobuki\_node를 실행 후에 /mobile\_base/version\_info 토픽을 살펴보는 방법이다.
 
 %-------------------------------------------------------------------------------
 \subsubsection{kobuki\_node 실행시에 펌웨어 버전 확인하기 }
