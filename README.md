@@ -2,9 +2,10 @@ rosbook_kr
 ==========
 
 로봇 프로그래밍 ROS로 시작하자!
+
 Copyright c 2014 by 표윤석 (Yoonseok Pyo, passionvirus@gmail.com)
+
 P UBLISHED BY OROCA ( WWW . OROCA . ORG )
-Ver 0.7, December 13, 2014
 
 이 저작물에는 크리에이티브 커먼즈 저작자표시 4.0 국제 라이선스가 적용 되어 있습니다.
 이 라이선스의 설명을 보고 싶으시면 http://creativecommons.org/licenses/by/4.0/
