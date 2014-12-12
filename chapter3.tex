@@ -172,7 +172,7 @@ $ unzip  2014-09-09-wheezy-raspbian.zip
 \end{lstlisting}
 
 \noindent
-압축 해제한 이미지 파일을 SD 카드에 넣도록 하자. 완전 포맷되지 않은 SD 카드의 경우, 기존 파티션을 삭제 하도록 하자. 파티션 수정을 위하여 GUI를 지원하는 disks를 이용할 것이다. 터미널 창에서 gnome-disks 를 실행하자. 그 뒤 디스크 목록에서 해당 SD 카드를 선택하면 기존에 사용했던 SD 카드라면 그림\ref{fig:partition_init1} 좌측과 같이 기존 파티션들이 보일 것이다. 그 하단의 \textbf{-} 버튼을 클릭하여 기존 파티션을 모두 삭제하여 모든 영역을 Free Space로 만들면 그림\ref{fig:partition_init1} 우측과 같은 결과를 얻을 수 있다.
+압축 해제한 이미지 파일을 SD 카드에 넣도록 하자. 완전 포맷되지 않은 SD 카드의 경우, 기존 파티션을 삭제 하도록 하자. 파티션 수정을 위하여 GUI를 지원하는 disks를 이용할 것이다. 터미널 창에서 gnome-disks 를 실행하자. 그 뒤 디스크 목록에서 해당 SD 카드를 선택하면 기존에 사용했던 SD 카드라면 그림\ref{fig:partition_init1} 좌측과 같이 기존 파티션들이 보일 것이다. 그 좌측 하단의 \textbf{-} 버튼을 클릭하여 기존 파티션을 모두 삭제하여 모든 영역을 Free Space로 만들면 그림\ref{fig:partition_init1} 우측과 같은 결과를 얻을 수 있다.
 
 \vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
@@ -241,6 +241,7 @@ $ sudo raspi-config
 
 리사이징이 완료되었으며 아래와 같이 재부팅이 되고 다시 라즈비안 데스크톱이 실행되면 다음의 명령어로 ROS Indigo\footnote{\url{http://wiki.ros.org/ROSberryPi/}}를 시작해보자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu wheezy main" > /etc/apt/sources.list.d/ros-latest.list'
 $ wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
@@ -253,8 +254,10 @@ $ sudo rosdep init
 $ rosdep update
 \end{lstlisting}
 
-다음에는 다음과 같이 catkin work space 폴더를 만들고 catkin\_make 가 정상 작동하는지 확인해야 하는 것이 기본적인 ROS 설치 방법이나 라즈비안의 경우 catkin\_make가 바이너리 파일로 제공되지 않는다. 다음과 같은 순서로 catkin\_make 를 설치하도록 하자. 이 과정에는 의존관계에 있어서 libconsole\_bridg 및 Liblz4-dev 설치 과정이 포함되어 있다. 이는 대략 2시간이 소요된다.
+다음과 같이 catkin work space 폴더를 만들고 catkin\_make 가 정상 작동하는지 확인해야 하는 것이 기본적인 ROS 설치 방법이나 라즈비안의 경우 catkin\_make가 바이너리 파일로 제공되지 않는다. 다음과 같은 순서로 catkin\_make 를 설치하도록 하자. 이 과정에는 의존관계에 있어서 libconsole\_bridg 및 Liblz4-dev 설치 과정이 포함되어 있다. 이는 대략 2시간이 소요된다.
 
+\vspace{\baselineskip}
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ source /opt/ros/indigo/setup.bash
 $ mkdir -p ~/catkin_ws/src
@@ -273,6 +276,7 @@ $ sudo checkinstall make install
 
 checkinstall이 실행되고 EOF 구문에서 엔터키를 누르고, 2번째 항목에 console\_bridg 라 적혀있는 부분을 libconsole\_bridg 으로 변경하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ cd ~/ros_catkin_ws/external_src
 $ wget http://archive.raspbian.org/raspbian/pool/main/l/lz4/liblz4-1_0.0~r122-2_armhf.deb
@@ -285,6 +289,7 @@ $ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Releas
 
 이제 catkin\_make 와 관련된 모든 프로그램을 설치 하였다. 마지막으로 catkin\_make 가 정상 작동하는지 그리고 roscore 가 동작하는지 살펴보자. 추가적인 개발 환경 설정은 \textbf{섹션~\ref{subsec:envrionment}~\nameref{subsec:envrionment}(pp.\pageref{subsec:envrionment})}을 참고하도록 하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/
 $ catkin_make
@@ -349,6 +354,7 @@ disks 이외에도 dd bs=4M if=ubuntu-14.04.1lts-lubuntu-odroid-u-20141124.img o
 
 현재 SD 메모리의 일부 부분만 사용할 수 있도록 되어 있기 때문에 메모리를 리사이즈 할 필요가 있다. LXDE 화면 하단의 xterm 을 실행하여 다음과 같이 오드로이드 유틸리티를 실행하자. 그 후 그림\ref{fig:odroid_utility}와 같이 메모리 리사이즈를 하기 위하여 4.Resize your root partition 를 선택하여 리사이징을 해주자. 리사이징이 완료되었으며 아래와 같이 재부팅을 하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ sudo odroid-utility.sh 
 $ sudo reboot 
@@ -372,6 +378,7 @@ $ sudo reboot
 
 그 다음 다음의 명령어로 ROS Indigo를 설치하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ sudo update-locale LANG=C LANGUAGE=C LC_ALL=C LC_MESSAGES=POSIX
 $ sudo sh -c 'echo "deb http://packages.namniart.com/repos/ros trusty main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -388,6 +395,7 @@ $ sudo apt-get install python-rosinstall
 
 다음에는 다음과 같이 catkin work space 폴더를 만들고 catkin\_make 가 정상 작동하는지 살펴보자. 마지막으로 마지막으로 roscore 가 동작하는지 확인까지 마치면 모든 설치가 완료된 것이다. 추가적인 개발 환경 설정은 \textbf{섹션~\ref{subsec:envrionment}~\nameref{subsec:envrionment}(pp.\pageref{subsec:envrionment})}을 참고하도록 하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ source /opt/ros/indigo/setup.bash
 $ mkdir -p ~/catkin_ws/src

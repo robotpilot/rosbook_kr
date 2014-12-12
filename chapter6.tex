@@ -48,14 +48,14 @@ RViz는 ROS의 3차원 시각화 툴이다. ROS 네트워크상의 데이터를 
 
 ROS 설치시에 기본 설치라고도 부를 수 있는 "Desktop-Full Install" 를 설치하게되면 RViz는 기본적으로 설치되어 있다. 만약에 "Desktop-Full Install" 으로 설치하지 않았거나, RViz 가 설치되어 있지 않을 경우에는 아래의 명령어로 설치할 수있다.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 sudo apt-get install ros-indigo-rviz
 \end{lstlisting}
 
 \noindent
 RViz 의 실행 명령어는 아래와 같다. (단, roscore 가 실행되어 있어야 한다.)
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 rosrun rviz rviz
 \end{lstlisting}
 
@@ -123,7 +123,7 @@ ROS Fuerte 버전부터는 rqt 라는 이름으로 기존의 rxbag, rxplot, rxgr
 
 ROS 설치시에 기본 설치라고도 부를 수 있는 "Desktop-Full Install" 를 설치하게되면 rqt는 기본적으로 설치되어 있다. 만약에 "Desktop-Full Install" 으로 설치하지 않았거나, rqt 가 설치되어 있지 않을 경우에는 아래의 명령어로 설치할 수있다.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 sudo apt-get install ros-indigo-rqt ros-indigo-rqt-common-plugins
 \end{lstlisting}
 
@@ -131,7 +131,7 @@ sudo apt-get install ros-indigo-rqt ros-indigo-rqt-common-plugins
 
 http://www.pyqtgraph.org/downloads/python-pyqtgraph\_0.9.8-1\_all.deb 에서 deb 파일을 받고 클릭하여 설치하도록 하자. 그 뒤 아래와 같이 rqt\_graph를 실행한 후, 프로그램의 오른쪽 상단에 있는 옵션을 의미하는 "기어" 모양의 아이콘을 클릭하면 아래의 첨부 그림과 같이 옵션을 선택할 수 있는데 PyQtGraph 를 선택해주면 된다. PyQtGraph 이외에도 MatPlot, QwtPlot 도 이용 가능하니 원하는 그래프 관련 라이브러리를 이용하면 된다.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 rqt_graph
 \end{lstlisting}
 
@@ -145,7 +145,7 @@ rqt_graph
 
 실행은 아래와 같다. 단순히 rqt 라고 실행해주면 된다. (정식 실행명령어는 rosrun rqt\_gui rqt\_gui 이다)
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 rqt
 \end{lstlisting}
 
@@ -216,19 +216,19 @@ TF Tree | tf 관계를 트리로 나타내는 그래프 뷰 형식의 플러그�
 
 rqt\_plot 은 2차원 데이터 플롯 툴이다. 플롯이라하면 좌료를 그리다라는 의미이다. 즉, ROS 메시지를 받아서 이를 좌표에 뿌리게 되는 것을 의미한다. 예를들어 turtlesim 노드 pose 메시지의 x 좌표와  y좌표를 좌표에 표기해보도록 하자. 우선, turtlesim 패키지의 turtlesim\_node 을 구동하자.
 
-\begin{lstlisting}[language=ros]
+\begin{lstlisting}[language=ROS]
 $ rosrun turtlesim turtlesim_node 
 \end{lstlisting}
 
 다음으로, rqt\_plot 을 아래의 조건으로 구동하여 좌표를 작성한다. (원래는 rqt 를 구동후에 Plot 플러그인을 불러와서 GUI환경에서 토픽을 설정하면 되야하지만, 현재 버전에서는 이상하게 구동하지 않는다. 그러므로 아래의 명령어로 대채하여 설명한다.)
 
-\begin{lstlisting}[language=ros]
+\begin{lstlisting}[language=ROS]
 rqt_plot /turtle1/pose/
 \end{lstlisting}
 
 다음으로, turtlesim 패키지의 turtle\_teleop\_key 을 구동하여, 화면속의 거북이를 이리저리 움직여보자.
 
-\begin{lstlisting}[language=ros]
+\begin{lstlisting}[language=ROS]
 $ rosrun turtlesim turtle_teleop_key
 \end{lstlisting}
 
@@ -243,17 +243,17 @@ $ rosrun turtlesim turtle_teleop_key
 %-------------------------------------------------------------------------------
 \subsection{rqt\_bag}\index{rqt\_bag}
 
-메시지 기록을 시각화한 GUI 툴이다. 섹션~\ref{sec:Rosbag}~\nameref{sec:Rosbag}(pp.\pageref{sec:Rosbag})에서 다룬 내용을 시각화하면 편집 가능한 툴로 이미지 값등과 함께 편집할 때 매우 유용한 툴이다.
+메시지 기록을 시각화한 GUI 툴이다. 섹션~\ref{subsub:Rosbag}~\nameref{subsub:Rosbag}(pp.\pageref{subsub:Rosbag})에서 다룬 내용을 시각화하면 편집 가능한 툴로 이미지 값등과 함께 편집할 때 매우 유용한 툴이다.
 
 이를 테스트하기 위해서 위헤서 다룬 rqt\_graph 및 Image View 에서 다룬 turtlesim 및 uvc camera 관련의 노드들을 전부 실행해 주자. 그 뒤, 아래의 명령어로 카메라의 /image\_raw 와 터틀시뮬레이션의 /turtle1/cmd\_vel 값을 bag 파일로 생성하자.
 
-\begin{lstlisting}[language=ros]
+\begin{lstlisting}[language=ROS]
 $ rosbag record /image_raw /turtle1/cmd_vel
 \end{lstlisting}
 
 그 후, 아래의 명령어로 rqt를 구동 후, 플러그인(Plugins) 메뉴에서 Bag를 선택한다. 그 뒤 왼쪽 상단의 폴더 모양(Load Bag)의 아이콘을 선택하여 방금전에 기록해둔 *.bag 파일을 불러오도록 하자. 그러면 아래의 화면처럼 영상 및 cmd\_vel 값을 확인할 수 있다. 또한, 이를 확대, 재생, 시간별 데이터 수 등을 확인할 수 있으며, 오른쪽 마우스를 누르면 Publish 라는 옵션이 있는데 이를 통해 메시지를 다시 발행할 수도 있다.
 
-\begin{lstlisting}[language=ros]
+\begin{lstlisting}[language=ROS]
 $ rqt
 \end{lstlisting}
 
@@ -269,7 +269,7 @@ $ rqt
 
 사용방법은 매우 간단한다. 아래의 명령어로 rqt를 구동후, 플러그인(Plugins) 메뉴에서 ROS Graph를 선택하면 그것으로 끝이다. 현재, 카메라 및 터틀봇시뮬레이션을 구동하셨을때의 노드 및 메시지의 상황은 아래 그림처럼 나타난다.
 
-\begin{lstlisting}[language=ros]
+\begin{lstlisting}[language=ROS]
 $ rqt
 \end{lstlisting}
 
@@ -291,13 +291,13 @@ $ sudo apt-get install ros-indigo-uvc-camera
 
 USB CAM을 컴퓨터의 USB에 연결하고, 아래의 명령어로 uvc\_camera 패키지의 uvc\_camera\_node 노드를 구동하자.
 
-\begin{lstlisting}[language=ros]
+\begin{lstlisting}[language=ROS]
 $ rosrun uvc_camera uvc_camera_node
 \end{lstlisting}
 
 그 후, 아래의 명령어로 rqt를 구동후, 플러그인(Plugins) 메뉴에서 이미지 뷰(Image View)를 선택한다. 그 뒤 왼쪽 상단의 메시지 선택란을 "/image\_raw"를 선택하면 아래의 화면처럼 영상을 확인할 수 있다. 
 
-\begin{lstlisting}[language=ros]
+\begin{lstlisting}[language=ROS]
 $ rqt
 \end{lstlisting}
 

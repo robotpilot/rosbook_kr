@@ -53,7 +53,7 @@ ROS에서는 중요한 하드웨어로 로봇과 센서를 꼽고있다. 이들�
 
 만약, 사용하고자 하는 로봇 패키지가 ROS 공식 패키지라면 설치 방법은 매우 간단하다. 우선, 자신이 사용하고자 하는 로봇 패키지가 공개 되었는지 ROS wiki robot (http://wiki.ros.org/Robots ) 에서 확인하거나 아래의 명령어로 전체의 ROS 패키지로부터 찾아 볼 수 있다.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ apt-cache search ros-indigo
 \end{lstlisting}
 
@@ -61,25 +61,25 @@ $ apt-cache search ros-indigo
 
 \textbf{(예제1) PR2\footnote{ROS Wiki PR2, http://wiki.ros.org/Robots/PR2}}
 PR2 경우는 아래의 명령어로 일괄 설치된다.
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ sudo apt-get install ros-indigo-pr2-desktop
 \end{lstlisting}
 
 \textbf{(예제2) 터틀봇2\footnote{ROS Wiki Turtlebot, http://wiki.ros.org/Robots/TurtleBot}}
 터틀봇2의 경우는 아래와 같으며, 설치관련 wiki 페이지를 보고 몇가지 설정해주면된다.
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ sudo apt-get install ros-indigo-turtlebot ros-indigo-turtlebot-apps ros-indigo-turtlebot-viz ros-indigo-turtlebot-simulator ros-indigo-kobuki-ftdi
 \end{lstlisting}
 
 \textbf{(예제3) Nao\footnote{ROS Wiki NAO, http://wiki.ros.org/nao/Installation}}
 Nao의 경우는 아래와 같으며, 설치관련 wiki 페이지를 보고 몇가지 설정해주면된다.
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ sudo apt-get install ros-indigo-nao-robot ros-indigo-nao-pose ros-indigo-nao-msgs ros-indigo-nao-driver ros-indigo-nao-description ros-indigo-nao-bringup ros-indigo-humanoid-nav-msg
 \end{lstlisting}
 
 만약에 해당 로봇 패키지가 공식적으로 제공되지 않더라도 로봇 패키지 위키에는 설치 방법등을 따로 설명해주고 있다. 예를들어 모바일 로봇으로 유명한 파이오니어(Pioneer)\footnote{ROS Wiki ROSARIA, http://wiki.ros.org/ROSARIA}의 경우, 아래와 같이 캐킨 빌드 시스템의 사용자 소스 폴더로 이동한 후, 위키에 적혀진 소스 리포지토리로부터 최신의 로봇 패키지를 다운로드 받으면 된다. 
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/src %*(캐킨 빌드 시스템의 사용자 소스 폴더로 이동)*)
 $ hg clone http://code.google.com/p/amor-ros-pkg/ %*(위키에 적혀져 있는 소스 리포지토리로부터 소스 다운로드)*)
 \end{lstlisting}
@@ -142,19 +142,19 @@ ROS 센서 위키 페이지\footnote{ROS Wiki, Sensors, http://wiki.ros.org/Sens
 
 일반 USB CAM의 경우, UVC을 지원하기에 ROS의 "uvc\_camera" 패키지\footnote{ROS Wiki, UVC Camera, http://wiki.ros.org/uvc\_camera}를 이용하면 된다. 우선, 아래의 명령어로 "uvc\_camera" 패키지를 설치하도록 하자.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 sudo apt-get install ros-indigo-uvc-camera 
 \end{lstlisting}
 
 USB CAM을 컴퓨터의 USB에 연결하고, 아래의 명령어로 uvc\_camera 패키지의 uvc\_camera\_node 노드를 구동하자.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 rosrun uvc_camera uvc_camera_node
 \end{lstlisting}
 
 그 후, 아래의 명령어로 rqt를 구동후, 플러그인(Plugins) 메뉴에서 이미지 뷰(Image View)를 선택한다. 그 뒤 왼쪽 상단의 메시지 선택란을 "/image\_raw"를 선택하면 아래의 화면처럼 영상을 확인할 수 있다. 
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 rqt
 \end{lstlisting}
 

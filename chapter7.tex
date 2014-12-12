@@ -87,7 +87,7 @@ $ catkin_create_pkg oroca_ros_tutorials std_msgs roscpp
 
 위와 같이 패키지를 생성하였으면 "\textasciitilde/catkin\_ws/src"에 "oroca\_ros\_tutorials" 라는 패키지 폴더 및 ROS 패키지가 갖추어야할 기본 내부 폴더 및 CMakeLists.txt 와 package.xml가 생성된다. 다음은 아래와 같이 ls 명령어를 입력하여 내용을 보던가 윈도우의 탐색기와 같은 역할을 하는 GUI기반의 Nautilus를 이용하여 패키지 내부를 살펴보도록 하자.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ ls
 include       %*.......... 인클루드 폴더*)
 src           %*.......... 소스코드 폴더*)
@@ -99,7 +99,7 @@ CMakeLists.txt%*.......... 빌드 설정 파일*)
 
 ROS의 필수 설정 파일 중 하나인 package.xml 은 패키지 정보를 담은 XML 파일로써 패키지의 이름, 저작자, 라이선스, 의존성 패키지 등을 기술하고 있다. 아래의 명령어로 gedit 툴을 이용하여 파일을 열고 현재의 노드에 맞도록 수정해보자.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ gedit package.xml 
 \end{lstlisting}
 
@@ -139,7 +139,7 @@ $ gedit package.xml
 
 ROS의 빌드 시스템인 캐킨(cakin)은 기본적으로 CMake를 이용하고 있어서 패키지 폴더에 CMakeLists.txt 라는 파일에 빌드 환경을 기술하고 있다. 이는 실행 파일 생성, 의존성 패키지 우선 빌드, 링크 생성 등을 설정하게 되어 있다.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ gedit CMakeLists.txt 
 \end{lstlisting}
 
@@ -183,7 +183,7 @@ add_dependencies(ros_tutorial_msg_subscriber oroca_ros_tutorials_generate_messag
 
 CMakeLists.txt 에 라는 파일에 "add\_message\_files(FILES msgTutorial.msg)" 라는 옵션을 넣었다. 이는 이번 노드에서 사용할 메시지인 msgTutorial.msg 를 빌드할때 포함하라는 이야기이다. 현재, msgTutorial.msg 는 생성하지 않았기에 아래와 같은 순서로 생성해주도록 하자.
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/src/oroca_ros_tutorials/     %*(패키지 폴더로 이동한다.)*)
 $ mkdir msg               %*(패키지에 msg 라는 메시지 폴더를 신규 작성한다.)*)
 $ cd msg                  %*(작성한 msg 폴더로 이동)*)
@@ -205,7 +205,7 @@ add_executable(ros_tutorial_msg_publisher src/ros_tutorial_msg_publisher.cpp)
 
 CMakeLists.txt 에 위와 같은 실행 파일을 생성하는 옵션을 주었다. 즉, "ros\_tutorial\_msg\_publisher.cpp"라는 파일을 빌드하여 "ros\_tutorial\_msg\_publisher"라는 실행 파일을 만들라는 이야기이다. 아래의 순서대로 발행자 노드 기능을 수행하는 "ros\_tutorial\_msg\_publisher.cpp" 소스를 작성해 보자. 
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/src/oroca_ros_tutorials/ %*(패키지 폴더로 이동한다.)*)
 $ cd src                                  %*(노드의 소스코드 폴더인 src 폴더로 이동)*)
 $ gedit ros_tutorial_msg_publisher.cpp    %*(소스 파일 신규 작성 및 내용 수정)*)
@@ -257,7 +257,7 @@ add_executable(ros_tutorial_msg_subscriber src/ros_tutorial_msg_subscriber.cpp)
 
 CMakeLists.txt 에 위와 같은 실행 파일을 생성하는 옵션을 주었다. 즉, "ros\_tutorial\_msg\_subscriber.cpp"라는 파일을 빌드하여 "ros\_tutorial\_msg\_subscriber"라는 실행 파일을 만들라는 이야기이다. 아래의 순서대로 구독자 노드 기능을 수행하는 "ros\_tutorial\_msg\_subscriber.cpp" 소스를 작성해 보자. 
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/src/oroca_ros_tutorials/ %*(패키지 폴더로 이동한다.)*)
 $ cd src                                  %*(노드의 소스코드 폴더인 src 폴더로 이동)*)
 $ gedit ros_tutorial_msg_subscriber.cpp   %*(소스 파일 신규 작성 및 내용 수정)*)
@@ -296,7 +296,7 @@ int main(int argc, char **argv)                         //%* 노드 메인 함�
 %-------------------------------------------------------------------------------
 \subsection{ROS 노드 빌드}
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws  %*(catkin 폴더로 이동)*)
 $ catkin_make     %*(catkin 빌드 실행)*)
 \end{lstlisting}
@@ -528,7 +528,7 @@ add_executable(ros_tutorial_srv_client src/ros_tutorial_srv_client.cpp)
 
 CMakeLists.txt 에 위와 같은 실행 파일을 생성하는 옵션을 주었다. 즉, "ros\_tutorial\_srv\_client.cpp"라는 파일을 빌드하여 "ros\_tutorial\_srv\_client"라는 실행 파일을 만들라는 이야기이다. 아래의 순서대로 서비스 클라이언트 노드 기능을 수행하는 "ros\_tutorial\_srv\_client.cpp" 소스를 작성해 보자. 
 
-\begin{lstlisting}[language=bash]
+\begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/src/oroca_ros_tutorials/ %*(패키지 폴더로 이동한다.)*)
 $ cd src                                  %*(노드의 소스코드 폴더인 src 폴더로 이동)*)
 $ gedit ros_tutorial_srv_client.cpp       %*(소스 파일 신규 작성 및 내용 수정)*)
