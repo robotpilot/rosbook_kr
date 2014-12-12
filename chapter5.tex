@@ -125,7 +125,6 @@ $ roscd turtlesim
 /opt/ros/indigo/share/turtlesim$
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 사용예에서 처럼, turtlesim 이라는 패키지 이름을 매개변수로 넣어주고 실행하게 되면 지정된 패키지가 저장된 폴더로 이동하게 된다. 현재 결과에서는 turtlesim 이라는 패키지가 ROS가 설치되어 있는 폴더에 있으므로 위와 같이 나왔으나, 자신이 작성한 패키지의 이름을 매개변수로 넣어주면 자신이 설정한 패키지의 디렉토리로 이동할 수도 있다. 명령어 기반의 ROS를 사용하는데 있어서 매우 사용빈도가 높은 명령어이다.
 
@@ -156,7 +155,6 @@ $ rosls turtlesim/
 cmake  images  msg  package.xml  srv
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 지정한 ROS 패키지의 파일 리스트를 확인하는 명령어이다. roscd 명령어를 이용하여 해당 패키지로 이동후에 일반 ls 명령어로 같은 기능을 수행할 수도 있지만, 간혹 바로 확인할 필요가 있을경우에 사용된다. 사용 빈도수는 매우 떨어진다.
 
@@ -176,7 +174,6 @@ rosed [%*패키지이름*)] [%*파일이름*)]
 $ rosed turtlesim package.xml 
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 turtlesim 패키지의 package.xml 를 편집하고자 할때 사용하는 명령어이다. 이를 실행하면 사용자가 설정한 에디터로 해당 파일을 열게된다. 급하게 간단히 파일을 수정하고자 할때 사용된다. 사용되는 에디터는 "~/.bashrc" 파일에 export EDITOR='emacs -nw' 와 같이 지정하여 사용가능하다. 필자는 비교적 단순한 편집일 경우 이를 사용한다. 프로그램 작성과 같은 작업 rosed 이외에 자신만의 개발환경을 사용하기를 추천한다.
 
@@ -187,11 +184,9 @@ turtlesim 패키지의 package.xml 를 편집하고자 할때 사용하는 명�
 %*사용자가 지정해둔 에디터를 이용하여 해당 파일을 열게된다.*)
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 바로 명령어창에서 수정이 필요한 단순한 작업에서 많이 사용되지만, 그 이외의 프로그램 작업등에는 비추천이다. 전체적인 사용 빈도수는 매우 떨어진다.
 
-\newpage
 %-------------------------------------------------------------------------------
 \section{ROS 실행 명령어}\index{ROS 실행 명령어}
 
@@ -206,6 +201,7 @@ ROS 실행 명령어\footnote{http://wiki.ros.org/rosbash}는 ROS 노드의 실�
 \item[rosclean] (★☆☆) ros+clean : ros 로그 파일을 체크하거나 삭제하는 명령어
 \end{description}
 
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{roscore : ROS 코어 실행}\index{roscore : ROS 코어 실행}
 \label{subsec:Roscore}
@@ -235,11 +231,11 @@ $ roscore
 \stepcounter{num}\circled{\thenum} 결과값
 \begin{lstlisting}[language=ROS]
 $ roscore
-... logging to /home/rts/.ros/log/a42b1130-63dc-11e4-a5a1-74d02bc77892/roslaunch-rts-3547.log
+... logging to /home/rts/.ros/log/fefe3f-63dc-fege-a5a1-f3r3df3e44/roslaunch-rts-3547.log
 Checking log directory for disk usage. This may take awhile.
 Press Ctrl-C to interrupt
 Done checking log file disk usage. Usage is <1GB.
-started roslaunch server http://192.168.4.1:57385/
+started roslaunch server http://192.168.4.100:57385/
 ros_comm version 1.11.9
 
 SUMMARY
@@ -252,14 +248,13 @@ NODES
 
 auto-starting new master
 process[master]: started with pid [3560]
-ROS_MASTER_URI=http://192.168.4.1:11311/
+ROS_MASTER_URI=http://192.168.4.100:11311/
 
-setting /run_id to a42b1130-63dc-11e4-a5a1-74d02bc77892
+setting /run_id to fefe3f-63dc-fege-a5a1-f3r3df3e44
 process[rosout-1]: started with pid [3575]
 started core service [/rosout]
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 위 결과에서 /home/rt/.ros/log/ 폴더에 로그들이 저장되고 있다는 것과 "Ctrl-C" 키로 ROS 코어를 종료할 수 있다느 것, roslaunch server, ROS\_MASTER\_URI 등의 정보, /rosdistro 및 /rosversion의 파라미터 서버, /rosout 의 서비스, /rosout 노드가 실행되었음을 알수 있다.
 
@@ -267,7 +262,7 @@ started core service [/rosout]
 %-------------------------------------------------------------------------------
 \subsection{rosrun : ROS 노드 실행}\index{rosrun : ROS 노드 실행}
 
-rosrun\footnote{http://wiki.ros.org/rosbash}은 지정한 패키지의 하나의 노드를 실행하는 명령어이다.
+rosrun\footnote{http://wiki.ros.org/rosbash}은 지정한 패키지의 하나의 노드를 실행하는 명령어이다. turtlesim 이라는 패키지의 turtlesim\_node 이라는 노드를 실행하는 명령어이다. rosrun은 지정한 패키지의 하나의 노드를 실행시킨다. 
 
 \setcounter{num}{0}
 
@@ -285,10 +280,6 @@ $ rosrun turtlesim turtlesim_node
 \end{lstlisting}
 
 \noindent
-turtlesim 이라는 패키지의 turtlesim\_node 이라는 노드를 실행하는 명령어이다. rosrun은 지정한 패키지의 하나의 노드를 실행시킨다. 
-
-\vspace{\baselineskip}
-\noindent
 \stepcounter{num}\circled{\thenum} 결과값
 \begin{lstlisting}[language=ROS]
 $ rosrun turtlesim turtlesim_node 
@@ -297,10 +288,11 @@ $ rosrun turtlesim turtlesim_node
 \end{lstlisting}
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.6\columnwidth]{pictures/chapter5/term_rosrun.png}
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter5/term_rosrun.png}
 \caption{turtlesim\_node 노드를 실행한 모습}
 \end{figure}
 
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{roslaunch : ROS 노드 복수 실행}\index{roslaunch : ROS 노드 복수 실행}
 
@@ -327,8 +319,10 @@ $ roslaunch openni_launch openni.launch
 %*생략*)
 \end{lstlisting}
 
+\noindent
 ※ 위와 같은 실행 및 결과를 위해서는 관련 패키지인 ros-indigo-openni-launch 패키지가 설치되어 있어야 한다. 만약 설치되어 있지 않은 경우 설치하도록 하자. 설치 명령어는 sudo apt-get install ros-indigo-openni-launch  이다.
 
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{rosclean : ROS 로그 파일 삭제}\index{rosclean : ROS 로그 파일 삭제}
 
@@ -382,6 +376,7 @@ rm -rf /home/rt/.ros/log
 \noindent
 자신의 ROS 로그 저장소 (필자의 경우, /home/rt/.ros/log)의 로그를 모두 삭제할때 사용하는 명령어이다.
 
+\newpage
 %-------------------------------------------------------------------------------
 \section{ROS 정보 명령어}\index{ROS 정보 명령어}
 
@@ -433,6 +428,7 @@ $ rosrun turtlesim turtlesim_node
 $ rosrun turtlesim turtle_teleop_key
 \end{lstlisting}
 
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{rosnode : ROS 노드}\index{rosnode : ROS 노드}
 
@@ -461,7 +457,6 @@ $ rosnode list
 /turtlesim
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 ROS코어(roscore)에 연결된 모든 노드의 목록을 확인하는 명령어이다. 위 [사전준비] 에서 이야기한 노드만을 실행하였다면 위와 같이 roscore를 구동하면 기본적으로 시작되는 rosout 과 [사전준비]에서 실행한 /teleop\_turtle 및 /turtlesim 의 노드가 리스트에 포함되어 있음을 확인할 수 있다.
 
@@ -475,7 +470,6 @@ pinging /turtlesim with a timeout of 3.0s
 xmlrpc reply from http://192.168.4.185:45470/ time=0.854969ms
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 위 명령어는 /turtlesim 노드가 실제로 현재 사용중인 컴퓨터와 연결이 되어 있는지에 대한 테스트이다. 만약에 해당 노드와 연결되어 있지 않으면 "ERROR: connection refused to [http://192.168.4.185:55996/]" 와 같은 에러 메세지를 보게될 것이다.
 
@@ -484,7 +478,7 @@ xmlrpc reply from http://192.168.4.185:45470/ time=0.854969ms
 \stepcounter{num}\circled{\thenum} rosnode info [노드이름] : 지정된 노드의 정보 확인
 \begin{lstlisting}[language=ROS]
 $ rosnode info /turtlesim 
---------------------------------------------------------------------------------
+-------------------------------
 Node [/turtlesim]
 Publications: 
  * /turtle1/color_sensor [turtlesim/Color]
@@ -495,7 +489,6 @@ Publications:
 \noindent
 rosnode info 명령어를 이용하면 지정한 노드의 정보를 확인가능하다. 기본적으로, Publications, Subscriptions, Services 등을 확인할 수 있으며, 노드 실행 URI 및 토픽 입출력에 대한 정보들도 확인 가능하다. 많은 정보 출력으로 위에서는 내용을 생략해 두었으므 꼭 실행해보길 권장한다.
 
-\vspace{\baselineskip}
 \noindent
 \stepcounter{num}\circled{\thenum} rosnode machine [PC이름 또는 IP] : 해당 PC에서 실행되고 있는 노드 목록 확인
 \begin{lstlisting}[language=ROS]
@@ -505,7 +498,6 @@ $ rosnode machine 192.168.4.185
 /turtlesim
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 지정된 특정 머신(PC 및 단말기)에서 작동죽인 노드의 목록을 확인할 수 있다.
 
@@ -518,27 +510,25 @@ killing /turtlesim
 killed
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 실행중인 노드를 종료하는 명령어이다. 노드가 실행된 터미널창에서 Ctrl + C 를 이용하여 직접 노드를 종료할 수도 있지만, 이렇게 해당 노드를 지정하여 종료할 수도 있다. 만약 이 명령어로 종료하게 되면 아래와 같이 해당 노드가 실행중인 터미널에 경고 메시지가 출력되면서 해당 노드는 종료되게 된다.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 [ WARN] [1383455647.514022654]: Shutdown request received.
 [ WARN] [1383455647.514058274]: Reason given for shutdown: [user request]
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 \stepcounter{num}\circled{\thenum} rosnode cleanup : 연결 정보가 확인안되는 유령 노드의 등록 정보 삭제
 \begin{lstlisting}[language=ROS]
 $ rosnode cleanup 
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 연결 정보가 확인안되는 유령 노드의 등록 정보를 삭제한다. 예기치못한 일로 노드가 비정상적으로 종료된경우, 이 명령어로 연결 정보가 끓어진 노드를 목록에서 삭제하게된다. 간혹 사용되지만 roscore 을 재실행하는 일이 없기에 매우 유용한 명령어이다.
 
-
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{rostopic : ROS 토픽}\index{rostopic : ROS 토픽}
 
@@ -569,7 +559,6 @@ rosrun turtlesim turtle_teleop_key
 
 \setcounter{num}{0}
 
-\vspace{\baselineskip}
 \noindent
 \stepcounter{num}\circled{\thenum} rostopic list : 활성화된 토픽의 목록을 표시한다
 
@@ -710,7 +699,7 @@ publishing and latching message for 3.0 seconds
 \caption{발행된 메시지가 반영된 모습}
 \end{figure}
 
-
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{rosservice : ROS 서비스}\index{rosservice : ROS 서비스}
 
@@ -827,6 +816,7 @@ $ rosservice call /turtle1/set_pen 255 0 0 5 0
 \caption{rosservice call 예제}
 \end{figure}
 
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{rosparam : ROS 매개변수}\index{rosparam : ROS 매개변수}
 
@@ -855,7 +845,6 @@ rosrun turtlesim turtle_teleop_key
 
 \setcounter{num}{0}
 
-\vspace{\baselineskip}
 \noindent
 \stepcounter{num}\circled{\thenum} rosparam list : 매개변수 목록 보기
 
@@ -944,6 +933,7 @@ $ rosparam delete /background_b
 \noindent
 지정한 매개변수를 삭제하는 명령어이다.
 
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{rosmsg : ROS 메시지 정보}\index{rosmsg : ROS 메시지 정보}
 
@@ -964,9 +954,9 @@ $ rosparam delete /background_b
 ※ 아래의 예제를 실행하기 전에 모든 노드를 종료하도록 하자. 그리고 난후, 각각 다른 터미널창에서 아래의 명령어를 실행하여 turtlesim\_node 및 turtle\_teleop\_key를 실행해주자.
 
 \begin{lstlisting}[language=ROS]
-roscore
-rosrun turtlesim turtlesim_node 
-rosrun turtlesim turtle_teleop_key
+$ roscore
+$ rosrun turtlesim turtlesim_node 
+$ rosrun turtlesim turtle_teleop_key
 \end{lstlisting}
 
 \setcounter{num}{0}
@@ -983,10 +973,11 @@ actionlib/TestActionGoal
 actionlib/TestActionResult
 actionlib/TestFeedback
 actionlib/TestGoal
-actionlib/TestRequestAction
-actionlib/TestRequestActionFeedback
-actionlib/TestRequestActionGoal
-actionlib/TestRequestActionResult
+sensor_msgs/Joy
+sensor_msgs/JoyFeedback
+sensor_msgs/JoyFeedbackArray
+sensor_msgs/LaserEcho
+zeroconf_msgs/DiscoveredService
 ...
 \end{lstlisting}
 
@@ -1068,6 +1059,7 @@ costmap_2d
 \noindent
 ※ 아래의 예제를 실행하기 전에 모든 노드를 종료하도록 하자. 그리고 난후, 각각 다른 터미널창에서 아래의 명령어를 실행하여 turtlesim\_node 및 turtle\_teleop\_key를 실행해주자.
 
+[leftmargin=*]
 \begin{lstlisting}[language=ROS]
 roscore
 rosrun turtlesim turtlesim_node 
@@ -1134,22 +1126,16 @@ control_msgs
 diagnostic_msgs
 dynamic_reconfigure
 gazebo_msgs
-laser_assembler
 map_msgs
 nav_msgs
 navfn
 nodelet
 oroca_ros_tutorials
-polled_camera
-robot_pose_ekf
 roscpp
-roscpp_tutorials
-rospy_tutorials
 sensor_msgs
 std_srvs
 tf
 tf2_msgs
-topic_tools
 turtlesim
 \end{lstlisting}
 
@@ -1180,6 +1166,7 @@ turtlesim
 \noindent
 ※ 아래의 예제를 실행하기 전에 모든 노드를 종료하도록 하자. 그리고 난후, 각각 다른 터미널창에서 아래의 명령어를 실행하여 turtlesim\_node 및 turtle\_teleop\_key를 실행해주자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 roscore
 rosrun turtlesim turtlesim_node 
@@ -1188,7 +1175,6 @@ rosrun turtlesim turtle_teleop_key
 
 \setcounter{num}{0}
 
-\vspace{\baselineskip}
 \noindent
 \stepcounter{num}\circled{\thenum} rosbag record [옵션] [토픽이름] : 지정한 토픽의 메시지를 기록한다
 
@@ -1212,6 +1198,8 @@ $ rosbag record /turtle1/cmd_vel
 
 \noindent
 사용중인 토픽중에서 기록하고자 하는 토픽을 옵션으로 입력하여 bag기록을 시작한다. 기록을 시작한 후, "turtle\_teleop\_key" 노드에서 키보드로 명령을 내리면서 거북이를 이동시켜본다. 이때에 사용된 "/turtle1/cmd\_vel" 토픽이 기록되게 된다. 기록 종료는 Ctrl + C 으로 종료하면 된다. 위 정보처럼 "2013-11-04-15-29-16.bag" 와 같은 .bag 파일이 생성될 것이다.
+
+\newpage
 
 \begin{figure}[h]
 \centering\includegraphics[width=0.8\columnwidth]{pictures/chapter5/rosbag_record.png}
@@ -1263,7 +1251,6 @@ $ rosbag play 2013-11-04-15-29-16.bag
 Waiting 0.2 seconds after advertising topics... done.
 
 Hit space to toggle paused, or 's' to step.
-
 [RUNNING]  Bag Time: 1383546576.681423   Duration: 16.855905 / 16.918187     
 Done.
 \end{lstlisting}

@@ -30,14 +30,16 @@
 %-------------------------------------------------------------------------------
 \subsection{토픽 (topic)}\index{토픽 (topic)}
 
-토픽(topic)은 "이야깃거리"이다.\\ 
+\begin{center} 
+토픽(topic)은 \textbf{이야깃거리}이다.\\ 
+\end{center}
 
 발행자 노드가 하나의 이야깃거리에서 대해서 토픽이라는 이름으로 마스터에 등록한 후, 이야깃거리에 대한 이야기를 메시지 형태로 발행한다. 이 이야깃거리를 수신 받기를 원하는 구독자 노드는 마스터에 등록된 토픽의 이름에 해당되는 발행자 노드의 정보를 받는다. 이 정보를 기반으로 구독자 노드는 발행자 노드와 직접적으로 연결하여 메시지를 송/수신 받게 된다. \\
 
 이를 나타낸 그림이 아래와 같다. 단방향 통신이기에 센서가 취득한 정보를 단순히 전달하는 용도로 많이 사용되는 메시지 통신 방식이다.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter7/msgtrans2.jpg}
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter7/msgtrans2.jpg}
 \caption{토픽}
 \end{figure}
 
@@ -53,7 +55,7 @@
 이러한 서비스는 로봇에게 특정의 일을 수행하는 요청시에 명령어로써 많이 사용된다. 혹은, 특정 조건에 의해 이벤트를 발생해야할 노드에 사용되는 경우가 많다. 1회성 메시지 이기에 네트워크에 부하가 적다는 이유로 토픽을 대체하는 수단으로도 사용되는 등 매우 유용한 통신 수단이다.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter7/msgtrans3.png}
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter7/msgtrans3.png}
 \caption{서비스}
 \end{figure}
 
@@ -63,7 +65,7 @@
 노드에서 사용되는 매개변수를 말한다. 흔히, 윈도우즈 프로그램에서 *.ini 설정파일과 같다고 생각하면 된다. 디폴트로 설정 값들이 지정되어 있고, 필요에 의해서 외부에서 이 매개변수를 읽기, 쓰기가 가능하다. 특히, 상황에 맞추어 이 매개변수를 외부에서 쓰기기능을 이용하여 설정값을 실시간으로 바꿀수 있기에 매우 유용한 방법이다. 이는 엄밀히 따지면, 메시지 통신이라고 볼 수 없지만, 필자는 메시지를 이용한다는 점에서 메시지 통신의 범위에 속한다고 본다. 사용 예를 들자면 접속하는 USB포트 및 카메라 캘리브레이션 값, 속도 및 명령어들의 최대/최저 값 등의 설정 등을 꼽을 수 있다.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter7/msgtrans4.png}
+\centering\includegraphics[width=0.6\columnwidth]{pictures/chapter7/msgtrans4.png}
 \caption{매개변수}
 \end{figure}
 
@@ -319,12 +321,13 @@ $ rosrun oroca_ros_tutorials ros_tutorial_msg_publisher
 ROS 노드 실행 명령어인 rosrun 을 이용하여, oroca\_ros\_tutorials 패키지의 ros\_tutorial\_msg\_publisher 노드를 구동하라는 명령어이다. 이를 실행하게 되면 아래와 같은 출력 화면을 볼 수 있다. 내부에 선언된 count 값이 표시되고 있으며, ROS 메시지로 발부되고 있다. 
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter7/rosrun_ros_tutorial_msg_publisher.png}
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter7/rosrun_ros_tutorial_msg_publisher.png}
 \caption{ros\_tutorial\_msg\_publisher 노드 실행시의 화면}
 \end{figure}
 
 이전에 익힌 rostopic 명령어를 이용하여 현재 ROS 네트워크에서 사용중인 토픽의 목록을 확인해보고, 위에서 실행한 발행자 노드에서 발행중인 메시지를 확인해보도록 하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ rostopic list
 /ros_tutorial_msg
@@ -336,10 +339,11 @@ $ rostopic echo /ros_tutorial_msg
 rostopic list 라는 옵션을 붙인 명령어로 ros\_tutorial\_msg 토픽이 있음을 확인하였다. rostopic echo /ros\_tutorial\_msg 이라는 명령어로 ros\_tutorial\_msg 토픽의 메시지를 확인해보자. 아래와 같이 실시간으로 발행되는 메시지를 확인할 수 있을 것이다.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter7/rostopic_echo.png}
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter7/rostopic_echo.png}
 \caption{ros\_tutorial\_msg 토픽의 수신된 내역}
 \end{figure}
 
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{구독자 실행}
 
@@ -350,26 +354,26 @@ $ rosrun oroca_ros_tutorials ros_tutorial_msg_subscriber
 ROS 노드 실행 명령어인 rosrun 을 이용하여, oroca\_ros\_tutorials 패키지의 ros\_tutorial\_msg\_subscriber  노드를 구동하라는 명령어이다. 이를 실행하게 되면 아래와 같은 출력 화면을 볼 수 있다. 발행자에서 발행된 ros\_tutorial\_msg 토픽의 메시지를 수신받아 값이 표시되고 있다.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter7/rosrun_ros_tutorial_msg_subscriber.png}
+\centering\includegraphics[width=0.8\columnwidth]{pictures/chapter7/rosrun_ros_tutorial_msg_subscriber.png}
 \caption{ros\_tutorial\_msg\_subscriber 노드 실행시의 화면}
 \end{figure}
 
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{실행된 노드들의 통신 상태 확인}
 
 \begin{lstlisting}[language=ROS]
 $ rqt_graph
 \end{lstlisting}
-또는
 
 \begin{lstlisting}[language=ROS]
 $ rqt
 \end{lstlisting}
 
-rqt 를 실행 후, 플러그인(plugins)에서 ROS Graph 를 선택하면 아래의 그림처럼 현재 ROS 에서 구동중인 노드 및 메시지를 확인할 수 있다. 현재 ROS 네트워크상에는, 구독자 노드 (ros\_tutorial\_msg\_publisher) 에서 발행한 토픽 (ros\_tutorial\_msg) 이 발행중이고 이를 구독자 노드 (ros\_tutorial\_msg\_subscriber) 에서 수신하고 있음을 확인할 수 있다.
+위 두 명령어 중 하나를 사용하여 rqt 를 실행 후, 플러그인(plugins)에서 ROS Graph 를 선택하면 아래의 그림처럼 현재 ROS 에서 구동중인 노드 및 메시지를 확인할 수 있다. 현재 ROS 네트워크상에는, 구독자 노드 (ros\_tutorial\_msg\_publisher) 에서 발행한 토픽 (ros\_tutorial\_msg) 이 발행중이고 이를 구독자 노드 (ros\_tutorial\_msg\_subscriber) 에서 수신하고 있음을 확인할 수 있다.
 
 \begin{figure}[h]
-\centering\includegraphics[width=0.5\columnwidth]{pictures/chapter7/rqt_graph_oroca_ros_tutorials.png}
+\centering\includegraphics[width=0.7\columnwidth]{pictures/chapter7/rqt_graph_oroca_ros_tutorials.png}
 \caption{rqt\_graph를 통해서 본 두 노드의 관계도}
 \end{figure}
 
@@ -663,7 +667,7 @@ $ rqt
 \caption{ServiceCaller rqt플러그인을 통한 서비스 요청}
 \end{figure}
 
-강좌 15 및 16의 소스는 https://github.com/oroca/oroca\_ros\_tutorials 에서 확인해 볼 수 있다. 바로 적용해 보고 싶은 경우는 아래와 같이 catkin\_ws/src 에서 아래의 명령어를 실행해주면 된다.
+관련 소스는 https://github.com/oroca/oroca\_ros\_tutorials 에서 확인해 볼 수 있다. 바로 적용해 보고 싶은 경우는 아래와 같이 catkin\_ws/src 에서 아래의 명령어를 실행해주면 된다.
 
 \begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/src      %*(catkin/src 폴더로 이동*)
@@ -672,6 +676,7 @@ $ cd ~/catkin_ws          %*(catkin 폴더로 이동*)
 $ catkin_make             %*(catkin 빌드 실행*)
 \end{lstlisting}
 
+\newpage
 %-------------------------------------------------------------------------------
 \section{매개변수 사용법}\index{매개변수 사용법}
 
@@ -768,6 +773,7 @@ int main(int argc, char **argv)                     //%* 노드 메인 함수*)
 }
 \end{lstlisting}
 
+\noindent
 대부분은 이전 강좌에서 다룬 내용과 비슷하다. 이 중에서 매개변수 활용을 위해 추가된 부분에 대해서 알아보도록 하자. 특히, 49줄과 62줄에서 다룬 "setParam", "getParam" 가 매개변수 사용에서 제일 중요하다. 하지만, 매우 간단한 사용법이기때문에 함수 사용만 봐도 충분히 이해가 될 것이다.
 
 %-------------------------------------------------------------------------------
@@ -779,6 +785,7 @@ int main(int argc, char **argv)                     //%* 노드 메인 함수*)
 nh.setParam("calculation_method", PLUS);
 \end{lstlisting}
 
+\noindent
 참로고 매개변수는 integers, floats, boolean, string, dictionaries, list 등으로 설정할 수 있다. 간단히 예를 들자면, 1 은 integer, 1.0은 floats, internetofthings은 string, true는 boolean, [1,2,3]은 integers 의 list, {a: b, c: d}은 dictionary이다. 
 
 %-------------------------------------------------------------------------------
@@ -797,6 +804,7 @@ nh.getParam("calculation_method", g_operator);
 $ cd ~/catkin_ws && catkin_make
 \end{lstlisting}
 
+\noindent
 위의 명령어로 oroca\_ros\_tutorials 패키지의 서비스 서버 노드가 빌드되었다. 
 
 \begin{lstlisting}[language=ROS]
@@ -804,6 +812,7 @@ $ rosrun oroca_ros_tutorials ros_tutorial_srv_server
 [ INFO] [1385278089.933322980]: ready srv server!
 \end{lstlisting}
 
+\noindent
 위 명령어를 실행하면 서비스 서버는 서비스 요청 대기를 하게 된다.
 
 %-------------------------------------------------------------------------------
@@ -818,6 +827,7 @@ $ rosparam list
 /run_id
 \end{lstlisting}
 
+\noindent
 "rosparam list" 명령어로 현재 ROS 네트워크에 사용된 매개변수의 목록을 확인할 수 있다. 위에 출력된 목록중 "/calculation\_method" 가 우리가 사용한 매개변수이다.
 
 %-------------------------------------------------------------------------------
@@ -825,6 +835,7 @@ $ rosparam list
 
 아래의 명령어 대로 매개변수를 설정해보고, 매번 같은 서비스 요청을 하여 서비스 처리가 달라짐을 확인해보자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ rosservice call /ros_tutorial_srv 10 5
 result: 15
@@ -864,6 +875,7 @@ ROS런치의 활용으로 이전 메시지 발행자 노드와 구독자 노드�
 
 우선, *.launch 파일을 작성하자. ROS런치 파일은 *.launch 이라는 파일명을 가지고 있으며, 노드 폴더에 ROS런치를 저장할 launch 라는 폴더를 생성해줘야 한다. 아래의 명령어대로 폴더를 생성하고 새롭게 union.launch 이라는 파일으로 ROS런치 파일을 생성해보자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/src/oroca_ros_tutorials
 $ mkdir launch
@@ -871,6 +883,7 @@ $ cd launch
 $ gedit union.launch
 \end{lstlisting}
 
+\noindent
 내용으로는 아래의 내용대로 작성해주도록 하자.
 
 \begin{lstlisting}[language=XML]
@@ -894,8 +907,10 @@ ROS런치파일의 작성을 마쳤으면 아래와 같이 ROS런치를 실행�
 $ roslaunch oroca_ros_tutorials union.launch
 \end{lstlisting}
 
+\noindent
 실행 후, 결과가 어떻게 되었을까? 우선 아래와 같이 "rosnode list" 명령어로 현재 실행중인 노드를 살펴보자. 결과적으로  ros\_tutorial\_msg\_publisher 노드가 msg\_publisher1 및 msg\_publisher2 로 이름이 바뀌어 두 개의 노드가 실행되었으며, ros\_tutorial\_msg\_subscriber 노드도  msg\_subscriber1 및 msg\_subscriber2 로 이름이 바뀌어 실행되었다.  
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ rosnode list
 /msg_publisher1
@@ -916,6 +931,7 @@ $ rosnode list
 $ rqt_graph
 \end{lstlisting}
 
+\noindent
 미리 만들어둔 union.launch 을 수정해보자.
 
 \begin{lstlisting}[language=ROS]
@@ -923,6 +939,7 @@ $ cd ~/catkin_ws/src/oroca_ros_tutorials/launch
 $ gedit union.launch
 \end{lstlisting}
 
+\noindent
 내용으로는 아래의 내용대로 작성해주도록 하자.
 
 \begin{lstlisting}[language=XML]
@@ -941,11 +958,13 @@ $ gedit union.launch
 </launch>
 \end{lstlisting}
 
+\noindent
 \textbf{\textless group\textgreater} 는 지정된 노드를 그룹으로 묶어주는 태그이다. 옵션으로는 ns 가 있다. 이는 네임스페이스(namespace)로써 그룹의 이름을 지칭하며, 그룹에 속한 노드의 이름 및 메시지 등도 모두 ns로 지정한 이름에 포함되게 된다.
 
 
 다시 한번, rqt\_graph 로 노드간의 연결 및 메시지 송수신 상태를 확인해보자. 이번에는 우리가 처음에 의도한 "발신자 노드와 구독자 노드를 각각 두 개씩 구동하여 서로간에 별도로 메시지 통신" 가 성공적으로 이루어졌음을 확인할 수 있다.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ rqt_graph
 \end{lstlisting}
@@ -960,6 +979,7 @@ $ rqt_graph
 
 ROS런치는 ROS런치 파일에서 XML\footnote{ROS Wiki roslaunch XML,  http://wiki.ros.org/roslaunch/XML}을 어떻게 작성하냐에 따라 다양한 응용이 가능할 것이다. 현재 ROS런치에서 사용되는 태그들은 아래와 같다. 많이 사용되는 태그는 위에서 설명했고 그 이외에 필요한 부분에 대해서는 직접 찾아가보며 익혀보도록 하자. 각 태그에 링크로 설명 페이지의 주소를 걸어두었으니 필요한 태그의 공식 설명을 참조해보길 바란다.
 
+\vspace{\baselineskip}
 \begin{description}
 \item[\textless launch\textgreater] ROS런치 구문의 시작과 끝을 가르킨다.
 \item[\textless node\textgreater] 노드 실행에 대한 태그이다. 패키지, 노드명, 실행명을 변경할 수 있다.

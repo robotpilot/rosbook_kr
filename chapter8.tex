@@ -34,9 +34,9 @@ ROS에서는 중요한 하드웨어로 로봇과 센서를 꼽고있다. 이들�
 \caption{ROS가 도입한 로봇들 (http://wiki.ros.org/Robots)}
 \end{figure}
 
-로봇의 종류로는 아래와 같이 거의 모든 종류의 로봇 분류에서 사용되는 로봇들이 등록되어 있다.
+로봇의 종류로는 아래와 같이 거의 모든 종류의 로봇 분류에서 사용되는 로봇들이 등록되어 있다. 공개된 로봇 패키지는 \url{http://wiki.ros.org/Robots} 에서 확인해 볼 수 있다.
 
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \item 매니퓰레이터 (Manipulator)
 \item 모바일 로봇 (Mobile robot)
 \item 자동 주행 자동차 (Autonomous car)
@@ -46,12 +46,12 @@ ROS에서는 중요한 하드웨어로 로봇과 센서를 꼽고있다. 이들�
 \item 무인 표면 주행차 (UWV: Unmanned Surface Vehicle) 
 \end{itemize}
 
-공개된 로봇 패키지는 \url{http://wiki.ros.org/Robots} 에서 확인해 볼 수 있다.
+
 
 %-------------------------------------------------------------------------------
 \subsection{로봇패키지 사용 방법}\index{로봇패키지 사용 방법}
 
-만약, 사용하고자 하는 로봇 패키지가 ROS 공식 패키지라면 설치 방법은 매우 간단하다. 우선, 자신이 사용하고자 하는 로봇 패키지가 공개 되었는지 ROS wiki robot (http://wiki.ros.org/Robots ) 에서 확인하거나 아래의 명령어로 전체의 ROS 패키지로부터 찾아 볼 수 있다.
+만약, 사용하고자 하는 로봇 패키지가 ROS 공식 패키지라면 설치 방법은 매우 간단하다. 우선, 자신이 사용하고자 하는 로봇 패키지가 공개 되었는지 ROS wiki robot (\url{http://wiki.ros.org/Robots}) 에서 확인하거나 아래의 명령어로 전체의 ROS 패키지로부터 찾아 볼 수 있다.
 
 \begin{lstlisting}[language=ROS]
 $ apt-cache search ros-indigo
@@ -59,6 +59,7 @@ $ apt-cache search ros-indigo
 
 필자는 위 명령어보다 리눅스의 GUI 패키지 매니저 프로그램인 synaptic 을 구동하여  "ros-indigo" 으로 검색해볼 것을 추천하고 싶다. 사용하고자 하는 로봇 패키지가 공식 패키지라면 제일 간단하다. 아래의 그 예를 몇개 알아보기로 하곘다.
 
+\vspace{\baselineskip}
 \textbf{(예제1) PR2\footnote{ROS Wiki PR2, http://wiki.ros.org/Robots/PR2}}
 PR2 경우는 아래의 명령어로 일괄 설치된다.
 \begin{lstlisting}[language=ROS]
@@ -79,9 +80,10 @@ $ sudo apt-get install ros-indigo-nao-robot ros-indigo-nao-pose ros-indigo-nao-m
 
 만약에 해당 로봇 패키지가 공식적으로 제공되지 않더라도 로봇 패키지 위키에는 설치 방법등을 따로 설명해주고 있다. 예를들어 모바일 로봇으로 유명한 파이오니어(Pioneer)\footnote{ROS Wiki ROSARIA, http://wiki.ros.org/ROSARIA}의 경우, 아래와 같이 캐킨 빌드 시스템의 사용자 소스 폴더로 이동한 후, 위키에 적혀진 소스 리포지토리로부터 최신의 로봇 패키지를 다운로드 받으면 된다. 
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ cd ~/catkin_ws/src %*(캐킨 빌드 시스템의 사용자 소스 폴더로 이동)*)
-$ hg clone http://code.google.com/p/amor-ros-pkg/ %*(위키에 적혀져 있는 소스 리포지토리로부터 소스 다운로드)*)
+$ hg clone http://code.google.com/p/amor-ros-pkg/ %*(위키에 개재된 리포지토리로부터 소스 다운로드)*)
 \end{lstlisting}
 
 이와 같이, 공개된 로봇 패키지는 ROS 공식 패키지를 설치하던가, 위키 패키지에 적혀진 설치 방법에 따라, 공개 소스 리포지토리로부터 다운로드 후, 빌드 과정을 거치고 사용하면된다. 패키지안의 각 노드들의 사용설명은 해당 로봇 패키지의 설명을 따르기 바란다.
@@ -89,6 +91,7 @@ $ hg clone http://code.google.com/p/amor-ros-pkg/ %*(위키에 적혀져 있는 
 로봇 패키지는 기본적으로 로봇 구동 드라이브 노드, 장착된 센서 데이터의 취득 및 활용 노드, 원격 조정 노드, 관절형인 경우에는 역기구학 구동 노드, 모바일 로봇의 경우는 네비게이션 노드 등이 포함되어 있다. 
 
 
+\newpage
 %-------------------------------------------------------------------------------
 \section{센서 패키지}\index{센서 패키지}
 
@@ -122,11 +125,9 @@ ROS 는 위에서 언급한 센서들의 드라이버, 라이브러리 사용 �
 %-------------------------------------------------------------------------------
 \subsection{센서 패지키}\index{센서 패지키}
 
-ROS 센서 위키 페이지\footnote{ROS Wiki, Sensors, http://wiki.ros.org/Sensors}에는 여러 센서 패키지를 공개되어 있다. 센서를 각 분류별로 1D range finders, 2D range finders, 3D Sensors, Pose Estimation (GPS+IMU), Cameras, Sensor Interfaces, Audio / Speech Recognition, Enviromental, Force/Torque/Touch Sensors, Motion Capture, Power Supply, RFID 등으로 구분되어 각 분류에 속하는 센서들을 소개하고 있다. 센서 패키지 자세한 사용법은 \url{http://wiki.ros.org/Sensors} 를 참조하면 좋을 듯 싶다.
+ROS 센서 위키 페이지\footnote{ROS Wiki, Sensors, http://wiki.ros.org/Sensors}에는 여러 센서 패키지를 공개되어 있다. 센서를 각 분류별로 1D range finders, 2D range finders, 3D Sensors, Pose Estimation (GPS+IMU), Cameras, Sensor Interfaces, Audio / Speech Recognition, Enviromental, Force/Torque/Touch Sensors, Motion Capture, Power Supply, RFID 등으로 구분되어 각 분류에 속하는 센서들을 소개하고 있다. 센서 패키지 자세한 사용법은 \url{http://wiki.ros.org/Sensors} 를 참조하면 좋을 듯 싶다. 특히, 필자가 중요하게 생각하는 패키지는 다음과 같다.
 
-\noindent
-특히, 필자가 중요하게 생각하는 패키지는 다음과 같다.
-
+\vspace{\baselineskip}
 \begin{itemize}[leftmargin=*]
 \item 1D range finders : 저가의 로봇을 만들떄 사용할만한 적외선 방식의 직선 거리 센서
 \item 2D range finders : LRF 센서로써 네비게이션에 많이 사용되는 센서들을 모아 두었다.
@@ -200,6 +201,7 @@ ROS 에 공개된 패키지가 얼마나 될까? 정확히는 몰라도 수천�
 
 그리고 난 후, 패키지의 오픈소스 저장소 주소, 패키지 의존관계 등을 필히 숙지한다. 패키지를 설치하기 전에 의존하는 패키지는 우선적으로 설치를 해줘야만 해당 패키지를 사용할 수 있다. 그럼 다음 챕터에서 직접 설치해보자.
 
+\newpage
 %-------------------------------------------------------------------------------
 \subsection{패키지 설치}\index{패키지 설치}
 
@@ -212,6 +214,7 @@ ROS 에 공개된 패키지가 얼마나 될까? 정확히는 몰라도 수천�
 
 예제대로 설치해주도록 하자. 참고로 git clone 명령어는 다음의 주소의 저장소의 소스코드를 전부 다운로드 하라는 명령어이며, rosdep install uvc\_cam 은 uvc\_cam 패키지의 의존선 패키지를 미리 설치하라는 명령어이다. 그리고 마지막으로 rosmake uvc\_cam 는 uvc\_cam 를 빌드하여 실행 파일을 생성하라는 명령어이다.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ git clone https://github.com/ericperko/uvc_cam.git
 $ rosdep install uvc_cam
@@ -220,6 +223,7 @@ $ rosmake uvc_cam
 
 그 다음, 아래의 pi\_vision 패키지를 설치해보도록 하자. 실제로 해본 사람은 알겠지만 중간에 빌드가 멈추고 에러가 발생하는데 rosbridge 가 없다고 나온다.  이는 "sudo apt-get install ros-hydro-rosbridge-server" 명령어로 설치해주면 끝날 것이라고 생각되지만 pi\_vision 는 rosbridge 의 1.0 을 요구하고 있어서 현재의 hydro 및 groovy 에서는 rosbridge 2.0 만 제공하고 있어서 설치가 불가능하다. pi\_vision 버전이 상당히 오래된것으로 생각된다.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ svn co http://pi-robot-ros-pkg.googlecode.com/svn/trunk/pi_vision
 $ rosmake pi_vision
@@ -227,6 +231,7 @@ $ rosmake pi_vision
 
 다만, pi\_vision 은 roscpp가 아닌 python 으로 작성되었기 때문에 패키지의 srv 및 msg 만 빌드하여 생성해주면 이용 가능하다.  아래의 명령어로 메시지 및 서비스만 빌드하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ roscd pi_face_tracker
 $ make
@@ -244,12 +249,15 @@ $ make
 
 일단, 위와 같이 패키지의 실행 방법을 확인하자. 그리 어려움은 없고 roslaunch 로 실행 가능하다. 그럼 우선, roscore 를 구동하고, 참고로 roscore는 앞으로 부터는 항상 구동해두는 습관을 가지도록 하자. 다음 부터는 별도로 설명하지 않겠다. 그 뒤, 별도의 다른 터미널 창을 열어 아래의 명령어로 카메라 드라이버를 구동하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ roslaunch ros2opencv uvc_cam.launch
 \end{lstlisting}
 
+\noindent
 이번에는 다른 터미널 창을 다시 열어서 아래의 명령어로 얼굴 인식 노드를 구동하자.
 
+\vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
 $ roslaunch pi_face_tracker face_tracker_uvc_cam.launch
 \end{lstlisting}

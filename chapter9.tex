@@ -26,9 +26,7 @@ ROS 에서는 USB 카메라와 관련하여 아래와 같은 다양한 패키지
 \item[libuvc-camera] UVC 표준을 사용하는 카메라들의 사용을 위한 인터페이스 패키지이다. (개발자: Ken Tossell)
 \item[uvc-camera] 비교적 카메라 상세한 설정 변경이 있어 매우 편리하다. 더욱이 카메라 두대를 이용하여 스테레오 카메라를 이용할 수 있도록 할 수 있기에 스테레오 카메라를 생각하고 있다면 적정한 패키지가 아닐까 싶다.
 \item[usb-cam] Bosch 에서 사용하는 매우 간단한 카메라 드라이버 (개발자:Benjamin Pitzer)
-\item[freenect-camera]
-\item[openni-camera]
-\item[openni2-camera] 3가지 패키지 모두 카메라라는 명칭이 붙어 있지만 모두 Kinect 또는 Xtion과 같은 RGB-D 카메라를 위한 패키지들이다. 이들의 센서 역시 컬러 카메라를 포함하고 있기때문에 이들을 이용하려면 이 패키지들이 필요하다.
+\item[freenect-camera, openni-camera, openni2-camera] 3가지 패키지 모두 카메라라는 명칭이 붙어 있지만 모두 Kinect 또는 Xtion과 같은 RGB-D 카메라를 위한 패키지들이다. 이들의 센서 역시 컬러 카메라를 포함하고 있기때문에 이들을 이용하려면 이 패키지들이 필요하다.
 \item[camera1394] IEEE 1394 규격인 FireWire 를 이용하는 카메라를 위한 드라이버이다.
 \item[prosilica-camera] 연구용으로 많이 사용되는 AVT사의 prosilica 카메라에 사용된다.
 \item[pointgrey-camera-driver] 연구용으로 많이 사용되는 Point Grey Research사의 Point Grey 카메라를 위한 드라이버이다.
@@ -44,7 +42,7 @@ ROS 에서는 USB 카메라와 관련하여 아래와 같은 다양한 패키지
 
 \vspace{\baselineskip}
 \noindent
-\stepcounter{num}\circled{\thenum} USB 카메라를 컴퓨터에 연결한다.
+\stepcounter{num}\circled{\thenum} USB 카메라를 컴퓨터에 연결한다.\\
 \stepcounter{num}\circled{\thenum} 카메라 정보를 확인한다.
 
 \noindent
@@ -66,12 +64,14 @@ Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 \end{lstlisting}
 
+\noindent
 \stepcounter{num}\circled{\thenum} ROS uvc-camera 카메라 패키지 설치
 
 \begin{lstlisting}[language=ROS]
 sudo apt-get install ros-indigo-uvc-camera
 \end{lstlisting}
 
+\noindent
 \stepcounter{num}\circled{\thenum} ROS image 관련 패키지 설치
 
 \begin{lstlisting}[language=ROS]
@@ -79,8 +79,10 @@ sudo apt-get install ros-indigo-image-*
 sudo apt-get install ros-indigo-rqt-image-view 
 \end{lstlisting}
 
+\noindent
 \stepcounter{num}\circled{\thenum} uvc\_camera 노드 실행
 
+\noindent
 uvc\_camera 노드를 실행하게 되면 [ WARN] [xxx]: Camera calibration 과 같이 카메라 캘리브레이션\footnote{http://wiki.ros.org/camera\_calibration}과 관련된 경고가 나오는데 특수한 경우가 아닌이상 본 강좌에서 다루려고 하는 범위에서는 해당되지 않는다. 일단, 무시해도 된다. 나중에 카메라 응용 강좌에서 카메라 캘리브레이션에 대해서 다루도록 하겠다.
 
 \begin{lstlisting}[language=ROS]
@@ -88,8 +90,9 @@ $ roscore
 $ rosrun uvc_camera uvc_camera_node
 \end{lstlisting}
 
+\noindent
 \stepcounter{num}\circled{\thenum} 관련 토픽 메시지 확인
-
+\noindent
 아래와 같이 토픽 메시지를 보면 카메라 정보 (/camera\_info)와 이미지 정보 (/image\_raw)가 발신되고 있음을 확인할 수 있다.
 
 \begin{lstlisting}[language=ROS]
@@ -143,6 +146,7 @@ rosrun image_view image_view image:=/image_raw
 \noindent
 \stepcounter{num}\thenum) 시각화(visualization)툴인 RViz를 실행하자.
 
+\noindent
 RViz 관련하여 더 자세한 사항은 "ROS 도구 (RViz)" 강좌를 참조하도록 하자.
 
 \begin{lstlisting}[language=ROS]
@@ -196,6 +200,7 @@ export ROS_MASTER_URI=http://192.168.1.100:11311
 export ROS_IP=192.168.1.100
 \end{lstlisting}
 
+\noindent
 그 다음 ROS 마스터에서만 roscore를 구동해주고, uvc\_camera\_node 노드를 구동해 주면 된다.
 
 \begin{lstlisting}[language=ROS]
@@ -295,6 +300,7 @@ $ ls -l ttyACM*
 crw-rw-rw- 1 root dialout 166, 0 Aug 11 14:35 ttyACM0
 \end{lstlisting}
 
+\noindent
 chmod 명령어로 권한이 변경되었음을 확인할 수 있다.
 
 %-------------------------------------------------------------------------------
@@ -494,7 +500,6 @@ $ roslaunch openni2_launch openni2.launch
 $ rosrun rviz rviz
 \end{lstlisting}
 
-\vspace{\baselineskip}
 \noindent
 \stepcounter{num}
 \thenum) Displays 옵션 변경
