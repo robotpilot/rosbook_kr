@@ -12,12 +12,7 @@
 %-------------------------------------------------------------------------------
 \subsection{ROS 메시지 통신}\index{ROS 메시지 통신}
 
-다음 강좌부터 ROS 프로그래밍이 시작된다. 이전 강좌들이 개론을 설명하였다면 이번 부터가 본격적인 ROS 강좌라고 볼 수 있다. 하지만, 이전 강좌들도 필수적으로 알아야할 기초이므로 꼭 정독하시기를 권장한다. 특히, 이번 강좌를 따라오기 위해서는 아래의 강좌는 필수 사항이라고 볼 수 있다.\\
-
-로봇 운영체제 강좌 : 08. ROS 용어 정리\\
-로봇 운영체제 강좌 : 09. ROS 개념 정리\\
-
-지금까지 다양한 강좌들을 올렸는데, 제일 많이 나온 단어라고 치면 "메시지, 토픽, 서비스, 매개변수" 가 가장 빈번히 언급되었다. 그도 그럴것이, 메시지, 토픽, 서비스, 매개변수는 ROS 에서 가장 핵심 부분이라고 할 수 있다. 각기 목적에 따라 분화된 최소 실행 단위인 노드들은 메시지 통신을 통해 노드간의 입/출력 데이터를 주고 받는 처리를 하고 있다.
+이전 챕터 내용들이 ROS 개론을 설명하였다면 이번 부터가 본격적인 ROS 프로그래밍이라고 볼 수 있다. 이전 내용에서 제일 많이 나온 단어라고 치면 "메시지, 토픽, 서비스, 매개변수" 가 가장 빈번히 언급되었다. 그도 그럴것이, 메시지, 토픽, 서비스, 매개변수는 ROS 에서 가장 핵심 부분이라고 할 수 있다. 각기 목적에 따라 분화된 최소 실행 단위인 노드들은 메시지 통신을 통해 노드간의 입/출력 데이터를 주고 받는 처리를 하고 있다.
 
 \begin{definition*}[메시지(message,msg)]
 노드는 메시지를 통해 노드간의 데이터를 주고받게 된다. 메시지는 integer, floating point, boolean 와 같은 변수형태이다. 또한, 메시지안에 메시지를 품고 있는 간단한 데이터 구조 및 메시지들의 배열과 같은 구조도 사용할 수 있다. 
@@ -80,13 +75,6 @@
 
 ROS 메시지 통신에서 사용되는 발행자(Publisher) 와 구독자(Subscriber) 라는 용어는 쉽게 우리말로 따지면 송신과 수신역할을 담당하게 된다. ROS에서는 송신측을 Publisher, 수신측을 Subscriber 라고 부르고 있다. 이 강좌에서는 간단한 메시지 파일을 작성해보고, 발행자(Publisher) 노드 와 구독자(Subscriber) 노드를 작성 및 실행하는 것을 목적으로 한다.
 
-이 강좌를 수행하기 앞서서 참고가 될만한 선행 강좌를 아래에 링크한다. 메시지 통신, 토픽, cakin 빌드 시스템, 패키지, 노드 등의 용어를 잘 모르겠다면 아래의 강좌를 참조하길 바란다.\\
-
-로봇 운영체제 강좌 : 08. ROS 용어 정리\\
-로봇 운영체제 강좌 : 09. ROS 개념 정리\\
-로봇 운영체제 강좌 : 11. ROS 빌드 시스템\\
-로봇 운영체제 강좌 : 14. 메시지, 토픽, 서비스, 매개변수\\
-
 %-------------------------------------------------------------------------------
 \subsection{패키지 생성}
 
@@ -115,7 +103,7 @@ ROS의 필수 설정 파일 중 하나인 package.xml 은 패키지 정보를 �
 $ gedit package.xml 
 \end{lstlisting}
 
-아래의 코드는 package.xml 를 이번 노드에 맞도록 수정한 내용이다. 내용중에 필자의 개인 정보가 포함되어 있으니, 이를 자신에 맞게 수정해주길 바란다. 각 옵션의 세부 설명은 로봇 운영체제 강좌 : 11. ROS 빌드 시스템 를 참고하길 바란다.
+아래의 코드는 package.xml 를 이번 노드에 맞도록 수정한 내용이다. 내용중에 필자의 개인 정보가 포함되어 있으니, 이를 자신에 맞게 수정해주길 바란다. 각 옵션의 세부 설명은 섹션~\ref{sec:RosBuildSystem}~\nameref{sec:RosBuildSystem}(pp.\pageref{sec:RosBuildSystem})를 참고하길 바란다.
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0"?>
@@ -155,7 +143,7 @@ ROS의 빌드 시스템인 캐킨(cakin)은 기본적으로 CMake를 이용하�
 $ gedit CMakeLists.txt 
 \end{lstlisting}
 
-아래의 코드는 CMakeLists.txt 를 이번 노드에 맞도록 수정한 내용이다. 각 옵션의 세부 설명은 로봇 운영체제 강좌 : 11. ROS 빌드 시스템 를 참고하길 바란다.
+아래의 코드는 CMakeLists.txt 를 이번 노드에 맞도록 수정한 내용이다.
 
 \begin{lstlisting}[language=make]
 cmake_minimum_required(VERSION 2.8.3)
@@ -345,7 +333,7 @@ $ rostopic list
 $ rostopic echo /ros_tutorial_msg
 \end{lstlisting}
 
-rostopic list 라는 옵션을 붙인 명령어로 "ros\_tutorial\_msg" 토픽이 있음을 확인하였다. rostopic echo /ros\_tutorial\_msg 이라는 명령어로 "ros\_tutorial\_msg" 토픽의 메시지를 확인해보자. 아래와 같이 실시간으로 발행되는 메시지를 확인할 수 있을 것이다.
+rostopic list 라는 옵션을 붙인 명령어로 ros\_tutorial\_msg 토픽이 있음을 확인하였다. rostopic echo /ros\_tutorial\_msg 이라는 명령어로 ros\_tutorial\_msg 토픽의 메시지를 확인해보자. 아래와 같이 실시간으로 발행되는 메시지를 확인할 수 있을 것이다.
 
 \begin{figure}[h]
 \centering\includegraphics[width=0.5\columnwidth]{pictures/chapter7/rostopic_echo.png}
@@ -359,7 +347,7 @@ rostopic list 라는 옵션을 붙인 명령어로 "ros\_tutorial\_msg" 토픽�
 $ rosrun oroca_ros_tutorials ros_tutorial_msg_subscriber 
 \end{lstlisting}
 
-ROS 노드 실행 명령어인 rosrun 을 이용하여, oroca\_ros\_tutorials 패키지의 ros\_tutorial\_msg\_subscriber  노드를 구동하라는 명령어이다. 이를 실행하게 되면 아래와 같은 출력 화면을 볼 수 있다. 발행자에서 발행된 "ros\_tutorial\_msg" 토픽의 메시지를 수신받아 값이 표시되고 있다.
+ROS 노드 실행 명령어인 rosrun 을 이용하여, oroca\_ros\_tutorials 패키지의 ros\_tutorial\_msg\_subscriber  노드를 구동하라는 명령어이다. 이를 실행하게 되면 아래와 같은 출력 화면을 볼 수 있다. 발행자에서 발행된 ros\_tutorial\_msg 토픽의 메시지를 수신받아 값이 표시되고 있다.
 
 \begin{figure}[h]
 \centering\includegraphics[width=0.5\columnwidth]{pictures/chapter7/rosrun_ros_tutorial_msg_subscriber.png}
@@ -395,17 +383,10 @@ rqt 를 실행 후, 플러그인(plugins)에서 ROS Graph 를 선택하면 아�
 
 이 강좌에서는 간단한 서비스 파일 작성해보고 서비스 서버(server) 노드 와 서비스 클라이언트(client) 노드를 작성 및 실행하는 것을 목적으로 한다.
 
-이 강좌를 수행하기 앞서서 참고가 될만한 선행 강좌를 아래에 링크한다. 메시지 통신, 서비스, cakin 빌드 시스템, 패키지, 노드 등의 용어를 잘 모르겠다면 아래의 강좌를 참조하길 바란다.\\
-
-로봇 운영체제 강좌 : 08. ROS 용어 정리\\
-로봇 운영체제 강좌 : 09. ROS 개념 정리\\
-로봇 운영체제 강좌 : 11. ROS 빌드 시스템\\
-로봇 운영체제 강좌 : 14. 메시지, 토픽, 서비스, 매개변수\\
-
 %-------------------------------------------------------------------------------
 \subsection{패키지 생성}
 
-이전 강좌에서 "oroca\_ros\_tutorials" 라는 패키지를 생성하는 설명을 하였다. 위 강좌를 참조하기 바라고, 위 강좌에서 이미 패키지를 생성한 것으로 보고 패키지 생성은 건너 뛰도록 하자.
+이전 강좌에서 oroca\_ros\_tutorials 라는 패키지를 생성하는 설명을 하였다. 위 강좌를 참조하기 바라고, 위 강좌에서 이미 패키지를 생성한 것으로 보고 패키지 생성은 건너 뛰도록 하자.
 
 %-------------------------------------------------------------------------------
 \subsection{패키지 설정 파일 (package.xml) 수정}
@@ -421,7 +402,7 @@ ROS의 빌드 시스템인 캐킨(cakin)은 기본적으로 CMake를 이용하�
 $ gedit CMakeLists.txt 
 \end{lstlisting}
 
-아래의 코드는 CMakeLists.txt 를 이번 노드에 맞도록 수정한 내용이다. 이전 강좌인 "로봇 운영체제 강좌 : 15. 메시지 발행자 노드와 구독자 노드 작성 및 실행" 에 서비스 파일을 새로 추가하고, 서비스 서버 노드와 클라이언트 노드에 대한 내용을 추가하였다. 각 옵션의 세부 설명은 로봇 운영체제 강좌 : 11. ROS 빌드 시스템 를 참고하길 바란다.
+아래의 코드는 CMakeLists.txt 를 이번 노드에 맞도록 수정한 내용이다. 이전 메시지 발행자 노드와 구독자 노드 작성에 서비스 파일을 새로 추가하고, 서비스 서버 노드와 클라이언트 노드에 대한 내용을 추가하였다. 각 옵션의 세부 설명은 섹션~\ref{sec:RosBuildSystem}~\nameref{sec:RosBuildSystem}(pp.\pageref{sec:RosBuildSystem})를 참고하길 바란다.
 
 \begin{lstlisting}[language=make]
 cmake_minimum_required(VERSION 2.8.3)
@@ -706,7 +687,7 @@ $ catkin_make             %*(catkin 빌드 실행*)
 %-------------------------------------------------------------------------------
 \subsection{매개변수를 활용한 노드 작성}
 
-이번 강좌에서는 이전 강좌 "로봇 운영체제 강좌 : 16. 서비스 서버 노드와 클라이언트 노드 작성 및 실행" 에서 다룬 "ros\_tutorial\_srv\_server.cpp" 의 소스를 수정하여 서비스 요청으로 입력된 "a" 와 "b" 를 단순히 덧셈하는 것이 아니라, 사칙연산을 할 수있도록 매개변수를 활용해 볼 것이다. 아래의 순서대로 이전 강좌에서 작성해둔 "ros\_tutorial\_srv\_server.cpp" 소스를 수정하도록 하자.
+이번에서 이전 서비스 서버 노드와 클라이언트 노드에서 다룬 ros\_tutorial\_srv\_server.cpp 의 소스를 수정하여 서비스 요청으로 입력된 a 와 b 를 단순히 덧셈하는 것이 아니라, 사칙연산을 할 수있도록 매개변수를 활용해 볼 것이다. 아래의 순서대로 이전 강좌에서 작성해둔 ros\_tutorial\_srv\_server.cpp 소스를 수정하도록 하자.
 
 \begin{lstlisting}[language=ROS]
 $ roscd oroca_ros_tutorials         %*(패키지 폴더로 이동한다.*)
@@ -863,6 +844,7 @@ result: 2
 
 %-------------------------------------------------------------------------------
 \section{ROS런치 사용법}\index{ROS런치 사용법}
+\label{sec:HowToUseTheRoslaunch}
 
 %-------------------------------------------------------------------------------
 \subsection{ROS런치}\index{ROS런치}
@@ -878,7 +860,7 @@ ROS런치는 "*.launch" 라는 ROS런치파일을 사용하여 실행 노드에 
 %-------------------------------------------------------------------------------
 \subsection{ROS런치의 활용}\index{ROS런치의 활용}
 
-ROS런치의 활용으로 이전 강좌인 "로봇 운영체제 강좌 : 15. 메시지 발행자 노드와 구독자 노드 작성 및 실행" 에서 작성한 ros\_tutorial\_msg\_publisher 와  ros\_tutorial\_msg\_subscriber 를 이름을 바꾸어서 실행해보자. 그냥 이름을 바꾸어 의미가 없으니, 발신자 노드와 구독자 노드를 각각 두 개씩 구동하여 서로간에 별도로 메시지 통신을 해보도록 하겠다.
+ROS런치의 활용으로 이전 메시지 발행자 노드와 구독자 노드에서 작성한 ros\_tutorial\_msg\_publisher 와  ros\_tutorial\_msg\_subscriber 를 이름을 바꾸어서 실행해보자. 그냥 이름을 바꾸어 의미가 없으니, 발신자 노드와 구독자 노드를 각각 두 개씩 구동하여 서로간에 별도로 메시지 통신을 해보도록 하겠다.
 
 우선, *.launch 파일을 작성하자. ROS런치 파일은 *.launch 이라는 파일명을 가지고 있으며, 노드 폴더에 ROS런치를 저장할 launch 라는 폴더를 생성해줘야 한다. 아래의 명령어대로 폴더를 생성하고 새롭게 union.launch 이라는 파일으로 ROS런치 파일을 생성해보자.
 

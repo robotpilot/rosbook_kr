@@ -8,7 +8,7 @@
 %-------------------------------------------------------------------------------
 \section{ROS 도구 (RViz)}\index{ROS 도구 (RViz)}
 
-ROS는 "로봇 운영체제 강좌 : ROS 명령어" 에서 설명한 커맨드형 명령어 이외에도 ROS 활용에 필요한 다양한 도구들이 존재한다. 이는 커맨드형 명령어와 상호보완하는 형태로 ROS 유저들에게는 필수적으로 알아둬야 할 부분이다.
+\textbf{섹션~\ref{sec:RosCommand}~\nameref{sec:RosCommand}(pp.\pageref{sec:RosCommand})}에서 설명한 커맨드형 명령어 이외에도 ROS 활용에 필요한 다양한 도구들이 존재한다. 이는 커맨드형 명령어와 상호보완하는 형태로 ROS 유저들에게는 필수적으로 알아둬야 할 부분이다.
 
 ROS 도구로는 ROS 유저들이 개인적으로 공개한 툴까지 포함하여 상당히 많은 수가 있는데 그 중에서 이번 강좌에서는 1) 3차원 시각화를 돕는 RViz\footnote{ROS wiki, RViz, http://wiki.ros.org/rviz}\footnote{ROS wiki, RViz User Guide, http://wiki.ros.org/rviz/UserGuide}, 2) 데이터 로깅 툴인 rqt\_bag\footnote{ROS wiki, RQT Bag, http://wiki.ros.org/rqt\_bag}, 3) 데이터 플롯 툴인 rqt\_plot\footnote{ROS wiki, RQT Plot, http://wiki.ros.org/rqt\_plot}. 4) 노드간의 관계 및 메시지를 확인 가능한 rqt\_graph\footnote{ROS wiki, RQT Graph, http://wiki.ros.org/rqt\_graph} , 5) GUI 통합 툴인 rqt\footnote{ROS wiki, RQT, http://wiki.ros.org/rqt} 을 알아볼 것이다. 있다. 이들 툴들은 ros와의 직접적인 처리를 행하는 것은 아니지만 ROS를 이용한 프로그래밍에 매우 유용한 보조툴이다. 
 
@@ -243,9 +243,9 @@ $ rosrun turtlesim turtle_teleop_key
 %-------------------------------------------------------------------------------
 \subsection{rqt\_bag}\index{rqt\_bag}
 
-메시지 기록을 시각화한 GUI 툴이다. "로봇 운영체제 강좌 : ROS 정보 명령어 (rosbag)" 에서 다룬 내용을 시각화하면 편집 가능한 툴로 이미지 값등과 함께 편집할 때 매우 유용한 툴이다.
+메시지 기록을 시각화한 GUI 툴이다. 섹션~\ref{sec:Rosbag}~\nameref{sec:Rosbag}(pp.\pageref{sec:Rosbag})에서 다룬 내용을 시각화하면 편집 가능한 툴로 이미지 값등과 함께 편집할 때 매우 유용한 툴이다.
 
-이를 테스트하기 위해서 위헤서 다룬 rqt\_graph 및 Image View 에서 다룬 turtlesim 및 uvc camera 관련의 노드들을 전부 실행해 주자. 그 뒤, 아래의 명령어로 카메라의 "/image\_raw" 와 터틀시뮬레이션의 "/turtle1/cmd\_vel" 값을 bag 파일로 생성하자.
+이를 테스트하기 위해서 위헤서 다룬 rqt\_graph 및 Image View 에서 다룬 turtlesim 및 uvc camera 관련의 노드들을 전부 실행해 주자. 그 뒤, 아래의 명령어로 카메라의 /image\_raw 와 터틀시뮬레이션의 /turtle1/cmd\_vel 값을 bag 파일로 생성하자.
 
 \begin{lstlisting}[language=ros]
 $ rosbag record /image_raw /turtle1/cmd_vel
