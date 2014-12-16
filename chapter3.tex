@@ -259,14 +259,13 @@ $ rosdep update
 \vspace{\baselineskip}
 \vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
-$ source /opt/ros/indigo/setup.bash
-$ mkdir -p ~/catkin_ws/src
-$ cd ~/catkin_ws/src
+$ mkdir ~/catkin_ws
+$ cd ~/catkin_ws
 $ rosinstall_generator ros_comm --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-ros_comm-wet.rosinstall
 $ wstool init -j8 src indigo-ros_comm-wet.rosinstall
-$ mkdir ~/ros_catkin_ws/external_src
+$ mkdir ~/catkin_ws/external_src
 $ sudo apt-get install checkinstall cmake
-$ cd ~/ros_catkin_ws/external_src
+$ cd ~/catkin_ws/external_src
 $ sudo apt-get install libboost-system-dev libboost-thread-dev
 $ git clone https://github.com/ros/console_bridge.git
 $ cd console_bridge
@@ -274,17 +273,18 @@ $ cmake .
 $ sudo checkinstall make install
 \end{lstlisting}
 
-checkinstall이 실행되고 EOF 구문에서 엔터키를 누르고, 2번째 항목에 console\_bridg 라 적혀있는 부분을 libconsole\_bridg 으로 변경하자.
+checkinstall이 실행되고 EOF 구문에서 엔터키를 누르고, 2번째 항목에 console-bridge 이라 적혀있는 부분을 libconsole-bridge-dev 으로 변경하자.
 
 \vspace{\baselineskip}
 \begin{lstlisting}[language=ROS]
-$ cd ~/ros_catkin_ws/external_src
+$ cd ~/catkin_ws/external_src
 $ wget http://archive.raspbian.org/raspbian/pool/main/l/lz4/liblz4-1_0.0~r122-2_armhf.deb
 $ wget http://archive.raspbian.org/raspbian/pool/main/l/lz4/liblz4-dev_0.0~r122-2_armhf.deb
 $ sudo dpkg -i liblz4-1_0.0~r122-2_armhf.deb liblz4-dev_0.0~r122-2_armhf.deb
-$ cd ~/ros_catkin_ws
+$ cd ~/catkin_ws
 $ rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:wheezy
 $ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/indigo
+$ source /opt/ros/indigo/setup.bash
 \end{lstlisting}
 
 이제 catkin\_make 와 관련된 모든 프로그램을 설치 하였다. 마지막으로 catkin\_make 가 정상 작동하는지 그리고 roscore 가 동작하는지 살펴보자. 추가적인 개발 환경 설정은 \textbf{섹션~\ref{subsec:envrionment}~\nameref{subsec:envrionment}(pp.\pageref{subsec:envrionment})}을 참고하도록 하자.
