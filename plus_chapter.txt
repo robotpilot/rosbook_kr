@@ -1,0 +1,140 @@
+ROS to RaspberryPi how to input 
+
+(lubuntu を入れて、ROSをinstallする方法)
+
+1. RasoberryPi のOS（Raspbian ）のインストールの仕方
+Raspbian のホームページ　http://www.raspberrypi.org/
+=>downloads                      http://www.raspberrypi.org/downloads/
+よりOS（Raspbian）をZip でDownload
+※(記載時)ダウンロードファイル:2014-09-09-wheezy-raspbian.zip
+
+2.Zip ファイルで圧縮されているので解凍する
+
+cd ~/ダウンロード保存先
+unzip  2014-09-09-wheezy-raspbian.zip
+
+3. 解凍したimage ファイルをSDカードにリストア
+リストアの仕方
+1.  ubuntu の　disks（初期から導入済み）を　起動　→　16GB SD カードにリストアする
+
+Restore Disk image をクリック
+先ほど解凍したファイル
+2014-09-09-wheezy-raspbian.img
+ をリストア
+・40分ほどでできる。 
+
+※ dd comannd →　これでもできる
+.df コマンドで　usbの場所を把握（/dev/sda とか　）
+.書き込むイメージファイルの場所も把握()
+.dd if = /dev/disk1 of=(img の　場所)
+
+・正しくイメージファイルがインストールできたらこのようになる
+ 
+これで準備完了　＝＞先ほどOSをインストールしたSDカードをRaspberryPi 本体挿入
+
+[RaspberryPi 準備]
+1.本体にSDカードを挿入し、電源を入れる。miniusbをさすことで、RaspberryPi は電源が入る。
+
+2.初期にlogin するときRaspi-configというメニューが現れるが、ここではなにもせずに<Finish>を選択
+
+3.コマンドラインが現れるので、startxとコマンドを押す。なお、再起動や電源を落としたとき、最初のloginでユーザー名を聞かれる。その時は
+
+Login : pi
+Password: raspberry
+
+
+最初のデスクトップが表示される。
+
+3.まず最初にメモリの拡張を行う必要がある。 LXTerminalを開き、
+
+sudo raspi-config
+
+下のような画面が表示される。
+ 
+ここでExpand Filesystem を選び、Enter
+
+完了すると再起動するように言われるので, <Yes>
+
+4.メモリを拡張したらROSをinstall していく
+
+$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu wheezy main" > /etc/apt/sources.list.d/ros-latest.list'
+
+$ wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
+
+$ sudo apt-get update
+
+$ sudo apt-get upgrade
+ここでYes or No と聞かれるので、Yを選択
+
+$ sudo apt-get install python-setuptools
+ここでYes or No と聞かれるので、Yを選択
+
+$ sudo easy_install pip
+
+$ sudo pip install -U rosdep rosinstall_generator wstool rosinstall
+
+$ sudo rosdep init
+
+$ rosdep update
+
+これでROSの下準備が完了
+
+5.ROS の　Workspace を作る
+$ mkdir ~/ros_catkin_ws
+
+$ cd ~/ros_catkin_ws
+
+5.1 ROS のcoreパッケージの設定
+Ros-Comm
+$ rosinstall_generator ros_comm --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-ros_comm-wet.rosinstall
+
+$ wstool init -j8 src indigo-ros_comm-wet.rosinstall
+
+$ mkdir ~/ros_catkin_ws/external_src
+
+$ sudo apt-get install checkinstall cmake
+ここでYes or No と聞かれるので、Yを選択
+
+libconsole_bridg のインストール
+$ cd ~/ros_catkin_ws/external_src
+$ sudo apt-get install libboost-system-dev libboost-thread-dev
+ここでYes or No と聞かれるので、Yを選択
+$ git clone https://github.com/ros/console_bridge.git
+$ cd console_bridge
+$ cmake .
+$ sudo checkinstall make install
+ここで./doc-pak が存在してません。デフォルトのパッケージを作りますかと尋ねられるのでyを選択
+
+空行でディスクリプションを終わらせてくださいと言われるのでEnter[写真]
+ 
+そして2番目の項目console_bridg　と書かれているところを　libconsole_bridg に変える
+
+
+そしてEnterを押す。
+それらをリストアップしますかときかれるのでn
+それらを取り除きますかと聞かれるのでyes
+
+Liblz4-dev のインストール
+$ cd ~/ros_catkin_ws/external_src
+$ wget http://archive.raspbian.org/raspbian/pool/main/l/lz4/liblz4-1_0.0~r122-2_armhf.deb
+$ wget http://archive.raspbian.org/raspbian/pool/main/l/lz4/liblz4-dev_0.0~r122-2_armhf.deb
+$ sudo dpkg -i liblz4-1_0.0~r122-2_armhf.deb liblz4-dev_0.0~r122-2_armhf.deb
+
+rosdpを走らせて残りの依存関係も把握する
+$ cd ~/ros_catkin_ws
+$ rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:wheezy
+これを走らせると下の写真のようにpython関係のパッケージがインストールできないといわれるが気にしない。なぜならそれらはpipでもうインストールしているからである。
+
+
+ros_catkin_ws　のビルド
+
+$ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/indigo
+2時間以上かかる
+
+新しくターミナルを起動するとき忘れないように(毎回行う必要がある)
+$ source /opt/ros/indigo/setup.bash
+
+6.roscore 起動
+
+roscore
+ 
